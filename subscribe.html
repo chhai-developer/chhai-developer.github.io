@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Subscribe</title>
+  <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta name="description" content="Subscribe">
+  <link href="https://chhai-developer.github.io/avatar.jpg" rel="shortcut icon">
+
+  <link rel="stylesheet" href="main.css">
+  <script src="https://unpkg.com/prefixfree@1.0.0/prefixfree.min.js"></script>
+
+  
+</head>
+<body>
+<center><h2 style="color:red">SUBSCRIBE <i class="fa fa-bell" aria-hidden="true"></i></h2></center><br>
+  <div class="form-container">
+    <form name="submit-to-google-sheet">
+      <input name="Email" type="email" placeholder="Email" required>
+      <input name="FirstName" type="text" placeholder="First name">
+      <input name="LastName" type="text" placeholder="Last name">
+      <button type="submit">Subscribe</button>
+    </form>
+
+    <div class="loading js-loading is-hidden">
+      <div class="loading-spinner">
+        <svg><circle cx="25" cy="25" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg>
+      </div>
+    </div>
+
+
+    <p class="js-success-message is-hidden">Thanks for subscribe!</p>
+    <p class="js-error-message is-hidden">Error please try again!</p>
+  </div>
+
+  <a href="https://chhai-developer.github.io" target="_blank"><b>Power by Chhai Developer</b></a><br>
+  <footer class="footer">
+         <div class="footer-col">
+             <div class="socal-link">
+                 <a href="https://chhai-developer.github.io"><i class="fab fa-github"></i></a>
+                 <a href="https://web.facebook.com/chhai.developer.net"><i class="fab fa-facebook-f"></i></a>
+                 <a href="https://www.instagram.com/chhai.developer"><i class="fab fa-instagram"></i></a>
+                 <a href="https://twitter.com/chhai_developer"><i class="fab fa-twitter"></i></a>
+                 <a href="https://www.linkedin.com/in/chhai-developer"><i class="fab fa-linkedin-in"></i></a> 
+                 <a href="https://t.me/chhai_developer"><i class="fab fa-telegram"></i></a>
+             </div>
+       </div>
+    </div>
+ </footer>
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycby2VsY3RHATcTYHd8CgiLTfzYa3GvkWxLuid6Ish5bcmP6GYYz1cpB5xOFvW5Nz80cM/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const loading = document.querySelector('.js-loading')
+    const successMessage = document.querySelector('.js-success-message')
+    const errorMessage = document.querySelector('.js-error-message')
+
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      showLoadingIndicator()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => showSuccessMessage(response))
+        .catch(error => showErrorMessage(error))
+    })
+
+    function showLoadingIndicator () {
+      form.classList.add('is-hidden')
+      loading.classList.remove('is-hidden')
+    }
+
+    function showSuccessMessage (response) {
+      console.log('Success!', response)
+      setTimeout(() => {
+        successMessage.classList.remove('is-hidden')
+        loading.classList.add('is-hidden')
+      }, 500)
+    }
+
+    function showErrorMessage (error) {
+      console.error('Error!', error.message)
+      setTimeout(() => {
+        errorMessage.classList.remove('is-hidden')
+        loading.classList.add('is-hidden')
+      }, 500)
+    }
+  </script>
+
+</body>
+</html>
