@@ -3,12 +3,13 @@
 <head>
 <title>Chhai Developer</title>
 <meta charset="UTF-8">
-<link rel="shortcut icon" type="image/png" href="https://chhai-developer.github.io/avatar.jpg"sizes="192x192">
+<link rel="shortcut icon" type="image/png" href="https://chhai-developer.github.io/image/avatar.jpg"sizes="192x192">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="style/links/w3.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"href="style.css">
+<link rel="stylesheet" href="style/links/ajax-4.css">
+<link rel="stylesheet"href="style/style.css">
+<script src="js/chat.js"></script>
 <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
@@ -27,7 +28,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     
       <div class="w3-white w3-text-grey w3-card-4">
         <div class="w3-display-container">
-          <img src="https://chhai-developer.github.io/avatar.jpg" style="width:100%" alt="Avatar">
+          <img src="https://chhai-developer.github.io/image/avatar.jpg" style="width:100%" alt="Avatar">
           <div class="w3-display-bottomleft w3-container w3-text-black">
             <h2 style="color:#ffffff;"></i><b>Chhai Developer </b><i style="color:#00c1ad"class="fa fa-check-circle"></i></h2>
           </div>
@@ -134,37 +135,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     </div>
   </div>
 </div>
-    <!-- Messenger Chat Plugin Code -->
-    <div id="fb-root"></div>
-
-    <!-- Your Chat Plugin code -->
-    <div id="fb-customer-chat" class="fb-customerchat">
-    </div>
-
-    <script>
-      var chatbox = document.getElementById('fb-customer-chat');
-      chatbox.setAttribute("page_id", "108981731903177");
-      chatbox.setAttribute("attribution", "biz_inbox");
-    </script>
-
-    <!-- Your SDK code -->
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          xfbml            : true,
-          version          : 'v16.0'
-        });
-      };
-
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    </script>
-  </div>
+<div id="fb-root"></div>
+<div id="fb-customer-chat" class="fb-customerchat"></div>
   <!-- End Page Container -->
 </div>
 </div>
@@ -186,20 +158,24 @@ background-color: #ffffff;
 }
 </style>
 <br />
-<br />
 <footer class="footer">
     <div class="container">
        <div class="row">
           <div class="footer-col">
-              <h4><b>Our services</b></h4>
+              <h4><b>services</b></h4>
               <ul>
-                <li><a href="https://fast-ytdl.github.io">TubeMate IOS</a></li>
-                <li><a href="csp.html">Create Secure Password</a></li>
-                <li><a href="subscribe.html">Subscribe now!</a></li>
                 <li><a href="privacy.html">Privacy Policy</a></li>
-                 <li><a href="contact-us.html">Contact us</a></li>
+                <li><a href="subscribe.html">Subscribe now!</a></li>
+                <li><a href="contact-us.html">Contact us</a></li>
               </ul>
           </div>
+          <div class="footer-col">
+            <h4><b>tools</b></h4>
+            <ul>
+              <li><a href="https://fast-ytdl.github.io">TubeMate IOS</a></li>
+              <li><a href="csp.html">Secure Password</a></li>
+            </ul>
+        </div>
          <div class="footer-col">
              <h4><b>follow us</b></h4>
              <div class="socal-link">
