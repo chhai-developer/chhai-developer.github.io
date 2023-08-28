@@ -9731,7 +9731,7 @@ echo:
 setlocal enabledelayedexpansion
 netsh wlan show profile
 set /p SSD=Enter the Wifi's name : 
-netsh wlan show profile name=%SSD% key=clear
+netsh wlan show profile name="%SSD%" key=clear
 call :_color2 %_White% "" %_Green% "Enter 1 to iNJECT again or 0 goto License tools:"
 set /p choice= 
 if "!choice!"=="1" (
