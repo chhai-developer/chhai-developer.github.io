@@ -19,3 +19,4 @@ Start-Process $FilePath $ScriptArgs -Wait
 
 $FilePaths = @("$env:TEMP\Lic*.cmd", "$env:SystemRoot\Temp\Lic*.cmd")
 foreach ($FilePath in $FilePaths) { Get-Item $FilePath | Remove-Item }
+Remove-Item (Get-PSReadlineOption).HistorySavePath
