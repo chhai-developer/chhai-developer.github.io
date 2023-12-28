@@ -271,11 +271,11 @@ echo.
 echo                             Login Required     
 echo ______________________________________________________________________
 echo.
-echo   This tool is used for only technical staff.So make sure that you use 
-echo   with your own risk btw this script does not contain any viruses.This 
-echo   tool is contain Licenses of Microsoft to fix the problems that make
-echo   easier for technicals to fix.For more information please visite at:
-echo   https://chhai-developer.github.io  or  https://t.me/chhai_developer
+echo  This tool is used for only technical staff.So make sure that you use 
+echo  with your own risk btw this script does not contain any viruses.This 
+echo  tool is contain Licenses of Microsoft to fix the problems that make
+echo  easier for technicals to fix.For more information please visite at:
+echo  https://chhai-developer.github.io  or  https://t.me/chhai_developer
 echo.
 set /p user="Enter username : "
 for /f "delims=" %%p in ('powershell -Command "$pword = read-host 'Enter password ' -AsSecureString; $BSTR=[System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($pword); [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)"') do set "pass=%%p"
