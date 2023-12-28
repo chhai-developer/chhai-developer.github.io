@@ -391,7 +391,7 @@ netsh wlan show profile name="%SSD%" key=clear
 call :_color2 %_White% "" %_Green% "Enter 1 to iNJECT again or 0 goto License tools:"
 set /p choice= 
 if "!choice!"=="1" (
-    goto :wps
+    goto :wpi
 ) else (
     goto :MainMenu
 )
