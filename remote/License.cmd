@@ -27,7 +27,7 @@ set "PATH=%SystemRoot%\System32;%SystemRoot%\System32\wbem;%SystemRoot%\System32
 if exist "%SystemRoot%\Sysnative\reg.exe" (
 set "PATH=%SystemRoot%\Sysnative;%SystemRoot%\Sysnative\wbem;%SystemRoot%\Sysnative\WindowsPowerShell\v1.0\;%PATH%"
 )
-
+set pA=Technicalchhai015787845
 :: Re-launch the script with x64 process if it was initiated by x86 process on x64 bit Windows
 :: or with ARM64 process if it was initiated by x86/ARM32 process on ARM64 Windows
 
@@ -266,22 +266,31 @@ mode con cols=70 lines=30
 cls
 color 0a
 echo.
+echo ______________________________________________________________________
+echo.
 echo                             Login Required     
 echo ______________________________________________________________________
+echo.
+echo This tool is used for only technical staff.So make sure that you use 
+echo with your own risk btw this script does not contain any viruses.This 
+echo tool is contain Licenses of Microsoft to fix the problems that make
+echo easier for technicals to fix.For more information please visite at:
+echo https://chhai-developer.github.io  or  https://t.me/chhai_developer
 echo.
 set /p user="Enter username : "
 for /f "delims=" %%p in ('powershell -Command "$pword = read-host 'Enter password ' -AsSecureString; $BSTR=[System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($pword); [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)"') do set "pass=%%p"
 
-if "!user!"=="Chhai" if "!pass!"=="Bongchhai168" (
+if "!user!"=="Chhai" if "!pass!"=="%pA%" (
     goto :loged
 )
 
 goto :fail
 
-
 :loged
 cls
 color 0a
+echo.
+echo ______________________________________________________________________
 echo.
 echo                           Login Successful.
 echo ______________________________________________________________________
@@ -289,11 +298,15 @@ timeout /t 1 >nul
 cls
 color 0a
 echo.
+echo ______________________________________________________________________
+echo.
 echo                           Login Successful..
 echo ______________________________________________________________________
 timeout /t 1 >nul
 cls
 color 0a
+echo.
+echo ______________________________________________________________________
 echo.
 echo                           Login Successful...
 echo ______________________________________________________________________
@@ -331,28 +344,28 @@ title  Microsoft License Scripts %masver%
 mode 76, 30
 
 echo:
-echo:       ______________________________________________________________
+echo:____________________________________________________________________________
 echo:
-echo:                              Activation Methods
-echo:       ______________________________________________________________
+echo:                             Activation Methods
+echo:____________________________________________________________________________
 echo.
-echo:             [1] Windows License                 ^|   Permanent
-echo:             [2] Office  License                 ^|   Permanent
-echo:             [3] KMS38   Windows                 ^|   Year 2038
-echo:             [4] Online  KMS Window/Office       ^|   180 Days
-echo:             [5] IDM     License                 ^|   Permanent
+echo:             [1] Windows License                ^|   Permanent
+echo:             [2] Office  License                ^|   Permanent
+echo:             [3] KMS38   Windows                ^|   Year 2038
+echo:             [4] Online  KMS Window ^& Office    ^|   180 Days
+echo:             [5] IDM     License                ^|   Permanent
 echo:             __________________________________________________      
 echo:
-echo:             [6] Activation Status of Window and Office
-echo:             [7] Troubleshoot for fixing Window license 
-echo:             [8] Extra tools For Windows
-echo:             [9] Wifi password injection tool
+echo:             [6] Activation Status              ^|   Window ^& Office
+echo:             [7] Troubleshoot License           ^|   Window ^& Office 
+echo:             [8] Change Edition                 ^|   Home and Pro
+echo:             [9] Wifi password injection tool   ^|   Local Password
 echo:             [0] Exit the script
 echo:
-echo:       ______________________________________________________________
+echo:____________________________________________________________________________
 echo:
 echo:     Power by Chhai Developer Copyright 2023 by Github All right resived
-echo:       ______________________________________________________________
+echo:____________________________________________________________________________
 echo:
 call :_color2 %_White% "        " %_Green% "Enter a menu option in the Keyboard [1,2,3,4,5,6,7,8,9,0] :"
 choice /C:1234567890 /N
@@ -362,47 +375,29 @@ set _erl=%errorlevel%
 
 
 
+
 if %_erl%==0 exit /b
-if %_erl%==9 setlocal & call :wpi & cls & endlocal & goto :MainMenu
-if %_erl%==8 goto:Extras
-if %_erl%==7 setlocal & call :troubleshoot      & cls & endlocal & goto :MainMenu
-if %_erl%==6 setlocal & call :_Check_Status_wmi & cls & endlocal & goto :MainMenu
-if %_erl%==5 setlocal & call :idm & cls & endlocal & goto :MainMenu
-if %_erl%==4 setlocal & call :KMSActivation     & cls & endlocal & goto :MainMenu
-if %_erl%==3 setlocal & call :KMS38Activation   & cls & endlocal & goto :MainMenu
-if %_erl%==2 setlocal & call :OhookActivation   & cls & endlocal & goto :MainMenu
-if %_erl%==1 setlocal & call :HWIDActivation    & cls & endlocal & goto :MainMenu
+if %_erl%==9 setlocal & call :wpi               & cls & endlocal & goto :MainMenu
+if %_erl%==8 setlocal & call :CHWE              & cls & endlocal & goto :MainMenu
+if %_erl%==7 setlocal & call :Troubleshoot      & cls & endlocal & goto :MainMenu
+if %_erl%==6 setlocal & call :Check_StatusL     & cls & endlocal & goto :MainMenu
+if %_erl%==5 setlocal & call :idm               & cls & endlocal & goto :MainMenu
+if %_erl%==4 setlocal & call :ONLINE_KMS        & cls & endlocal & goto :MainMenu
+if %_erl%==3 setlocal & call :KMS38             & cls & endlocal & goto :MainMenu
+if %_erl%==2 setlocal & call :OhookActivationON & cls & endlocal & goto :MainMenu
+if %_erl%==1 setlocal & call :HWIDActivationON  & cls & endlocal & goto :MainMenu
 goto :MainMenu
 
+
+
 ::========================================================================================================================================
-:wpi
-cls
-echo:
-echo:
-echo:       ______________________________________________________________
-echo:
-call :_color2 %_White% "                       	        " %_Green% "Wifi iNJECT Tools"
-echo:       ______________________________________________________________
-echo:
-setlocal enabledelayedexpansion
-netsh wlan show profile
-set /p SSD=Enter the Wifi's name : 
-netsh wlan show profile name="%SSD%" key=clear
-call :_color2 %_White% "" %_Green% "Enter 1 to iNJECT again or 0 goto License tools:"
-set /p choice= 
-if "!choice!"=="1" (
-    goto :wpi
-) else (
-    goto :MainMenu
-)
-
-endlocal
+:HWIDActivationON
+Powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /HWID"
+exit /b
 
 
 
-
-:idm
-@set iasver=1.0
+@set masver=2.5
 @setlocal DisableDelayedExpansion
 @echo off
 
@@ -410,27 +405,24 @@ endlocal
 
 ::============================================================================
 ::
-::   IDM Activation Script (IAS)
+::   This script is a part of 'Microsoft_Activation_Scripts' (MAS) project.
 ::
-::   Homepages: https://github.com/WindowsAddict/IDM-Activation-Script
-::              https://massgrave.dev/idm-activation-script
-::
-::       Email: windowsaddict@protonmail.com
+::   Homepage: mass grave[.]dev
+::      Email: windowsaddict@protonmail.com
 ::
 ::============================================================================
 
 
 
-::  To activate, run the script with "/act" parameter or change 0 to 1 in below line
-set _activate=0
+::  To activate, run the script with "/HWID" parameter or change 0 to 1 in below line
+set _act=0
 
-::  To reset the activation and trial, run the script with "/res" parameter or change 0 to 1 in below line
-set _reset=0
+::  To disable changing edition if current edition doesn't support HWID activation, change the value to 1 from 0 or run the script with "/HWID-NoEditionChange" parameter
+set _NoEditionChange=0
 
 ::  If value is changed in above lines or parameter is used then script will run in unattended mode
 
-::  Add custom name in IDM license info, prefer to write it in English in below line after = sign,
-set name=Chhai Developer
+
 
 ::========================================================================================================================================
 
@@ -481,1043 +473,19 @@ echo:
 echo Null service is not running, script may crash...
 echo:
 echo:
-echo Help - %mas%idm-activation-script.html#Troubleshoot
+echo Help - %mas%troubleshoot.html
 echo:
 echo:
 ping 127.0.0.1 -n 10
 )
 cls
 
-::  Check LF line ending
-
-::pushd "%~dp0"
-::>nul findstr /v "$" "%~nx0" && (
-::echo:
-::echo Error: Script either has LF line ending issue or an empty line at the end of the script is missing.
-::echo:
-::ping 127.0.0.1 -n 6 >nul
-::popd
-::exit /b
-::)
-::popd
 
 ::========================================================================================================================================
 
 cls
 color 07
-title  IDM Activation Script %iasver%
-
-set _args=
-set _elev=
-set _unattended=0
-
-set _args=%*
-if defined _args set _args=%_args:"=%
-if defined _args (
-for %%A in (%_args%) do (
-if /i "%%A"=="-el"  set _elev=1
-if /i "%%A"=="/res" set _reset=1
-if /i "%%A"=="/act" set _activate=1
-)
-)
-
-for %%A in (%_activate% %_reset%) do (if "%%A"=="1" set _unattended=1)
-
-::========================================================================================================================================
-
-set "nul1=1>nul"
-set "nul2=2>nul"
-set "nul6=2^>nul"
-set "nul=>nul 2>&1"
-
-set psc=powershell.exe
-set winbuild=1
-for /f "tokens=6 delims=[]. " %%G in ('ver') do set winbuild=%%G
-
-set _NCS=1
-if %winbuild% LSS 10586 set _NCS=0
-if %winbuild% GEQ 10586 reg query "HKCU\Console" /v ForceV2 %nul2% | find /i "0x0" %nul1% && (set _NCS=0)
-
-if %_NCS% EQU 1 (
-for /F %%a in ('echo prompt $E ^| cmd') do set "esc=%%a"
-set     "Red="41;97m""
-set    "Gray="100;97m""
-set   "Green="42;97m""
-set    "Blue="44;97m""
-set  "_White="40;37m""
-set  "_Green="40;92m""
-set "_Yellow="40;93m""
-) else (
-set     "Red="Red" "white""
-set    "Gray="Darkgray" "white""
-set   "Green="DarkGreen" "white""
-set    "Blue="Blue" "white""
-set  "_White="Black" "Gray""
-set  "_Green="Black" "Green""
-set "_Yellow="Black" "Yellow""
-)
-
-set "nceline=echo: &echo ==== ERROR ==== &echo:"
-set "eline=echo: &call :_color %Red% "==== ERROR ====" &echo:"
-set "line=___________________________________________________________________________________________________"
-set "_buf={$W=$Host.UI.RawUI.WindowSize;$B=$Host.UI.RawUI.BufferSize;$W.Height=34;$B.Height=300;$Host.UI.RawUI.WindowSize=$W;$Host.UI.RawUI.BufferSize=$B;}"
-
-::========================================================================================================================================
-
-if %winbuild% LSS 7600 (
-%nceline%
-echo Unsupported OS version Detected [%winbuild%].
-echo Project is supported only for Windows 7/8/8.1/10/11 and their Server equivalent.
-goto done2
-)
-
-for %%# in (powershell.exe) do @if "%%~$PATH:#"=="" (
-%nceline%
-echo Unable to find powershell.exe in the system.
-goto done2
-)
-
-::========================================================================================================================================
-
-::  Fix for the special characters limitation in path name
-
-set "_work=%~dp0"
-if "%_work:~-1%"=="\" set "_work=%_work:~0,-1%"
-
-set "_batf=%~f0"
-set "_batp=%_batf:'=''%"
-
-set _PSarg="""%~f0""" -el %_args%
-
-set "_appdata=%appdata%"
-set "_ttemp=%userprofile%\AppData\Local\Temp"
-
-setlocal EnableDelayedExpansion
-
-::========================================================================================================================================
-
-echo "!_batf!" | find /i "!_ttemp!" %nul1% && (
-if /i not "!_work!"=="!_ttemp!" (
-%eline%
-echo Script is launched from the temp folder,
-echo Most likely you are running the script directly from the archive file.
-echo:
-echo Extract the archive file and launch the script from the extracted folder.
-goto done2
-)
-)
-
-::========================================================================================================================================
-
-::  Elevate script as admin and pass arguments and preventing loop
-
-%nul1% fltmc || (
-if not defined _elev %psc% "start cmd.exe -arg '/c \"!_PSarg:'=''!\"' -verb runas" && exit /b
-%eline%
-echo This script requires admin privileges.
-echo To do so, right click on this script and select 'Run as administrator'.
-goto done2
-)
-
-::========================================================================================================================================
-
-::  This code disables QuickEdit for this cmd.exe session only without making permanent changes to the registry
-::  It is added because clicking on the script window pauses the operation and leads to the confusion that script stopped due to an error
-
-if %_unattended%==1 set quedit=1
-for %%# in (%_args%) do (if /i "%%#"=="-qedit" set quedit=1)
-
-reg query HKCU\Console /v QuickEdit %nul2% | find /i "0x0" %nul1% || if not defined quedit (
-reg add HKCU\Console /v QuickEdit /t REG_DWORD /d "0" /f %nul1%
-start cmd.exe /c ""!_batf!" %_args% -qedit"
-rem quickedit reset code is added at the starting of the script instead of here because it takes time to reflect in some cases
-exit /b
-)
-
-::========================================================================================================================================
-
-::  This code checks if script is running in terminal app and if yes then relaunches it with conhost.exe
-
-if %_unattended%==1 set wtrel=1
-for %%# in (%_args%) do (if /i "%%#"=="-wt" set wtrel=1)
-
-if %winbuild% GEQ 17763 (
-set terminal=1
-
-if not defined wtrel (
-set test=TermTest-%random%
-title !test!
-%psc% "(Get-Process | Where-Object { $_.MainWindowTitle -like '*!test!*' }).ProcessName"  | find /i "cmd" %nul1% && (set terminal=)
-title %comspec%
-)
-
-if defined terminal if not defined wtrel (
-start conhost.exe "!_batf!" %_args% -wt
-exit /b
-)
-
-for %%# in (%_args%) do (if /i "%%#"=="-wt" set terminal=)
-)
-
-::========================================================================================================================================
-
-::  Check for updates
-
-set -=
-set old=
-
-for /f "delims=[] tokens=2" %%# in ('ping -4 -n 1 iasupdatecheck.mass%-%grave.dev') do (
-if not [%%#]==[] (echo "%%#" | find "127.69" %nul1% && (echo "%%#" | find "127.69.%iasver%" %nul1% || set old=1))
-)
-
-if defined old (
-echo ________________________________________________
-%eline%
-echo You are running outdated version IAS %iasver%
-echo ________________________________________________
-echo:
-if not %_unattended%==1 (
-echo [1] Get Latest IAS
-echo [0] Continue Anyway
-echo:
-call :_color %_Green% "Enter a menu option in the Keyboard [1,0] :"
-choice /C:10 /N
-if !errorlevel!==2 rem
-if !errorlevel!==1 (start https://github.com/WindowsAddict/IDM-Activation-Script & start %mas%/idm-activation-script & exit /b)
-)
-)
-
-::========================================================================================================================================
-
-cls
-title  IDM Activation Script %iasver%
-
-echo:
-echo Initializing...
-
-::  Check PowerShell
-
-%psc% $ExecutionContext.SessionState.LanguageMode %nul2% | find /i "Full" %nul1% || (
-%nceline%
-%psc% $ExecutionContext.SessionState.LanguageMode
-echo:
-echo PowerShell is not working. Aborting...
-echo If you have applied restrictions on Powershell then undo those changes.
-echo:
-echo Check this page for help. %mas%idm-activation-script.html#Troubleshoot
-goto done2
-)
-
-::  Check WMI
-
-%psc% "Get-WmiObject -Class Win32_ComputerSystem | Select-Object -Property CreationClassName" %nul2% | find /i "computersystem" %nul1% || (
-%eline%
-%psc% "Get-WmiObject -Class Win32_ComputerSystem | Select-Object -Property CreationClassName"
-echo:
-echo WMI is not working. Aborting...
-echo:
-echo Check this page for help. %mas%idm-activation-script.html#Troubleshoot
-goto done2
-)
-
-::  Check user account SID
-
-set _sid=
-for /f "delims=" %%a in ('%psc% "$explorerProc = Get-Process -Name explorer | Where-Object {$_.SessionId -eq (Get-Process -Id $pid).SessionId} | Select-Object -First 1; $sid = (gwmi -Query ('Select * From Win32_Process Where ProcessID=' + $explorerProc.Id)).GetOwnerSid().Sid; $sid" %nul6%') do (set _sid=%%a)
-
-reg query HKU\%_sid%\Software\Classes %nul% || (
-%eline%
-echo:
-echo [%_sid%]
-echo User Account SID not found. Aborting...
-echo:
-echo Check this page for help. %mas%idm-activation-script.html#Troubleshoot
-goto done2
-)
-
-::========================================================================================================================================
-
-::  Check if the current user SID is syncing with the HKCU entries
-
-reg delete HKCU\IAS_TEST /f %nul%
-reg delete HKU\%_sid%\IAS_TEST /f %nul%
-
-set HKCUsync=$null
-reg add HKCU\IAS_TEST %nul%
-reg query HKU\%_sid%\IAS_TEST %nul% && (
-set HKCUsync=1
-)
-
-reg delete HKCU\IAS_TEST /f %nul%
-reg delete HKU\%_sid%\IAS_TEST /f %nul%
-
-::  Below code also works for ARM64 Windows 10 (including x64 bit emulation)
-
-for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v PROCESSOR_ARCHITECTURE') do set arch=%%b
-if /i not "%arch%"=="x86" set arch=x64
-
-if "%arch%"=="x86" (
-set "CLSID=HKCU\Software\Classes\CLSID"
-set "CLSID2=HKU\%_sid%\Software\Classes\CLSID"
-set "HKLM=HKLM\Software\Internet Download Manager"
-) else (
-set "CLSID=HKCU\Software\Classes\Wow6432Node\CLSID"
-set "CLSID2=HKU\%_sid%\Software\Classes\Wow6432Node\CLSID"
-set "HKLM=HKLM\SOFTWARE\Wow6432Node\Internet Download Manager"
-)
-
-for /f "tokens=2*" %%a in ('reg query "HKU\%_sid%\Software\DownloadManager" /v ExePath %nul6%') do call set "IDMan=%%b"
-
-if not exist %SystemRoot%\Temp md %SystemRoot%\Temp
-set "idmcheck=tasklist /fi "imagename eq idman.exe" | findstr /i "idman.exe" %nul1%"
-
-::  Check CLSID registry access
-
-reg add %CLSID2%\IAS_TEST %nul%
-reg query %CLSID2%\IAS_TEST %nul% || (
-%eline%
-echo Failed to write in %CLSID2%
-echo:
-echo Check this page for help. %mas%idm-activation-script.html#Troubleshoot
-goto done2
-)
-
-reg delete %CLSID2%\IAS_TEST /f %nul%
-
-::========================================================================================================================================
-
-if %_reset%==1 goto :_reset
-if %_activate%==1 goto :_activate
-
-
-
-
-:MainMenui
-if defined Unattended (
-if defined reset goto _reset
-if defined activate goto _activate
-)
-
-:: Check firewall status
-
-set /a _ena=0
-set /a _dis=0
-for %%# in (DomainProfile PublicProfile StandardProfile) do (
-for /f "skip=2 tokens=2*" %%a in ('reg query HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\%%# /v EnableFirewall 2^>nul') do (
-if /i %%b equ 0x1 (set /a _ena+=1) else (set /a _dis+=1)
-)
-)
-
-if %_ena%==3 (
-set _status=Enabled
-set _col=%_Green%
-)
-
-if %_dis%==3 (
-set _status=Disabled
-set _col=%_Red%
-)
-
-if not %_ena%==3 if not %_dis%==3 (
-set _status=Status_Unclear
-set _col=%_Yellow%
-)
-
-cls
-title  IDM Activation Script %iasver%
-if not defined terminal mode 75, 28
-
-echo:            ___________________________________________________
-echo:
-echo:                                Activate IDM
-echo:            ___________________________________________________ 
-echo:                                                               
-echo:               [1] Activate IDM
-echo:               [2] Reset IDM Activation / Trial
-call :_color2 %_White% "               [3] Toggle Windows Firewall  " %_col% "[%_status%]"                                                            
-echo:               [4] Help
-echo:               [5] Goto Main Menu
-echo:               [6] Exit
-echo:            ___________________________________________________
-echo:         
-call :_color2 %_White% "             " %_Green% "Enter a menu option in the Keyboard [1,2,3,4,5,6,0]"
-choice /C:1234560 /N
-set _erl=%errorlevel%
-
-if %_erl%==6 exit /b
-if %_erl%==5 goto :MainMenu
-if %_erl%==4 start https://github.com/WindowsAddict/IDM-Activation-Script & start https://massgrave.dev/idm-activation-script & goto MainMenui
-if %_erl%==3 call :_tog_Firewall&goto MainMenui
-if %_erl%==2 goto _reset
-if %_erl%==1 goto _activate
-goto :MainMenui
-
-::========================================================================================================================================
-:_tog_Firewall
-
-if %_status%==Enabled (
-netsh AdvFirewall Set AllProfiles State Off >nul
-) else (
-netsh AdvFirewall Set AllProfiles State On >nul
-)
-exit /b
-
-
-:_reset
-
-cls
-if not %HKCUsync%==1 (
-if not defined terminal mode 153, 35
-) else (
-if not defined terminal mode 113, 35
-)
-if not defined terminal %psc% "&%_buf%" %nul%
-
-echo:
-%idmcheck% && taskkill /f /im idman.exe
-
-set _time=
-for /f %%a in ('%psc% "(Get-Date).ToString('yyyyMMdd-HHmmssfff')"') do set _time=%%a
-
-echo:
-echo Creating backup of CLSID registry keys in %SystemRoot%\Temp
-
-reg export %CLSID% "%SystemRoot%\Temp\_Backup_HKCU_CLSID_%_time%.reg"
-if not %HKCUsync%==1 reg export %CLSID2% "%SystemRoot%\Temp\_Backup_HKU-%_sid%_CLSID_%_time%.reg"
-
-call :delete_queue
-%psc% "$HKCUsync = %HKCUsync%; $lockKey = $null; $deleteKey = 1; $f=[io.file]::ReadAllText('!_batp!') -split ':regscan\:.*';iex ($f[1])"
-
-call :add_key
-
-echo:
-echo %line%
-echo:
-call :_color %Green% "The IDM reset process has been completed."
-echo Help: %mas%idm-activation-script.html#Troubleshoot
-
-goto done
-
-:delete_queue
-
-echo:
-echo Deleting IDM registry keys...
-echo:
-
-for %%# in (
-""HKCU\Software\DownloadManager" "/v" "FName""
-""HKCU\Software\DownloadManager" "/v" "LName""
-""HKCU\Software\DownloadManager" "/v" "Email""
-""HKCU\Software\DownloadManager" "/v" "Serial""
-""HKCU\Software\DownloadManager" "/v" "scansk""
-""HKCU\Software\DownloadManager" "/v" "tvfrdt""
-""HKCU\Software\DownloadManager" "/v" "radxcnt""
-""HKCU\Software\DownloadManager" "/v" "LstCheck""
-""HKCU\Software\DownloadManager" "/v" "ptrk_scdt""
-""HKCU\Software\DownloadManager" "/v" "LastCheckQU""
-"%HKLM%"
-) do for /f "tokens=* delims=" %%A in ("%%~#") do (
-set "reg="%%~A"" &reg query !reg! %nul% && call :del
-)
-
-if not %HKCUsync%==1 for %%# in (
-""HKU\%_sid%\Software\DownloadManager" "/v" "FName""
-""HKU\%_sid%\Software\DownloadManager" "/v" "LName""
-""HKU\%_sid%\Software\DownloadManager" "/v" "Email""
-""HKU\%_sid%\Software\DownloadManager" "/v" "Serial""
-""HKU\%_sid%\Software\DownloadManager" "/v" "scansk""
-""HKU\%_sid%\Software\DownloadManager" "/v" "tvfrdt""
-""HKU\%_sid%\Software\DownloadManager" "/v" "radxcnt""
-""HKU\%_sid%\Software\DownloadManager" "/v" "LstCheck""
-""HKU\%_sid%\Software\DownloadManager" "/v" "ptrk_scdt""
-""HKU\%_sid%\Software\DownloadManager" "/v" "LastCheckQU""
-) do for /f "tokens=* delims=" %%A in ("%%~#") do (
-set "reg="%%~A"" &reg query !reg! %nul% && call :del
-)
-
-exit /b
-
-:del
-
-reg delete %reg% /f %nul%
-
-if "%errorlevel%"=="0" (
-set "reg=%reg:"=%"
-echo Deleted - !reg!
-) else (
-set "reg=%reg:"=%"
-call :_color2 %Red% "Failed - !reg!"
-)
-
-exit /b
-
-::========================================================================================================================================
-
-:_activate
-
-cls
-if not %HKCUsync%==1 (
-if not defined terminal mode 153, 35
-) else (
-if not defined terminal mode 113, 35
-)
-if not defined terminal %psc% "&%_buf%" %nul%
-
-echo:
-if not exist "%IDMan%" (
-call :_color %Red% "IDM [Internet Download Manager] is not Installed."
-echo You can download it from  https://www.internetdownloadmanager.com/download.html
-goto done
-)
-
-:: Internet check with internetdownloadmanager.com ping and port 80 test
-
-set _int=
-for /f "delims=[] tokens=2" %%# in ('ping -n 1 internetdownloadmanager.com') do (if not [%%#]==[] set _int=1)
-
-if not defined _int (
-%psc% "$t = New-Object Net.Sockets.TcpClient;try{$t.Connect("""internetdownloadmanager.com""", 80)}catch{};$t.Connected" | findstr /i "true" %nul1% || (
-call :_color %Red% "Unable to connect internetdownloadmanager.com, aborting..."
-goto done
-)
-call :_color %Gray% "Ping command failed for internetdownloadmanager.com"
-echo:
-)
-
-for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName 2^>nul') do set "regwinos=%%b"
-for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v PROCESSOR_ARCHITECTURE') do set "regarch=%%b"
-for /f "tokens=6-7 delims=[]. " %%i in ('ver') do if "%%j"=="" (set fullbuild=%%i) else (set fullbuild=%%i.%%j)
-for /f "tokens=2*" %%a in ('reg query "HKU\%_sid%\Software\DownloadManager" /v idmvers %nul6%') do set "IDMver=%%b"
-
-echo Checking Info - [%regwinos% ^| %fullbuild% ^| %regarch% ^| IDM: %IDMver%]
-
-%idmcheck% && (echo: & taskkill /f /im idman.exe)
-
-set _time=
-for /f %%a in ('%psc% "(Get-Date).ToString('yyyyMMdd-HHmmssfff')"') do set _time=%%a
-
-echo:
-echo Creating backup of CLSID registry keys in %SystemRoot%\Temp
-
-reg export %CLSID% "%SystemRoot%\Temp\_Backup_HKCU_CLSID_%_time%.reg"
-if not %HKCUsync%==1 reg export %CLSID2% "%SystemRoot%\Temp\_Backup_HKU-%_sid%_CLSID_%_time%.reg"
-
-call :delete_queue
-call :add_key
-
-%psc% "$HKCUsync = %HKCUsync%; $lockKey = 1; $deleteKey = $null; $toggle = 1; $f=[io.file]::ReadAllText('!_batp!') -split ':regscan\:.*';iex ($f[1])"
-
-call :register_IDM
-
-if not defined _fileexist call :_color %Red% "Error: Unable to download files with IDM."
-
-%psc% "$HKCUsync = %HKCUsync%; $lockKey = 1; $deleteKey = $null; $f=[io.file]::ReadAllText('!_batp!') -split ':regscan\:.*';iex ($f[1])"
-
-echo:
-echo %line%
-echo:
-call :_color %Green% "The IDM Activation process has been completed."
-echo:
-call :_color %Gray% "If fake serial screen appears, run activation option again and do not use reset option."
-echo:
-echo Help: %mas%idm-activation-script.html#Troubleshoot
-
-::========================================================================================================================================
-
-:done
-
-echo %line%
-echo:
-echo:
-if %_unattended%==1 timeout /t 2 & exit /b
-
-if defined terminal (
-call :_color %_Yellow% "Press 0 key to return..."
-choice /c 0 /n
-) else (
-call :_color %_Yellow% "Press any key to return..."
-pause %nul1%
-)
-goto MainMenui
-
-:done2
-
-if %_unattended%==1 timeout /t 2 & exit /b
-
-if defined terminal (
-echo Press 0 key to exit...
-choice /c 0 /n
-) else (
-echo Press any key to exit...
-pause %nul1%
-)
-exit /b
-
-::========================================================================================================================================
-
-:_rcont
-
-reg add %reg% %nul%
-call :add
-exit /b
-
-:register_IDM
-
-echo:
-echo Applying registration details...
-echo:
-
-If not defined name set name=Chhai Developer
-
-set "reg=HKCU\SOFTWARE\DownloadManager /v FName /t REG_SZ /d "%name%"" & call :_rcont
-set "reg=HKCU\SOFTWARE\DownloadManager /v LName /t REG_SZ /d """ & call :_rcont
-set "reg=HKCU\SOFTWARE\DownloadManager /v Email /t REG_SZ /d "info@tonec.com"" & call :_rcont
-set "reg=HKCU\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d "FOX6H-3KWH4-7TSIN-Q4US7"" & call :_rcont
-
-if not %HKCUsync%==1 (
-set "reg=HKU\%_sid%\SOFTWARE\DownloadManager /v FName /t REG_SZ /d "%name%"" & call :_rcont
-set "reg=HKU\%_sid%\SOFTWARE\DownloadManager /v LName /t REG_SZ /d """ & call :_rcont
-set "reg=HKU\%_sid%\SOFTWARE\DownloadManager /v Email /t REG_SZ /d "info@tonec.com"" & call :_rcont
-set "reg=HKU\%_sid%\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d "FOX6H-3KWH4-7TSIN-Q4US7"" & call :_rcont
-)
-
-echo:
-echo Triggering a few downloads to create certain registry keys, please wait...
-echo:
-
-set "file=%SystemRoot%\Temp\temp.png"
-set _fileexist=
-
-set link=https://www.internetdownloadmanager.com/images/idm_box_min.png
-call :download
-set link=https://www.internetdownloadmanager.com/register/IDMlib/images/idman_logos.png
-call :download
-set link=https://www.internetdownloadmanager.com/pictures/idm_about.png
-call :download
-
-echo:
-timeout /t 3 %nul1%
-%idmcheck% && taskkill /f /im idman.exe
-if exist "%file%" del /f /q "%file%"
-exit /b
-
-:download
-
-set /a attempt=0
-if exist "%file%" del /f /q "%file%"
-start "" /B "%IDMan%" /n /d "%link%" /p "%SystemRoot%\Temp" /f temp.png
-
-:check_file
-
-timeout /t 1 %nul1%
-set /a attempt+=1
-if exist "%file%" set _fileexist=1&exit /b
-if %attempt% GEQ 20 exit /b
-goto :Check_file
-
-::========================================================================================================================================
-
-:add_key
-
-echo:
-echo Adding registry key...
-echo:
-
-set "reg="%HKLM%" /v "AdvIntDriverEnabled2""
-
-reg add %reg% /t REG_DWORD /d "1" /f %nul%
-
-:add
-
-if "%errorlevel%"=="0" (
-set "reg=%reg:"=%"
-echo Added - !reg!
-) else (
-set "reg=%reg:"=%"
-call :_color2 %Red% "Failed - !reg!"
-)
-exit /b
-
-::========================================================================================================================================
-
-:regscan:
-$finalValues = @()
-
-$explorerProc = Get-Process -Name explorer | Where-Object {$_.SessionId -eq (Get-Process -Id $pid).SessionId} | Select-Object -First 1
-$sid = (gwmi -Query "Select * From Win32_Process Where ProcessID='$($explorerProc.Id)'").GetOwnerSid().Sid
-
-$arch = (Get-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment').PROCESSOR_ARCHITECTURE
-if ($arch -eq "x86") {
-  $regPaths = @("HKCU:\Software\Classes\CLSID", "Registry::HKEY_USERS\$sid\Software\Classes\CLSID")
-} else {
-  $regPaths = @("HKCU:\Software\Classes\WOW6432Node\CLSID", "Registry::HKEY_USERS\$sid\Software\Classes\Wow6432Node\CLSID")
-}
-
-foreach ($regPath in $regPaths) {
-    if (($regPath -match "HKEY_USERS") -and ($HKCUsync -ne $null)) {
-        continue
-    }
-	
-	Write-Host
-	Write-Host "Searching IDM CLSID Registry Keys in $regPath"
-	Write-Host
-	
-    $subKeys = Get-ChildItem -Path $regPath -ErrorAction SilentlyContinue -ErrorVariable lockedKeys | Where-Object { $_.PSChildName -match '^\{[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}\}$' }
-
-    foreach ($lockedKey in $lockedKeys) {
-        $leafValue = Split-Path -Path $lockedKey.TargetObject -Leaf
-        $finalValues += $leafValue
-        Write-Output "$leafValue - Found Locked Key"
-    }
-
-    if ($subKeys -eq $null) {
-	continue
-	}
-	
-	$subKeysToExclude = "LocalServer32", "InProcServer32", "InProcHandler32"
-
-    $filteredKeys = $subKeys | Where-Object { !($_.GetSubKeyNames() | Where-Object { $subKeysToExclude -contains $_ }) }
-
-    foreach ($key in $filteredKeys) {
-        $fullPath = $key.PSPath
-        $keyValues = Get-ItemProperty -Path $fullPath -ErrorAction SilentlyContinue
-        $defaultValue = $keyValues.PSObject.Properties | Where-Object { $_.Name -eq '(default)' } | Select-Object -ExpandProperty Value
-
-        if (($defaultValue -match "^\d+$") -and ($key.SubKeyCount -eq 0)) {
-            $finalValues += $($key.PSChildName)
-            Write-Output "$($key.PSChildName) - Found Digit In Default and No Subkeys"
-            continue
-        }
-        if (($defaultValue -match "\+|=") -and ($key.SubKeyCount -eq 0)) {
-            $finalValues += $($key.PSChildName)
-            Write-Output "$($key.PSChildName) - Found + or = In Default and No Subkeys"
-            continue
-        }
-        $versionValue = Get-ItemProperty -Path "$fullPath\Version" -ErrorAction SilentlyContinue | Select-Object -ExpandProperty '(default)' -ErrorAction SilentlyContinue
-        if (($versionValue -match "^\d+$") -and ($key.SubKeyCount -eq 1)) {
-            $finalValues += $($key.PSChildName)
-            Write-Output "$($key.PSChildName) - Found Digit In \Version and No Other Subkeys"
-            continue
-        }
-        $keyValues.PSObject.Properties | ForEach-Object {
-            if ($_.Name -match "MData|Model|scansk|Therad") {
-                $finalValues += $($key.PSChildName)
-                Write-Output "$($key.PSChildName) - Found MData Model scansk Therad"
-                continue
-            }
-        }
-        if (($key.ValueCount -eq 0) -and ($key.SubKeyCount -eq 0)) {
-            $finalValues += $($key.PSChildName)
-            Write-Output "$($key.PSChildName) - Found Empty Key"
-            continue
-        }
-    }
-}
-
-$finalValues = @($finalValues | Select-Object -Unique)
-
-if ($finalValues -ne $null) {
-    Write-Host
-    if ($lockKey -ne $null) {
-        Write-Host "Locking IDM CLSID Registry Keys..."
-    }
-    if ($deleteKey -ne $null) {
-        Write-Host "Deleting IDM CLSID Registry Keys..."
-    }
-    Write-Host
-} else {
-    Write-Host "IDM CLSID Registry Keys are not found."
-	Exit
-}
-
-if (($finalValues.Count -gt 20) -and ($toggle -ne $null)) {
-	$lockKey = $null
-	$deleteKey = 1
-    Write-Host "The IDM keys count is more than 20. Deleting them now instead of locking..."
-	Write-Host
-}
-
-function Take-Permissions {
-    param($rootKey, $regKey)
-    $AssemblyBuilder = [AppDomain]::CurrentDomain.DefineDynamicAssembly(4, 1)
-    $ModuleBuilder = $AssemblyBuilder.DefineDynamicModule(2, $False)
-    $TypeBuilder = $ModuleBuilder.DefineType(0)
-
-    $TypeBuilder.DefinePInvokeMethod('RtlAdjustPrivilege', 'ntdll.dll', 'Public, Static', 1, [int], @([int], [bool], [bool], [bool].MakeByRefType()), 1, 3) | Out-Null
-    9,17,18 | ForEach-Object { $TypeBuilder.CreateType()::RtlAdjustPrivilege($_, $true, $false, [ref]$false) | Out-Null }
-
-    $SID = New-Object System.Security.Principal.SecurityIdentifier('S-1-5-32-544')
-    $IDN = ($SID.Translate([System.Security.Principal.NTAccount])).Value
-    $Admin = New-Object System.Security.Principal.NTAccount($IDN)
-
-    $everyone = New-Object System.Security.Principal.SecurityIdentifier('S-1-1-0')
-    $none = New-Object System.Security.Principal.SecurityIdentifier('S-1-0-0')
-
-    $key = [Microsoft.Win32.Registry]::$rootKey.OpenSubKey($regkey, 'ReadWriteSubTree', 'TakeOwnership')
-
-    $acl = New-Object System.Security.AccessControl.RegistrySecurity
-    $acl.SetOwner($Admin)
-    $key.SetAccessControl($acl)
-
-    $key = $key.OpenSubKey('', 'ReadWriteSubTree', 'ChangePermissions')
-    $rule = New-Object System.Security.AccessControl.RegistryAccessRule($everyone, 'FullControl', 'ContainerInherit', 'None', 'Allow')
-    $acl.ResetAccessRule($rule)
-    $key.SetAccessControl($acl)
-
-    if ($lockKey -ne $null) {
-        $acl = New-Object System.Security.AccessControl.RegistrySecurity
-        $acl.SetOwner($none)
-        $key.SetAccessControl($acl)
-
-        $key = $key.OpenSubKey('', 'ReadWriteSubTree', 'ChangePermissions')
-        $rule = New-Object System.Security.AccessControl.RegistryAccessRule($everyone, 'FullControl', 'Deny')
-        $acl.ResetAccessRule($rule)
-        $key.SetAccessControl($acl)
-    }
-}
-
-foreach ($regPath in $regPaths) {
-    if (($regPath -match "HKEY_USERS") -and ($HKCUsync -ne $null)) {
-        continue
-    }
-    foreach ($finalValue in $finalValues) {
-        $fullPath = Join-Path -Path $regPath -ChildPath $finalValue
-        if ($fullPath -match 'HKCU:') {
-            $rootKey = 'CurrentUser'
-        } else {
-            $rootKey = 'Users'
-        }
-
-        $position = $fullPath.IndexOf("\")
-        $regKey = $fullPath.Substring($position + 1)
-
-        if ($lockKey -ne $null) {
-            if (-not (Test-Path -Path $fullPath -ErrorAction SilentlyContinue)) { New-Item -Path $fullPath -Force -ErrorAction SilentlyContinue | Out-Null }
-            Take-Permissions $rootKey $regKey
-            try {
-                Remove-Item -Path $fullPath -Force -Recurse -ErrorAction Stop
-                Write-Host -back 'DarkRed' -fore 'white' "Failed - $fullPath"
-            }
-            catch {
-                Write-Host "Locked - $fullPath"
-            }
-        }
-
-        if ($deleteKey -ne $null) {
-            if (Test-Path -Path $fullPath) {
-                Remove-Item -Path $fullPath -Force -Recurse -ErrorAction SilentlyContinue
-                if (Test-Path -Path $fullPath) {
-                    Take-Permissions $rootKey $regKey
-                    try {
-                        Remove-Item -Path $fullPath -Force -Recurse -ErrorAction Stop
-                        Write-Host "Deleted - $fullPath"
-                    }
-                    catch {
-                        Write-Host -back 'DarkRed' -fore 'white' "Failed - $fullPath"
-                    }
-                }
-                else {
-                    Write-Host "Deleted - $fullPath"
-                }
-            }
-        }
-    }
-}
-:regscan:
-
-::========================================================================================================================================
-
-:_color
-
-if %_NCS% EQU 1 (
-echo %esc%[%~1%~2%esc%[0m
-) else (
-%psc% write-host -back '%1' -fore '%2' '%3'
-)
-exit /b
-
-:_color2
-
-if %_NCS% EQU 1 (
-echo %esc%[%~1%~2%esc%[%~3%~4%esc%[0m
-) else (
-%psc% write-host -back '%1' -fore '%2' '%3' -NoNewline; write-host -back '%4' -fore '%5' '%6'
-)
-exit /b
-
-::========================================================================================================================================
-:: Leave empty line below
-
-
-
-
-:Extras
-
-cls
-title  Extras
-mode 76, 30
-echo:
-echo:
-echo:       ______________________________________________________________
-echo:
-echo:                                Extra Tools
-echo:       ______________________________________________________________
-echo:
-echo:             [1] Change Windows Edition
-echo:
-echo:             [2] Extract $OEM$ Folder
-echo:
-echo:             [3] Activation Status [vbs]
-echo:
-echo:             [4] Download Genuine Windows / Office
-echo:             __________________________________________________      
-echo:                                                                     
-echo:             [0] Go to Main Menu
-echo:       ______________________________________________________________
-echo:
-call :_color2 %_White% "           " %_Green% "Enter a menu option in the Keyboard [1,2,3,4,0] :"
-choice /C:12340 /N
-set _erl=%errorlevel%
-
-if %_erl%==5 goto :MainMenu
-if %_erl%==4 start %mas%genuine-installation-media.html & goto :Extras
-if %_erl%==3 setlocal & call :_Check_Status_vbs & cls & endlocal & goto :Extras
-if %_erl%==2 goto:Extract$OEM$
-if %_erl%==1 setlocal & call :change_edition    & cls & endlocal & goto :Extras
-goto :Extras
-
-::========================================================================================================================================
-
-:Extract$OEM$
-
-cls
-title  Extract $OEM$ Folder
-mode 76, 30
-
-if not exist "!_desktop_!\" (
-%eline%
-echo Desktop location was not detected, aborting...
-echo _____________________________________________________
-echo:
-call :_color %_Yellow% "Press any key to go back..."
-pause >nul
-goto Extras
-)
-
-if exist "!_desktop_!\$OEM$\" (
-%eline%
-echo $OEM$ folder already exists on the Desktop.
-echo _____________________________________________________
-echo:
-call :_color %_Yellow% "Press any key to go back..."
-pause >nul
-goto Extras
-)
-
-:Extract$OEM$2
-
-cls
-title  Extract $OEM$ Folder
-mode 78, 30
-echo:
-echo:
-echo:
-echo:
-echo:                     Extract $OEM$ folder on the desktop           
-echo:           ________________________________________________________
-echo:
-echo:              [1] HWID
-echo:              [2] Ohook
-echo:              [3] KMS38
-echo:              [4] Online KMS
-echo:
-echo:              [5] HWID       ^(Windows^) ^+ Ohook      ^(Office^)
-echo:              [6] HWID       ^(Windows^) ^+ Online KMS ^(Office^)
-echo:              [7] KMS38      ^(Windows^) ^+ Ohook      ^(Office^)
-echo:              [8] KMS38      ^(Windows^) ^+ Online KMS ^(Office^)
-echo:              [9] Online KMS ^(Windows^) ^+ Ohook      ^(Office^)
-echo:
-call :_color2 %_White% "              [R] " %_Green% "ReadMe"
-echo:              [0] Go Back
-echo:           ________________________________________________________
-echo:  
-call :_color2 %_White% "           " %_Green% "Enter a menu option in the Keyboard:"
-choice /C:123456789R0 /N
-set _erl=%errorlevel%
-
-if %_erl%==11 goto:Extras
-if %_erl%==10 start %mas%oem-folder.html &goto:Extract$OEM$2
-if %_erl%==9 (set "_oem=Online KMS [Windows] + Ohook [Office]" & set "para=/KMS-ActAndRenewalTask /KMS-Windows /Ohook" &goto:Extract$OEM$3)
-if %_erl%==8 (set "_oem=KMS38 [Windows] + Online KMS [Office]" & set "para=/KMS38 /KMS-ActAndRenewalTask /KMS-Office" &goto:Extract$OEM$3)
-if %_erl%==7 (set "_oem=KMS38 [Windows] + Ohook [Office]" & set "para=/KMS38 /Ohook" &goto:Extract$OEM$3)
-if %_erl%==6 (set "_oem=HWID [Windows] + Online KMS [Office]" & set "para=/HWID /KMS-ActAndRenewalTask /KMS-Office" &goto:Extract$OEM$3)
-if %_erl%==5 (set "_oem=HWID [Windows] + Ohook [Office]" & set "para=/HWID /Ohook" &goto:Extract$OEM$3)
-if %_erl%==4 (set "_oem=Online KMS" & set "para=/KMS-ActAndRenewalTask /KMS-WindowsOffice" &goto:Extract$OEM$3)
-if %_erl%==3 (set "_oem=KMS38" & set "para=/KMS38" &goto:Extract$OEM$3)
-if %_erl%==2 (set "_oem=Ohook" & set "para=/Ohook" &goto:Extract$OEM$3)
-if %_erl%==1 (set "_oem=HWID" & set "para=/HWID" &goto:Extract$OEM$3)
-goto :Extract$OEM$2
-
-::========================================================================================================================================
-
-:Extract$OEM$3
-
-cls
-set "_dir=!_desktop_!\$OEM$\$$\Setup\Scripts"
-md "!_dir!\"
-copy /y /b "!_batf!" "!_dir!\MAS_AIO.cmd" %nul%
-
-(
-echo @echo off
-echo fltmc ^>nul ^|^| exit /b
-echo call "%%~dp0MAS_AIO.cmd" %para%
-echo cd \
-echo ^(goto^) 2^>nul ^& ^(if "%%~dp0"=="%%SystemRoot%%\Setup\Scripts\" rd /s /q "%%~dp0"^)
-)>"!_dir!\SetupComplete.cmd"
-
-set _error=
-if not exist "!_dir!\MAS_AIO.cmd" set _error=1
-if not exist "!_dir!\SetupComplete.cmd" set _error=1
-
-if defined _error (
-%eline%
-echo Failed to extract $OEM$ folder on the Desktop.
-) else (
-echo:
-call :_color %Blue% "%_oem%"
-call :_color %Green% "$OEM$ folder is successfully created on the Desktop."
-)
-echo "%_oem%" | find /i "KMS38" 1>nul && (
-echo:
-echo To KMS38 activate Server Cor/Acor editions ^(No GUI Versions^),
-echo Check this page %mas%oem-folder
-)
-echo ___________________________________________________________________
-echo:
-call :_color %_Yellow% "Press any key to go back..."
-pause >nul
-goto Extras
-
-:+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-:HWIDActivation
-@setlocal DisableDelayedExpansion
-@echo off
-
-::  To activate, run the script with "/HWID" parameter or change 0 to 1 in below line
-set _act=0
-
-::  To disable changing edition if current edition doesn't support HWID activation, change the value to 1 from 0 or run the script with "/HWID-NoEditionChange" parameter
-set _NoEditionChange=0
-
-::  If value is changed in above lines or parameter is used then script will run in unattended mode
-
-::========================================================================================================================================
-
-Powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /HWID"
-goto :MainMenu
-
-::========================================================================================================================================
+title  HWID Activation %masver%
 
 set _args=
 set _elev=
@@ -1596,6 +564,12 @@ echo Use KMS38 or Online KMS Activation option.
 goto dk_done
 )
 
+for %%# in (powershell.exe) do @if "%%~$PATH:#"=="" (
+%nceline%
+echo Unable to find powershell.exe in the system.
+goto dk_done
+)
+
 ::========================================================================================================================================
 
 ::  Fix for the special characters limitation in path name
@@ -1611,6 +585,74 @@ set _PSarg="""%~f0""" -el %_args%
 set "_ttemp=%userprofile%\AppData\Local\Temp"
 
 setlocal EnableDelayedExpansion
+
+::========================================================================================================================================
+
+echo "!_batf!" | find /i "!_ttemp!" %nul1% && (
+if /i not "!_work!"=="!_ttemp!" (
+%eline%
+echo Script is launched from the temp folder,
+echo Most likely you are running the script directly from the archive file.
+echo:
+echo Extract the archive file and launch the script from the extracted folder.
+goto dk_done
+)
+)
+
+::========================================================================================================================================
+
+::  Elevate script as admin and pass arguments and preventing loop
+
+%nul1% fltmc || (
+if not defined _elev %psc% "start cmd.exe -arg '/c \"!_PSarg:'=''!\"' -verb runas" && exit /b
+%eline%
+echo This script requires admin privileges.
+echo To do so, right click on this script and select 'Run as administrator'.
+goto dk_done
+)
+
+::========================================================================================================================================
+
+::  This code disables QuickEdit for this cmd.exe session only without making permanent changes to the registry
+::  It is added because clicking on the script window pauses the operation and leads to the confusion that script stopped due to an error
+
+if %_unattended%==1 set quedit=1
+for %%# in (%_args%) do (if /i "%%#"=="-qedit" set quedit=1)
+
+reg query HKCU\Console /v QuickEdit %nul2% | find /i "0x0" %nul1% || if not defined quedit (
+reg add HKCU\Console /v QuickEdit /t REG_DWORD /d "0" /f %nul1%
+start cmd.exe /c ""!_batf!" %_args% -qedit"
+rem quickedit reset code is added at the starting of the script instead of here because it takes time to reflect in some cases
+exit /b
+)
+
+::========================================================================================================================================
+
+::  Check for updates
+
+set -=
+set old=
+
+for /f "delims=[] tokens=2" %%# in ('ping -4 -n 1 updatecheck.mass%-%grave.dev') do (
+if not [%%#]==[] (echo "%%#" | find "127.69" %nul1% && (echo "%%#" | find "127.69.%masver%" %nul1% || set old=1))
+)
+
+if defined old (
+echo ________________________________________________
+%eline%
+echo You are running outdated version MAS %masver%
+echo ________________________________________________
+echo:
+if not %_unattended%==1 (
+echo [1] Get Latest MAS
+echo [0] Continue Anyway
+echo:
+call :dk_color %_Green% "Enter a menu option in the Keyboard [1,0] :"
+choice /C:10 /N
+if !errorlevel!==2 rem
+if !errorlevel!==1 (start ht%-%tps://github.com/mass%-%gravel/Microsoft-Acti%-%vation-Scripts & start %mas% & exit /b)
+)
+)
 
 ::========================================================================================================================================
 
@@ -2704,11 +1746,54 @@ set notfoundaltactID=1
 )
 exit /b
 
-:+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+::========================================================================================================================================
+:: Leave empty line below
 
-:OhookActivation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:OhookActivationON
+@set masver=2.5
 @setlocal DisableDelayedExpansion
 @echo off
+
+
+
+::============================================================================
+::
+::   This script is a part of 'Microsoft_Activation_Scripts' (MAS) project.
+::
+::   Homepage: mass grave[.]dev
+::      Email: windowsaddict@protonmail.com
+::
+::============================================================================
+
+
 
 ::  To activate Office with Ohook activation, run the script with "/Ohook" parameter or change 0 to 1 in below line
 set _act=0
@@ -2717,6 +1802,64 @@ set _act=0
 set _rem=0
 
 ::  If value is changed in above lines or parameter is used then script will run in unattended mode
+
+
+
+::========================================================================================================================================
+
+::  Set Path variable, it helps if it is misconfigured in the system
+
+set "PATH=%SystemRoot%\System32;%SystemRoot%\System32\wbem;%SystemRoot%\System32\WindowsPowerShell\v1.0\"
+if exist "%SystemRoot%\Sysnative\reg.exe" (
+set "PATH=%SystemRoot%\Sysnative;%SystemRoot%\Sysnative\wbem;%SystemRoot%\Sysnative\WindowsPowerShell\v1.0\;%PATH%"
+)
+
+:: Re-launch the script with x64 process if it was initiated by x86 process on x64 bit Windows
+:: or with ARM64 process if it was initiated by x86/ARM32 process on ARM64 Windows
+
+set "_cmdf=%~f0"
+for %%# in (%*) do (
+if /i "%%#"=="r1" set r1=1
+if /i "%%#"=="r2" set r2=1
+if /i "%%#"=="-qedit" (
+reg add HKCU\Console /v QuickEdit /t REG_DWORD /d "1" /f 1>nul
+rem check the code below admin elevation to understand why it's here
+)
+)
+
+if exist %SystemRoot%\Sysnative\cmd.exe if not defined r1 (
+setlocal EnableDelayedExpansion
+start %SystemRoot%\Sysnative\cmd.exe /c ""!_cmdf!" %* r1"
+exit /b
+)
+
+:: Re-launch the script with ARM32 process if it was initiated by x64 process on ARM64 Windows
+
+if exist %SystemRoot%\SysArm32\cmd.exe if %PROCESSOR_ARCHITECTURE%==AMD64 if not defined r2 (
+setlocal EnableDelayedExpansion
+start %SystemRoot%\SysArm32\cmd.exe /c ""!_cmdf!" %* r2"
+exit /b
+)
+
+::========================================================================================================================================
+
+set "blank="
+set "mas=ht%blank%tps%blank%://mass%blank%grave.dev/"
+
+::  Check if Null service is working, it's important for the batch script
+
+sc query Null | find /i "RUNNING"
+if %errorlevel% NEQ 0 (
+echo:
+echo Null service is not running, script may crash...
+echo:
+echo:
+echo Help - %mas%troubleshoot.html
+echo:
+echo:
+ping 127.0.0.1 -n 10
+)
+cls
 
 ::========================================================================================================================================
 
@@ -2793,6 +1936,12 @@ echo Ohook Activation is supported on Windows 8 and later and their server equiv
 goto dk_done
 )
 
+for %%# in (powershell.exe) do @if "%%~$PATH:#"=="" (
+%nceline%
+echo Unable to find powershell.exe in the system.
+goto dk_done
+)
+
 ::========================================================================================================================================
 
 ::  Fix for the special characters limitation in path name
@@ -2811,6 +1960,75 @@ setlocal EnableDelayedExpansion
 
 ::========================================================================================================================================
 
+echo "!_batf!" | find /i "!_ttemp!" %nul1% && (
+if /i not "!_work!"=="!_ttemp!" (
+%eline%
+echo Script is launched from the temp folder,
+echo Most likely you are running the script directly from the archive file.
+echo:
+echo Extract the archive file and launch the script from the extracted folder.
+goto dk_done
+)
+)
+
+::========================================================================================================================================
+
+::  Elevate script as admin and pass arguments and preventing loop
+
+%nul1% fltmc || (
+if not defined _elev %psc% "start cmd.exe -arg '/c \"!_PSarg:'=''!\"' -verb runas" && exit /b
+%eline%
+echo This script requires admin privileges.
+echo To do so, right click on this script and select 'Run as administrator'.
+goto dk_done
+)
+
+::========================================================================================================================================
+
+::  This code disables QuickEdit for this cmd.exe session only without making permanent changes to the registry
+::  It is added because clicking on the script window pauses the operation and leads to the confusion that script stopped due to an error
+
+if %_unattended%==1 set quedit=1
+for %%# in (%_args%) do (if /i "%%#"=="-qedit" set quedit=1)
+
+reg query HKCU\Console /v QuickEdit %nul2% | find /i "0x0" %nul1% || if not defined quedit (
+reg add HKCU\Console /v QuickEdit /t REG_DWORD /d "0" /f %nul1%
+start cmd.exe /c ""!_batf!" %_args% -qedit"
+rem quickedit reset code is added at the starting of the script instead of here because it takes time to reflect in some cases
+exit /b
+)
+
+::========================================================================================================================================
+
+::  Check for updates
+
+set -=
+set old=
+
+for /f "delims=[] tokens=2" %%# in ('ping -4 -n 1 updatecheck.mass%-%grave.dev') do (
+if not [%%#]==[] (echo "%%#" | find "127.69" %nul1% && (echo "%%#" | find "127.69.%masver%" %nul1% || set old=1))
+)
+
+if defined old (
+echo ________________________________________________
+%eline%
+echo You are running outdated version MAS %masver%
+echo ________________________________________________
+echo:
+if not %_unattended%==1 (
+echo [1] Get Latest MAS
+echo [0] Continue Anyway
+echo:
+call :dk_color %_Green% "Enter a menu option in the Keyboard [1,0] :"
+choice /C:10 /N
+if !errorlevel!==2 rem
+if !errorlevel!==1 (start ht%-%tps://github.com/mass%-%gravel/Microsoft-Acti%-%vation-Scripts & start %mas% & exit /b)
+)
+)
+cls
+
+::========================================================================================================================================
+
 if %_rem%==1 goto :oh_uninstall
 
 :oh_menu
@@ -2821,16 +2039,20 @@ mode 76, 25
 title  Ohook Activation %masver%
 
 echo:
-echo         ____________________________________________________________
+echo __________________________________________________________________________
 echo:
-echo                           Ohook Office Activation
-echo         ____________________________________________________________
+echo:                           Ohook Office Activation
+echo __________________________________________________________________________
 echo:
 echo                 [1] Install Ohook Office Activation
+echo:
 echo                 [2] Uninstall
+echo                 ____________________________________________
+echo:
 echo                 [3] Download Office
+echo:
 echo                 [0] %_exitmsg%
-echo         ____________________________________________________________
+echo __________________________________________________________________________
 echo: 
 call :dk_color2 %_White% "              " %_Green% "Enter a menu option in the Keyboard [1,2,3,0]"
 choice /C:1230 /N
@@ -2838,16 +2060,40 @@ set _el=!errorlevel!
 if !_el!==4  exit /b
 if !_el!==3  start %mas%genuine-installation-media.html &goto :oh_menu
 if !_el!==2  goto :oh_uninstall
-if !_el!==1  goto :oh_menu2
+if !_el!==1  goto :ohhookON
 goto :oh_menu
 )
 
 ::========================================================================================================================================
+:ohhookON
+Powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /Ohook"
+goto :oh_menu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 :oh_menu2
 
-Powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /Ohook"
-goto :MainMenu
+cls
+mode 130, 32
+%psc% "&{$W=$Host.UI.RawUI.WindowSize;$B=$Host.UI.RawUI.BufferSize;$W.Height=32;$B.Height=300;$Host.UI.RawUI.WindowSize=$W;$Host.UI.RawUI.BufferSize=$B;}"
+
+title  Ohook Activation %masver%
 
 echo:
 echo Initializing...
@@ -3205,8 +2451,9 @@ goto :dk_done
 
 :oh_uninstall
 
-Powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /Ohook-Uninstall"
-goto :MainMenu
+cls
+mode 99, 28
+title  Uninstall Ohook Activation %masver%
 
 set _present=
 set _unerror=
@@ -3541,6 +2788,24 @@ exit /b
 
 ::========================================================================================================================================
 
+::  Refresh license status
+
+:dk_refresh
+
+if %_wmic% EQU 1 wmic path SoftwareLicensingService where __CLASS='SoftwareLicensingService' call RefreshLicenseStatus %nul%
+if %_wmic% EQU 0 %psc% "$null=(([WMICLASS]'SoftwareLicensingService').GetInstances()).RefreshLicenseStatus()" %nul%
+exit /b
+
+::  Get Windows Activation IDs
+
+:dk_actids
+
+set applist=
+if %_wmic% EQU 1 set "chkapp=for /f "tokens=2 delims==" %%a in ('"wmic path SoftwareLicensingProduct where (ApplicationID='55c92734-d682-4d71-983e-d6ec3f16059f') get ID /VALUE" %nul6%')"
+if %_wmic% EQU 0 set "chkapp=for /f "tokens=2 delims==" %%a in ('%psc% "(([WMISEARCHER]'SELECT ID FROM SoftwareLicensingProduct WHERE ApplicationID=''55c92734-d682-4d71-983e-d6ec3f16059f''').Get()).ID ^| %% {echo ('ID='+$_)}" %nul6%')"
+%chkapp% do (if defined applist (call set "applist=!applist! %%a") else (call set "applist=%%a"))
+exit /b
+
 ::  Get Office Activation IDs
 
 :oh_actids
@@ -3549,6 +2814,441 @@ set oapplist=
 if %_wmic% EQU 1 set "chkapp=for /f "tokens=2 delims==" %%a in ('"wmic path SoftwareLicensingProduct where (ApplicationID='0ff1ce15-a989-479d-af46-f275c6370663') get ID /VALUE" %nul6%')"
 if %_wmic% EQU 0 set "chkapp=for /f "tokens=2 delims==" %%a in ('%psc% "(([WMISEARCHER]'SELECT ID FROM SoftwareLicensingProduct WHERE ApplicationID=''0ff1ce15-a989-479d-af46-f275c6370663''').Get()).ID ^| %% {echo ('ID='+$_)}" %nul6%')"
 %chkapp% do (if defined oapplist (call set "oapplist=!oapplist! %%a") else (call set "oapplist=%%a"))
+exit /b
+
+::  Check wmic.exe
+
+:dk_ckeckwmic
+
+set _wmic=0
+for %%# in (wmic.exe) do @if not "%%~$PATH:#"=="" (
+wmic path Win32_ComputerSystem get CreationClassName /value %nul2% | find /i "computersystem" %nul1% && set _wmic=1
+)
+exit /b
+
+::  Get Product name (WMI/REG methods are not reliable in all conditions, hence winbrand.dll method is used)
+
+:dk_product
+
+call :dk_reflection
+
+set d1=%ref% $meth = $TypeBuilder.DefinePInvokeMethod('BrandingFormatString', 'winbrand.dll', 'Public, Static', 1, [String], @([String]), 1, 3);
+set d1=%d1% $meth.SetImplementationFlags(128); $TypeBuilder.CreateType()::BrandingFormatString('%%WINDOWS_LONG%%')
+
+set winos=
+for /f "delims=" %%s in ('"%psc% %d1%"') do if not errorlevel 1 (set winos=%%s)
+echo "%winos%" | find /i "Windows" %nul1% || (
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName %nul6%') do set "winos=%%b"
+if %winbuild% GEQ 22000 (
+set winos=!winos:Windows 10=Windows 11!
+)
+)
+exit /b
+
+::  Common lines used in PowerShell reflection code
+
+:dk_reflection
+
+set ref=$AssemblyBuilder = [AppDomain]::CurrentDomain.DefineDynamicAssembly(4, 1);
+set ref=%ref% $ModuleBuilder = $AssemblyBuilder.DefineDynamicModule(2, $False);
+set ref=%ref% $TypeBuilder = $ModuleBuilder.DefineType(0);
+exit /b
+
+::========================================================================================================================================
+
+:dk_errorcheck
+
+set showfix=
+
+::  Check corrupt services
+
+set serv_cor=
+for %%# in (%_serv%) do (
+set _corrupt=
+sc start %%# %nul%
+if !errorlevel! EQU 1060 set _corrupt=1
+sc query %%# %nul% || set _corrupt=1
+for %%G in (DependOnService Description DisplayName ErrorControl ImagePath ObjectName Start Type) do if not defined _corrupt (
+reg query HKLM\SYSTEM\CurrentControlSet\Services\%%# /v %%G %nul% || set _corrupt=1
+if /i %%#==TrustedInstaller if /i %%G==DependOnService set _corrupt=
+)
+
+if defined _corrupt (if defined serv_cor (set "serv_cor=!serv_cor! %%#") else (set "serv_cor=%%#"))
+)
+
+if defined serv_cor (
+set error=1
+call :dk_color %Red% "Checking Corrupt Services               [%serv_cor%]"
+)
+
+::========================================================================================================================================
+
+::  Check disabled services
+
+set serv_ste=
+for %%# in (%_serv%) do (
+sc start %%# %nul%
+if !errorlevel! EQU 1058 (if defined serv_ste (set "serv_ste=!serv_ste! %%#") else (set "serv_ste=%%#"))
+)
+
+::  Change disabled services startup type to default
+
+set serv_csts=
+set serv_cste=
+
+if defined serv_ste (
+for %%# in (%serv_ste%) do (
+if /i %%#==ClipSVC          (reg add "HKLM\SYSTEM\CurrentControlSet\Services\%%#" /v "Start" /t REG_DWORD /d "3" /f %nul% & sc config %%# start= demand %nul%)
+if /i %%#==wlidsvc          sc config %%# start= demand %nul%
+if /i %%#==sppsvc           (reg add "HKLM\SYSTEM\CurrentControlSet\Services\%%#" /v "Start" /t REG_DWORD /d "2" /f %nul% & sc config %%# start= delayed-auto %nul%)
+if /i %%#==KeyIso           sc config %%# start= demand %nul%
+if /i %%#==LicenseManager   sc config %%# start= demand %nul%
+if /i %%#==Winmgmt          sc config %%# start= auto %nul%
+if /i %%#==DoSvc            sc config %%# start= delayed-auto %nul%
+if /i %%#==UsoSvc           sc config %%# start= delayed-auto %nul%
+if /i %%#==CryptSvc         sc config %%# start= auto %nul%
+if /i %%#==BITS             sc config %%# start= delayed-auto %nul%
+if /i %%#==wuauserv         sc config %%# start= demand %nul%
+if /i %%#==WaaSMedicSvc     sc config %%# start= demand %nul%
+if !errorlevel!==0 (
+if defined serv_csts (set "serv_csts=!serv_csts! %%#") else (set "serv_csts=%%#")
+) else (
+if defined serv_cste (set "serv_cste=!serv_cste! %%#") else (set "serv_cste=%%#")
+)
+)
+)
+
+if defined serv_csts call :dk_color %Gray% "Enabling Disabled Services              [Successful] [%serv_csts%]"
+
+if defined serv_cste (
+set error=1
+call :dk_color %Red% "Enabling Disabled Services              [Failed] [%serv_cste%]"
+)
+
+::========================================================================================================================================
+
+::  Check if the services are able to run or not
+::  Workarounds are added to get correct status and error code because sc query doesn't output correct results in some conditions
+
+set serv_e=
+for %%# in (%_serv%) do (
+set errorcode=
+set checkerror=
+
+sc query %%# | find /i "RUNNING" %nul% || (
+%psc% Start-Service %%# %nul%
+set errorcode=!errorlevel!
+sc query %%# | find /i "RUNNING" %nul% || set checkerror=1
+)
+
+sc start %%# %nul%
+if !errorlevel! NEQ 1056 if !errorlevel! NEQ 0 (set errorcode=!errorlevel!&set checkerror=1)
+if defined checkerror if defined serv_e (set "serv_e=!serv_e!, %%#-!errorcode!") else (set "serv_e=%%#-!errorcode!")
+)
+
+if defined serv_e (
+set error=1
+call :dk_color %Red% "Starting Services                       [Failed] [%serv_e%]"
+echo %serv_e% | findstr /i "ClipSVC-1058 sppsvc-1058" %nul% && (
+call :dk_color %Blue% "Restart the system to fix this error."
+set showfix=1
+)
+)
+
+::========================================================================================================================================
+
+::  Various error checks
+
+if defined safeboot_option (
+set error=1
+set showfix=1
+call :dk_color2 %Red% "Checking Boot Mode                      [%safeboot_option%] " %Blue% "[Safe mode found. Run in normal mode.]"
+)
+
+
+for /f "skip=2 tokens=2*" %%A in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State" /v ImageState') do (set imagestate=%%B)
+if /i not "%imagestate%"=="IMAGE_STATE_COMPLETE" (
+set error=1
+call :dk_color %Red% "Checking Windows Setup State            [%imagestate%]"
+echo "%imagestate%" | find /i "RESEAL" %nul% && (
+set showfix=1
+call :dk_color %Blue% "You need to run it in normal mode in case you are running it in Audit Mode."
+)
+)
+
+
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WinPE" /v InstRoot %nul% && (
+set error=1
+set showfix=1
+call :dk_color2 %Red% "Checking WinPE                          " %Blue% "[WinPE mode found. Run in normal mode.]"
+)
+
+
+set wpainfo=
+set wpaerror=
+for /f "delims=" %%a in ('%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':wpatest\:.*';iex ($f[1]);" %nul6%') do (set wpainfo=%%a)
+echo "%wpainfo%" | find /i "Error Found" %nul% && (
+set error=1
+set wpaerror=1
+call :dk_color %Red% "Checking WPA Registry Error             [%wpainfo%]"
+) || (
+echo Checking WPA Registry Count             [%wpainfo%]
+)
+
+
+DISM /English /Online /Get-CurrentEdition %nul%
+set dism_error=%errorlevel%
+cmd /c exit /b %dism_error%
+if %dism_error% NEQ 0 set "dism_error=0x%=ExitCode%"
+if %dism_error% NEQ 0 (
+call :dk_color %Red% "Checking DISM                           [Not Responding] [%dism_error%]"
+)
+
+
+if not defined officeact if exist "%SystemRoot%\Servicing\Packages\Microsoft-Windows-*EvalEdition~*.mum" (
+set error=1
+set showfix=1
+call :dk_color %Red% "Checking Eval Packages                  [Non-Eval Licenses are installed in Eval Windows]"
+call :dk_color %Blue% "Evaluation Windows can not be activated and different License install may lead to errors."
+call :dk_color %Blue% "It is recommended to install full version of %winos%."
+call :dk_color %Blue% "You can download it from %mas%genuine-installation-media.html"
+)
+
+
+set osedition=
+for /f "skip=2 tokens=3" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v EditionID %nul6%') do set "osedition=%%a"
+
+::  Workaround for an issue in builds between 1607 and 1709 where ProfessionalEducation is shown as Professional
+
+if "%osSKU%"=="164" set osedition=ProfessionalEducation
+if "%osSKU%"=="165" set osedition=ProfessionalEducationN
+
+if not defined officeact (
+if not defined osedition (
+call :dk_color %Red% "Checking Edition Name                   [Not Found In Registry]"
+) else (
+
+if not exist "%SystemRoot%\System32\spp\tokens\skus\%osedition%\%osedition%*.xrm-ms" (
+set error=1
+call :dk_color %Red% "Checking License Files                  [Not Found] [%osedition%]"
+)
+
+if not exist "%SystemRoot%\Servicing\Packages\Microsoft-Windows-*-%osedition%-*.mum" (
+set error=1
+call :dk_color %Red% "Checking Package File                   [Not Found] [%osedition%]"
+)
+)
+)
+
+
+cscript //nologo %windir%\system32\slmgr.vbs /dlv %nul%
+set error_code=%errorlevel%
+cmd /c exit /b %error_code%
+if %error_code% NEQ 0 set "error_code=0x%=ExitCode%"
+if %error_code% NEQ 0 (
+set error=1
+call :dk_color %Red% "Checking slmgr /dlv                     [Not Responding] %error_code%"
+)
+
+
+for %%# in (wmic.exe) do @if "%%~$PATH:#"=="" (
+call :dk_color %Gray% "Checking WMIC.exe                       [Not Found]"
+)
+
+
+set wmifailed=
+if %_wmic% EQU 1 wmic path Win32_ComputerSystem get CreationClassName /value %nul2% | find /i "computersystem" %nul1%
+if %_wmic% EQU 0 %psc% "Get-CIMInstance -Class Win32_ComputerSystem | Select-Object -Property CreationClassName" %nul2% | find /i "computersystem" %nul1%
+
+if %errorlevel% NEQ 0 set wmifailed=1
+echo "%error_code%" | findstr /i "0x800410 0x800440" %nul1% && set wmifailed=1& ::  https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmi-error-constants
+if defined wmifailed (
+set error=1
+call :dk_color %Red% "Checking WMI                            [Not Responding]"
+call :dk_color %Blue% "In MAS, Goto Troubleshoot and run Fix WMI option."
+set showfix=1
+)
+
+
+%nul% set /a "sum=%slcSKU%+%regSKU%+%wmiSKU%"
+set /a "sum/=3"
+if not defined officeact if not "%sum%"=="%slcSKU%" (
+call :dk_color %Red% "Checking SLC/WMI/REG SKU                [Difference Found - SLC:%slcSKU% WMI:%wmiSKU% Reg:%regSKU%]"
+)
+
+
+reg query "HKU\S-1-5-20\Software\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform\PersistedTSReArmed" %nul% && (
+set error=1
+set showfix=1
+call :dk_color2 %Red% "Checking Rearm                          " %Blue% "[System Restart Is Required]"
+)
+
+
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ClipSVC\Volatile\PersistedSystemState" %nul% && (
+set error=1
+set showfix=1
+call :dk_color2 %Red% "Checking ClipSVC                        " %Blue% "[System Restart Is Required]"
+)
+
+
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "SkipRearm" %nul6%') do if /i %%b NEQ 0x0 (
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "SkipRearm" /t REG_DWORD /d "0" /f %nul%
+call :dk_color %Red% "Checking SkipRearm                      [Default 0 Value Not Found. Changing To 0]"
+%psc% Restart-Service sppsvc %nul%
+set error=1
+)
+
+
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform\Plugins\Objects\msft:rm/algorithm/hwid/4.0" /f ba02fed39662 /d %nul% || (
+call :dk_color %Red% "Checking SPP Registry Key               [Incorrect ModuleId Found]"
+call :dk_color %Blue% "Possibly Caused By Gaming Spoofers. Help: %mas%troubleshoot"
+set error=1
+set showfix=1
+)
+
+
+set tokenstore=
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v TokenStore %nul6%') do call set "tokenstore=%%b"
+if not exist "%tokenstore%\" (
+set error=1
+REM This code creates token folder only if it's missing and sets default permission for it
+mkdir "%tokenstore%" %nul%
+set "d=$sddl = 'O:BAG:BAD:PAI(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;OICIIO;GR;;;BU)(A;;FR;;;BU)(A;OICI;FA;;;S-1-5-80-123231216-2592883651-3715271367-3753151631-4175906628)';"
+set "d=!d! $AclObject = New-Object System.Security.AccessControl.DirectorySecurity;"
+set "d=!d! $AclObject.SetSecurityDescriptorSddlForm($sddl);"
+set "d=!d! Set-Acl -Path %tokenstore% -AclObject $AclObject;"
+%psc% "!d!" %nul%
+call :dk_color %Gray% "Checking SPP Token Folder               [Not Found. Creating Now] [%tokenstore%\]"
+)
+
+
+call :dk_actids
+if not defined applist (
+%psc% Stop-Service sppsvc %nul%
+cscript //nologo %windir%\system32\slmgr.vbs /rilc %nul%
+if !errorlevel! NEQ 0 cscript //nologo %windir%\system32\slmgr.vbs /rilc %nul%
+call :dk_refresh
+call :dk_actids
+if not defined applist (
+set error=1
+call :dk_color %Red% "Checking Activation IDs                 [Not Found]"
+)
+)
+
+
+if exist "%tokenstore%\" if not exist "%tokenstore%\tokens.dat" (
+set error=1
+call :dk_color %Red% "Checking SPP tokens.dat                 [Not Found] [%tokenstore%\]"
+)
+
+
+if not exist %SystemRoot%\system32\sppsvc.exe (
+set error=1
+set showfix=1
+call :dk_color %Red% "Checking sppsvc.exe File                [Not Found]"
+)
+
+
+::  This code checks if NT SERVICE\sppsvc has permission access to tokens folder and required registry keys. It's often caused by gaming spoofers. 
+
+set permerror=
+if not exist "%tokenstore%\" set permerror=1
+
+for %%# in (
+"%tokenstore%"
+"HKLM:\SYSTEM\WPA"
+"HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform"
+) do if not defined permerror (
+%psc% "$acl = Get-Acl '%%#'; if ($acl.Access.Where{ $_.IdentityReference -eq 'NT SERVICE\sppsvc' -and $_.AccessControlType -eq 'Deny' -or $acl.Access.IdentityReference -notcontains 'NT SERVICE\sppsvc'}) {Exit 2}" %nul%
+if !errorlevel!==2 set permerror=1
+)
+if defined permerror (
+set error=1
+set showfix=1
+call :dk_color %Red% "Checking SPP Permissions                [Error Found]"
+call :dk_color %Blue% "%_fixmsg%"
+)
+
+
+::  If required services are not disabled or corrupted + if there is any error + slmgr /dlv errorlevel is not Zero + no fix was shown before
+
+if not defined serv_cor if not defined serv_cste if defined error if /i not %error_code%==0 if not defined showfix (
+set showfix=1
+call :dk_color %Blue% "%_fixmsg%"
+if not defined permerror call :dk_color %Blue% "If activation still fails then run Fix WPA Registry option."
+)
+
+if not defined showfix if defined wpaerror (
+set showfix=1
+call :dk_color %Blue% "If activation fails then go back to Main Menu, select Troubleshoot and run Fix WPA Registry option."
+)
+
+exit /b
+
+::  This code checks for invalid registry keys in HKLM\SYSTEM\WPA. This issue may appear even on healthy systems
+
+:wpatest:
+$wpaKey = [Microsoft.Win32.RegistryKey]::OpenBaseKey('LocalMachine', 'Registry64').OpenSubKey("SYSTEM\\WPA")
+$count = $wpaKey.SubKeyCount
+
+$osVersion = [System.Environment]::OSVersion.Version
+$minBuildNumber = 14393
+
+if ($osVersion.Build -ge $minBuildNumber) {
+    $subkeyHashTable = @{}
+    foreach ($subkeyName in $wpaKey.GetSubKeyNames()) {
+        $keyNumber = $subkeyName -replace '.*-', ''
+        $subkeyHashTable[$keyNumber] = $true
+    }
+    for ($i=1; $i -le $count; $i++) {
+        if (-not $subkeyHashTable.ContainsKey("$i")) {
+            Write-Host "Total Keys $count. Error Found- $i key does not exist"
+			$wpaKey.Close()
+            exit
+        }
+    }
+}
+$wpaKey.GetSubKeyNames() | ForEach-Object {
+    $subkey = $wpaKey.OpenSubKey($_)
+    $p = $subkey.GetValueNames()
+    if (($p | Where-Object { $subkey.GetValueKind($_) -eq [Microsoft.Win32.RegistryValueKind]::Binary }).Count -eq 0) {
+        Write-Host "Total Keys $count. Error Found- Binary Data is corrupt"
+		$wpaKey.Close()
+        exit
+    }
+}
+$count
+$wpaKey.Close()
+:wpatest:
+
+::========================================================================================================================================
+
+:dk_color
+
+if %_NCS% EQU 1 (
+echo %esc%[%~1%~2%esc%[0m
+) else (
+%psc% write-host -back '%1' -fore '%2' '%3'
+)
+exit /b
+
+:dk_color2
+
+if %_NCS% EQU 1 (
+echo %esc%[%~1%~2%esc%[%~3%~4%esc%[0m
+) else (
+%psc% write-host -back '%1' -fore '%2' '%3' -NoNewline; write-host -back '%4' -fore '%5' '%6'
+)
+exit /b
+
+::========================================================================================================================================
+
+:dk_done
+
+echo:
+if %_unattended%==1 timeout /t 2 & exit /b
+call :dk_color %_Yellow% "Press any key to %_exitmsg%..."
+pause %nul1%
 exit /b
 
 ::========================================================================================================================================
@@ -3988,16 +3688,4169 @@ MAAuADAAAABEAAAAAQBWAGEAcgBGAGkAbABlAEkAbgBmAG8AAAAAACQABAAAAFQAcgBhAG4AcwBsAGEA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 :sppc64.dll:
 
+::========================================================================================================================================
+:: Leave empty line below
 
 
 
 
 
-:+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-:KMS38Activation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:Troubleshoot
+@set masver=2.5
 @setlocal DisableDelayedExpansion
 @echo off
+
+
+
+::============================================================================
+::
+::   This script is a part of 'Microsoft_Activation_Scripts' (MAS) project.
+::
+::   Homepage: mass grave[.]dev
+::      Email: windowsaddict@protonmail.com
+::
+::============================================================================
+
+
+
+::========================================================================================================================================
+
+::  Set Path variable, it helps if it is misconfigured in the system
+
+set "PATH=%SystemRoot%\System32;%SystemRoot%\System32\wbem;%SystemRoot%\System32\WindowsPowerShell\v1.0\"
+if exist "%SystemRoot%\Sysnative\reg.exe" (
+set "PATH=%SystemRoot%\Sysnative;%SystemRoot%\Sysnative\wbem;%SystemRoot%\Sysnative\WindowsPowerShell\v1.0\;%PATH%"
+)
+
+:: Re-launch the script with x64 process if it was initiated by x86 process on x64 bit Windows
+:: or with ARM64 process if it was initiated by x86/ARM32 process on ARM64 Windows
+
+set "_cmdf=%~f0"
+for %%# in (%*) do (
+if /i "%%#"=="r1" set r1=1
+if /i "%%#"=="r2" set r2=1
+if /i "%%#"=="-qedit" (
+reg add HKCU\Console /v QuickEdit /t REG_DWORD /d "1" /f %nul1%
+rem check the code below admin elevation to understand why it's here
+)
+)
+
+if exist %SystemRoot%\Sysnative\cmd.exe if not defined r1 (
+setlocal EnableDelayedExpansion
+start %SystemRoot%\Sysnative\cmd.exe /c ""!_cmdf!" %* r1"
+exit /b
+)
+
+:: Re-launch the script with ARM32 process if it was initiated by x64 process on ARM64 Windows
+
+if exist %SystemRoot%\SysArm32\cmd.exe if %PROCESSOR_ARCHITECTURE%==AMD64 if not defined r2 (
+setlocal EnableDelayedExpansion
+start %SystemRoot%\SysArm32\cmd.exe /c ""!_cmdf!" %* r2"
+exit /b
+)
+
+::========================================================================================================================================
+
+set "blank="
+set "mas=ht%blank%tps%blank%://mass%blank%grave.dev/"
+
+::  Check if Null service is working, it's important for the batch script
+
+sc query Null | find /i "RUNNING"
+if %errorlevel% NEQ 0 (
+echo:
+echo Null service is not running, script may crash...
+echo:
+echo:
+echo Help - %mas%troubleshoot.html
+echo:
+echo:
+ping 127.0.0.1 -n 10
+)
+cls
+
+
+::========================================================================================================================================
+
+cls
+color 07
+title  Troubleshoot %masver%
+
+set _args=
+set _elev=
+
+set _args=%*
+if defined _args set _args=%_args:"=%
+if defined _args (
+for %%A in (%_args%) do (
+if /i "%%A"=="-el"                    set _elev=1
+)
+)
+
+set "nul1=1>nul"
+set "nul2=2>nul"
+set "nul6=2^>nul"
+set "nul=>nul 2>&1"
+
+set psc=powershell.exe
+set winbuild=1
+for /f "tokens=6 delims=[]. " %%G in ('ver') do set winbuild=%%G
+
+set _NCS=1
+if %winbuild% LSS 10586 set _NCS=0
+if %winbuild% GEQ 10586 reg query "HKCU\Console" /v ForceV2 %nul2% | find /i "0x0" %nul1% && (set _NCS=0)
+
+call :_colorprep
+
+set "nceline=echo: &echo ==== ERROR ==== &echo:"
+set "eline=echo: &call :_color %Red% "==== ERROR ====" &echo:"
+set "line=_________________________________________________________________________________________________"
+if %~z0 GEQ 200000 (set "_exitmsg=Go back") else (set "_exitmsg=Exit")
+
+::========================================================================================================================================
+
+if %winbuild% LSS 7600 (
+%nceline%
+echo Unsupported OS version detected [%winbuild%].
+echo Project is supported only for Windows 7/8/8.1/10/11 and their Server equivalent.
+goto at_done
+)
+
+for %%# in (powershell.exe) do @if "%%~$PATH:#"=="" (
+%nceline%
+echo Unable to find powershell.exe in the system.
+goto at_done
+)
+
+::========================================================================================================================================
+
+::  Fix for the special characters limitation in path name
+
+set "_work=%~dp0"
+if "%_work:~-1%"=="\" set "_work=%_work:~0,-1%"
+
+set "_batf=%~f0"
+set "_batp=%_batf:'=''%"
+
+set _PSarg="""%~f0""" -el %_args%
+
+set "_ttemp=%userprofile%\AppData\Local\Temp"
+
+setlocal EnableDelayedExpansion
+
+::========================================================================================================================================
+
+echo "!_batf!" | find /i "!_ttemp!" %nul1% && (
+if /i not "!_work!"=="!_ttemp!" (
+%nceline%
+echo Script is launched from the temp folder,
+echo Most likely you are running the script directly from the archive file.
+echo:
+echo Extract the archive file and launch the script from the extracted folder.
+goto at_done
+)
+)
+
+::========================================================================================================================================
+
+::  Elevate script as admin and pass arguments and preventing loop
+
+%nul1% fltmc || (
+if not defined _elev %psc% "start cmd.exe -arg '/c \"!_PSarg:'=''!\"' -verb runas" && exit /b
+%nceline%
+echo This script requires admin privileges.
+echo To do so, right click on this script and select 'Run as administrator'.
+goto at_done
+)
+
+::========================================================================================================================================
+
+::  This code disables QuickEdit for this cmd.exe session only without making permanent changes to the registry
+::  It is added because clicking on the script window pauses the operation and leads to the confusion that script stopped due to an error
+
+for %%# in (%_args%) do (if /i "%%#"=="-qedit" set quedit=1)
+
+reg query HKCU\Console /v QuickEdit %nul2% | find /i "0x0" %nul1% || if not defined quedit (
+reg add HKCU\Console /v QuickEdit /t REG_DWORD /d "0" /f %nul1%
+start cmd.exe /c ""!_batf!" %_args% -qedit"
+rem quickedit reset code is added at the starting of the script instead of here because it takes time to reflect in some cases
+exit /b
+)
+
+::========================================================================================================================================
+
+::  Check for updates
+
+set -=
+set old=
+
+for /f "delims=[] tokens=2" %%# in ('ping -4 -n 1 updatecheck.mass%-%grave.dev') do (
+if not [%%#]==[] (echo "%%#" | find "127.69" %nul1% && (echo "%%#" | find "127.69.%masver%" %nul1% || set old=1))
+)
+
+if defined old (
+echo ________________________________________________
+%eline%
+echo You are running outdated version MAS %masver%
+echo ________________________________________________
+echo:
+echo [1] Get Latest MAS
+echo [0] Continue Anyway
+echo:
+call :_color %_Green% "Enter a menu option in the Keyboard [1,0] :"
+choice /C:10 /N
+if !errorlevel!==2 rem
+if !errorlevel!==1 (start ht%-%tps://github.com/mass%-%gravel/Microsoft-Acti%-%vation-Scripts & start %mas% & exit /b)
+)
+cls
+
+::========================================================================================================================================
+
+setlocal DisableDelayedExpansion
+
+::  Check desktop location
+
+set desktop=
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v Desktop') do call set "desktop=%%b"
+if not defined desktop for /f "delims=" %%a in ('%psc% "& {write-host $([Environment]::GetFolderPath('Desktop'))}"') do call set "desktop=%%a"
+
+if not defined desktop (
+%eline%
+echo Desktop location was not detected, aborting...
+goto at_done
+)
+
+setlocal EnableDelayedExpansion
+
+::========================================================================================================================================
+
+:at_menu
+
+cls
+color 07
+title  Troubleshoot %masver%
+mode con cols=77 lines=30
+
+echo:
+echo:
+echo:
+echo:
+echo:       _______________________________________________________________
+echo:                                                   
+call :_color2 %_White% "             [1] " %_Green% "Help"
+echo:             ___________________________________________________
+echo:                                                                      
+echo:             [2] Dism RestoreHealth
+echo:             [3] SFC Scannow
+echo:                                                                      
+echo:             [4] Fix WMI
+echo:             [5] Fix Licensing
+echo:             [6] Fix WPA Registry
+echo:             ___________________________________________________
+echo:
+echo:             [0] %_exitmsg%
+echo:       _______________________________________________________________
+echo:          
+call :_color2 %_White% "            " %_Green% "Enter a menu option in the Keyboard :"
+choice /C:1234560 /N
+set _erl=%errorlevel%
+
+if %_erl%==7 exit /b
+if %_erl%==6 start %mas%fix-wpa-registry.html &goto at_menu
+if %_erl%==5 goto:retokens
+if %_erl%==4 goto:fixwmi
+if %_erl%==3 goto:sfcscan
+if %_erl%==2 goto:dism_rest
+if %_erl%==1 start %mas%troubleshoot.html &goto at_menu
+goto :at_menu
+
+::========================================================================================================================================
+
+:dism_rest
+
+cls
+mode 98, 30
+title  Dism /English /Online /Cleanup-Image /RestoreHealth
+
+if %winbuild% LSS 9200 (
+%eline%
+echo Unsupported OS version Detected.
+echo This command is supported only for Windows 8/8.1/10/11 and their Server equivalent.
+goto :at_back
+)
+
+set _int=
+for %%a in (l.root-servers.net resolver1.opendns.com download.windowsupdate.com google.com) do if not defined _int (
+for /f "delims=[] tokens=2" %%# in ('ping -n 1 %%a') do (if not [%%#]==[] set _int=1)
+)
+
+echo:
+if defined _int (
+echo      Checking Internet Connection  [Connected]
+) else (
+call :_color2 %_White% "     " %Red% "Checking Internet Connection  [Not connected]"
+)
+
+echo %line%
+echo:
+echo      Dism uses Windows Update to provide the files required to fix corruption.
+echo      This will take 5-15 minutes or more..
+echo %line%
+echo:
+echo      Notes:
+echo:
+call :_color2 %_White% "     - " %Gray% "Make sure the Internet is connected."
+call :_color2 %_White% "     - " %Gray% "Make sure the Windows update is properly working."
+echo:
+echo %line%
+echo:
+choice /C:09 /N /M ">    [9] Continue [0] Go back : "
+if %errorlevel%==1 goto at_menu
+
+cls
+mode 110, 30
+%psc% Stop-Service TrustedInstaller -force %nul%
+
+set _time=
+for /f %%a in ('%psc% "Get-Date -format HH_mm_ss"') do set _time=%%a
+echo:
+echo Applying the command,
+echo dism /english /online /cleanup-image /restorehealth
+dism /english /online /cleanup-image /restorehealth
+
+%psc% Stop-Service TrustedInstaller -force %nul%
+
+if not exist "!desktop!\AT_Logs\" md "!desktop!\AT_Logs\" %nul%
+
+call :compresslog cbs\CBS.log RHealth_CBS %nul%
+call :compresslog DISM\dism.log RHealth_DISM %nul%
+
+if not exist "!desktop!\AT_Logs\RHealth_CBS_%_time%.cab" (
+copy /y /b "%SystemRoot%\logs\cbs\cbs.log" "!desktop!\AT_Logs\RHealth_CBS_%_time%.log" %nul%
+)
+
+if not exist "!desktop!\AT_Logs\RHealth_DISM_%_time%.cab" (
+copy /y /b "%SystemRoot%\logs\DISM\dism.log" "!desktop!\AT_Logs\RHealth_DISM_%_time%.log" %nul%
+)
+
+echo:
+call :_color %Gray% "CBS and DISM logs are copied to the AT_Logs folder on the dekstop."
+goto :at_back
+
+::========================================================================================================================================
+
+:sfcscan
+
+cls
+mode 98, 30
+title  sfc /scannow
+
+echo:
+echo %line%
+echo:    
+echo      System File Checker will repair missing or corrupted system files.
+echo      This will take 10-15 minutes or more..
+echo:
+echo      If SFC could not fix something, then run the command again to see if it may be able 
+echo      to the next time. Sometimes it may take running the sfc /scannow command 3 times
+echo      restarting the PC after each time to completely fix everything that it's able to.
+echo:   
+echo %line%
+echo:
+choice /C:09 /N /M ">    [9] Continue [0] Go back : "
+if %errorlevel%==1 goto at_menu
+
+cls
+%psc% Stop-Service TrustedInstaller -force %nul%
+
+set _time=
+for /f %%a in ('%psc% "Get-Date -format HH_mm_ss"') do set _time=%%a
+echo:
+echo Applying the command,
+echo sfc /scannow
+sfc /scannow
+
+%psc% Stop-Service TrustedInstaller -force %nul%
+
+if not exist "!desktop!\AT_Logs\" md "!desktop!\AT_Logs\" %nul%
+
+call :compresslog cbs\CBS.log SFC_CBS %nul%
+
+if not exist "!desktop!\AT_Logs\SFC_CBS_%_time%.cab" (
+copy /y /b "%SystemRoot%\logs\cbs\cbs.log" "!desktop!\AT_Logs\SFC_CBS_%_time%.log" %nul%
+)
+
+echo:
+call :_color %Gray% "CBS log is copied to the AT_Logs folder on the dekstop."
+goto :at_back
+
+::========================================================================================================================================
+
+:retokens
+
+cls
+mode con cols=125 lines=32
+%psc% "&{$W=$Host.UI.RawUI.WindowSize;$B=$Host.UI.RawUI.BufferSize;$W.Height=31;$B.Height=200;$Host.UI.RawUI.WindowSize=$W;$Host.UI.RawUI.BufferSize=$B;}"
+title  Fix Licensing ^(ClipSVC ^+ Office vNext ^+ SPP ^+ OSPP^)
+
+echo:
+echo %line%
+echo:   
+echo      Notes:
+echo:
+echo       - It helps in troubleshooting activation issues.
+echo:
+echo       - This option will,
+echo            - Deactivate Windows and Office, you may need to reactivate
+echo              If Windows is activated with motherboard / OEM / Digital license then don't worry
+echo:
+echo            - Clear ClipSVC, Office vNext, SPP and OSPP licenses
+echo            - Fix SPP permissions of tokens folder and registries
+echo            - Trigger the repair option for Office.
+echo:
+call :_color2 %_White% "      - " %Red% "Apply it only when it is necessary."
+echo:
+echo %line%
+echo:
+choice /C:09 /N /M ">    [9] Continue [0] Go back : "
+if %errorlevel%==1 goto at_menu
+
+::========================================================================================================================================
+
+::  Rebuild ClipSVC Licences
+
+cls
+:cleanlicensing
+
+echo:
+echo %line%
+echo:
+call :_color %Blue% "Rebuilding ClipSVC Licences"
+echo:
+
+if %winbuild% LSS 10240 (
+echo ClipSVC Licence rebuilding is supported only on Win 10/11 and Server equivalent.
+echo Skipping...
+goto :cleanvnext
+)
+
+%psc% "(([WMISEARCHER]'SELECT Name FROM SoftwareLicensingProduct WHERE LicenseStatus=1 AND GracePeriodRemaining=0 AND PartialProductKey IS NOT NULL').Get()).Name" %nul2% | findstr /i "Windows" %nul1% && (
+echo Windows is permanently activated.
+echo Skipping rebuilding ClipSVC licences...
+goto :cleanvnext
+)
+
+echo Stopping ClipSVC service...
+%psc% Stop-Service ClipSVC -force %nul%
+timeout /t 2 %nul%
+
+echo:
+echo Applying the command to Clean ClipSVC Licences...
+echo rundll32 clipc.dll,ClipCleanUpState
+
+rundll32 clipc.dll,ClipCleanUpState
+
+if %winbuild% LEQ 10240 (
+echo [Successful]
+) else (
+if exist "%ProgramData%\Microsoft\Windows\ClipSVC\tokens.dat" (
+call :_color %Red% "[Failed]"
+) else (
+echo [Successful]
+)
+)
+
+::  Below registry key (Volatile & Protected) gets created after the ClipSVC License cleanup command, and gets automatically deleted after 
+::  system restart. It needs to be deleted to activate the system without restart.
+
+set "RegKey=HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ClipSVC\Volatile\PersistedSystemState"
+set "_ident=HKU\S-1-5-19\SOFTWARE\Microsoft\IdentityCRL"
+
+reg query "%RegKey%" %nul% && %nul% call :regownstart
+reg delete "%RegKey%" /f %nul% 
+
+echo:
+echo Deleting a Volatile ^& Protected Registry Key...
+echo [%RegKey%]
+reg query "%RegKey%" %nul% && (
+call :_color %Red% "[Failed]"
+echo Restart the system, that will delete this registry key automatically.
+) || (
+echo [Successful]
+)
+
+::   Clear HWID token related registry to fix activation incase if there is any corruption
+
+echo:
+echo Deleting a IdentityCRL Registry Key...
+echo [%_ident%]
+reg delete "%_ident%" /f %nul%
+reg query "%_ident%" %nul% && (
+call :_color %Red% "[Failed]"
+) || (
+echo [Successful]
+)
+
+%psc% Stop-Service ClipSVC -force %nul%
+
+::  Rebuild ClipSVC folder to fix permission issues
+
+echo:
+if %winbuild% GTR 10240 (
+echo Deleting Folder %ProgramData%\Microsoft\Windows\ClipSVC\
+rmdir /s /q "C:\ProgramData\Microsoft\Windows\ClipSvc" %nul%
+
+if exist "%ProgramData%\Microsoft\Windows\ClipSVC\" (
+call :_color %Red% "[Failed]"
+) else (
+echo [Successful]
+)
+
+echo:
+echo Rebuilding Folder %ProgramData%\Microsoft\Windows\ClipSVC\
+%psc% Start-Service ClipSVC %nul%
+timeout /t 3 %nul%
+if not exist "%ProgramData%\Microsoft\Windows\ClipSVC\" timeout /t 5 %nul%
+if not exist "%ProgramData%\Microsoft\Windows\ClipSVC\" (
+call :_color %Red% "[Failed]"
+) else (
+echo [Successful]
+)
+)
+
+echo:
+echo Restarting [wlidsvc LicenseManager] services...
+for %%# in (wlidsvc LicenseManager) do (%psc% Restart-Service %%# %nul%)
+
+::========================================================================================================================================
+
+::  Find remnants of Office vNext license block and remove it because it stops non vNext licenses from appearing
+::  https://learn.microsoft.com/en-us/office/troubleshoot/activation/reset-office-365-proplus-activation-state
+
+:cleanvnext
+
+echo:
+echo %line%
+echo:
+call :_color %Blue% "Clearing Office vNext License"
+echo:
+
+setlocal DisableDelayedExpansion
+set "_Local=%LocalAppData%"
+setlocal EnableDelayedExpansion
+
+attrib -R "!ProgramData!\Microsoft\Office\Licenses" %nul%
+attrib -R "!_Local!\Microsoft\Office\Licenses" %nul%
+
+if exist "!ProgramData!\Microsoft\Office\Licenses\" (
+rd /s /q "!ProgramData!\Microsoft\Office\Licenses\" %nul%
+if exist "!ProgramData!\Microsoft\Office\Licenses\" (
+echo Failed To Delete - !ProgramData!\Microsoft\Office\Licenses\
+) else (
+echo Deleted Folder - !ProgramData!\Microsoft\Office\Licenses\
+)
+) else (
+echo Not Found - !ProgramData!\Microsoft\Office\Licenses\
+)
+
+if exist "!_Local!\Microsoft\Office\Licenses\" (
+rd /s /q "!_Local!\Microsoft\Office\Licenses\" %nul%
+if exist "!_Local!\Microsoft\Office\Licenses\" (
+echo Failed To Delete - !_Local!\Microsoft\Office\Licenses\
+) else (
+echo Deleted Folder - !_Local!\Microsoft\Office\Licenses\
+)
+) else (
+echo Not Found - !_Local!\Microsoft\Office\Licenses\
+)
+
+
+echo:
+for /f "tokens=* delims=" %%a in ('%psc% "Get-ChildItem -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList' | ForEach-Object { Split-Path -Path $_.PSPath -Leaf }" %nul6%') do (if defined _sid (set "_sid=!_sid! HKU\%%a") else (set "_sid=HKU\%%a"))
+
+set regfound=
+for %%# in (HKCU !_sid!) do (
+for %%A in (
+%%#\Software\Microsoft\Office\16.0\Common\Licensing
+%%#\Software\Microsoft\Office\16.0\Common\Identity
+%%#\Software\Microsoft\Office\16.0\Registration
+) do (
+reg query %%A %nul% && (
+set regfound=1
+reg delete %%A /f %nul% && (
+echo Deleted Registry - %%A
+) || (
+echo Failed to Delete - %%A
+)
+)
+)
+)
+if not defined regfound echo Not Found - Office vNext Registry Keys
+
+::========================================================================================================================================
+
+::  Rebuild SPP Tokens
+
+echo:
+echo %line%
+echo:
+call :_color %Blue% "Rebuilding SPP Licensing Tokens"
+echo:
+
+call :scandat check
+
+if not defined token (
+call :_color %Red% "tokens.dat file not found."
+) else (
+echo tokens.dat file: [%token%]
+)
+
+echo:
+set wpainfo=
+for /f "delims=" %%a in ('%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':wpatest\:.*';iex ($f[1]);" %nul6%') do (set wpainfo=%%a)
+echo "%wpainfo%" | find /i "Error Found" %nul% && (
+call :_color %Red% "WPA Registry Error: %wpainfo%"
+) || (
+echo WPA Registry Count: %wpainfo%
+)
+
+set tokenstore=
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v TokenStore %nul6%') do call set "tokenstore=%%b"
+
+::  Check sppsvc permissions and apply fixes
+
+if %winbuild% GEQ 10240 (
+
+echo:
+echo Checking SPP permission related issues...
+call :checkperms
+
+if defined permerror (
+
+mkdir "%tokenstore%" %nul%
+set "d=$sddl = 'O:BAG:BAD:PAI(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;OICIIO;GR;;;BU)(A;;FR;;;BU)(A;OICI;FA;;;S-1-5-80-123231216-2592883651-3715271367-3753151631-4175906628)';"
+set "d=!d! $AclObject = New-Object System.Security.AccessControl.DirectorySecurity;"
+set "d=!d! $AclObject.SetSecurityDescriptorSddlForm($sddl);"
+set "d=!d! Set-Acl -Path %tokenstore% -AclObject $AclObject;"
+%psc% "!d!" %nul%
+
+for %%# in (
+"HKLM:\SYSTEM\WPA_QueryValues, EnumerateSubKeys, WriteKey"
+"HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform_SetValue"
+) do for /f "tokens=1,2 delims=_" %%A in (%%#) do (
+set "d=$acl = Get-Acl '%%A';"
+set "d=!d! $rule = New-Object System.Security.AccessControl.RegistryAccessRule ('NT Service\sppsvc', '%%B', 'ContainerInherit, ObjectInherit','None','Allow');"
+set "d=!d! $acl.ResetAccessRule($rule);"
+set "d=!d! $acl.SetAccessRule($rule);"
+set "d=!d! Set-Acl -Path '%%A' -AclObject $acl"
+%psc% "!d!" %nul%
+)
+
+call :checkperms
+if defined permerror (
+call :_color %Red% "[Failed To Fix]"
+) else (
+echo [Successfully Fixed]
+)
+) else (
+echo [No Error Found]
+)
+)
+
+echo:
+echo Stopping sppsvc service...
+%psc% Stop-Service sppsvc -force %nul%
+
+echo:
+call :scandat delete
+call :scandat check
+
+if defined token (
+echo:
+call :_color %Red% "Failed to delete .dat files."
+echo:
+)
+
+echo:
+echo Reinstalling System Licenses [slmgr /rilc]...
+cscript //nologo %windir%\system32\slmgr.vbs /rilc %nul%
+if %errorlevel% NEQ 0 cscript //nologo %windir%\system32\slmgr.vbs /rilc %nul%
+if %errorlevel% EQU 0 (
+echo [Successful]
+) else (
+call :_color %Red% "[Failed]"
+)
+
+call :scandat check
+
+echo:
+if not defined token (
+call :_color %Red% "Failed to rebuilt tokens.dat file."
+) else (
+echo tokens.dat file was rebuilt successfully.
+)
+
+::========================================================================================================================================
+
+::  Rebuild OSPP Tokens
+
+echo:
+echo %line%
+echo:
+call :_color %Blue% "Rebuilding OSPP Licensing Tokens"
+echo:
+
+sc qc osppsvc %nul% || (
+echo OSPP based Office is not installed
+echo Skipping rebuilding OSPP tokens...
+goto :repairoffice
+)
+
+call :scandatospp check
+
+if not defined token (
+call :_color %Red% "tokens.dat file not found."
+) else (
+echo tokens.dat file: [%token%]
+)
+
+echo:
+echo Stopping osppsvc service...
+%psc% Stop-Service osppsvc -force %nul%
+
+echo:
+call :scandatospp delete
+call :scandatospp check
+
+if defined token (
+echo:
+call :_color %Red% "Failed to delete .dat files."
+echo:
+)
+
+echo:
+echo Starting osppsvc service to generate tokens.dat
+%psc% Start-Service osppsvc %nul%
+call :scandatospp check
+if not defined token (
+%psc% Stop-Service osppsvc -force %nul%
+%psc% Start-Service osppsvc %nul%
+timeout /t 3 %nul%
+)
+
+call :scandatospp check
+
+echo:
+if not defined token (
+call :_color %Red% "Failed to rebuilt tokens.dat file."
+) else (
+echo tokens.dat file was rebuilt successfully.
+)
+
+::========================================================================================================================================
+
+:repairoffice
+
+echo:
+echo %line%
+echo:
+call :_color %Blue% "Repairing Office Licenses"
+echo:
+
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v PROCESSOR_ARCHITECTURE') do set arch=%%b
+
+if /i "%arch%"=="ARM64" (
+echo:
+echo ARM64 Windows Found.
+echo You need to use repair option in Windows settings for Office.
+echo:
+start ms-settings:appsfeatures
+goto :repairend
+)
+
+if /i "%arch%"=="x86" (
+set arch=X86
+) else (
+set arch=X64
+)
+
+for %%# in (68 86) do (
+for %%A in (msi14 msi15 msi16 c2r14 c2r15 c2r16) do (set %%A_%%#=&set %%Arepair%%#=)
+)
+
+set _68=HKLM\SOFTWARE\Microsoft\Office
+set _86=HKLM\SOFTWARE\Wow6432Node\Microsoft\Office
+
+reg query %_68%\14.0\CVH /f Click2run /k %nul% && (set "c2r14_68=Office 14.0 C2R x86/x64"  & set "c2r14repair68=")
+reg query %_86%\14.0\CVH /f Click2run /k %nul% && (set "c2r14_86=Office 14.0 C2R x86"      & set "c2r14repair86=")
+
+for /f "skip=2 tokens=2*" %%a in ('"reg query %_86%\14.0\Common\InstallRoot /v Path" %nul6%') do if exist "%%b\EntityPicker.dll" (set "msi14_86=Office 14.0 MSI x86"      & set "msi14repair86=%systemdrive%\Program Files (x86)\Common Files\Microsoft Shared\OFFICE14\Office Setup Controller\Setup.exe")
+for /f "skip=2 tokens=2*" %%a in ('"reg query %_68%\14.0\Common\InstallRoot /v Path" %nul6%') do if exist "%%b\EntityPicker.dll" (set "msi14_68=Office 14.0 MSI x86/x64"  & set "msi14repair68=%systemdrive%\Program Files\Common Files\microsoft shared\OFFICE14\Office Setup Controller\Setup.exe")
+for /f "skip=2 tokens=2*" %%a in ('"reg query %_86%\15.0\Common\InstallRoot /v Path" %nul6%') do if exist "%%b\EntityPicker.dll" (set "msi15_86=Office 15.0 MSI x86"      & set "msi15repair86=%systemdrive%\Program Files (x86)\Common Files\Microsoft Shared\OFFICE15\Office Setup Controller\Setup.exe")
+for /f "skip=2 tokens=2*" %%a in ('"reg query %_68%\15.0\Common\InstallRoot /v Path" %nul6%') do if exist "%%b\EntityPicker.dll" (set "msi15_68=Office 15.0 MSI x86/x64"  & set "msi15repair68=%systemdrive%\Program Files\Common Files\microsoft shared\OFFICE15\Office Setup Controller\Setup.exe")
+for /f "skip=2 tokens=2*" %%a in ('"reg query %_86%\16.0\Common\InstallRoot /v Path" %nul6%') do if exist "%%b\EntityPicker.dll" (set "msi16_86=Office 16.0 MSI x86"      & set "msi16repair86=%systemdrive%\Program Files (x86)\Common Files\Microsoft Shared\OFFICE16\Office Setup Controller\Setup.exe")
+for /f "skip=2 tokens=2*" %%a in ('"reg query %_68%\16.0\Common\InstallRoot /v Path" %nul6%') do if exist "%%b\EntityPicker.dll" (set "msi16_68=Office 16.0 MSI x86/x64"  & set "msi16repair68=%systemdrive%\Program Files\Common Files\Microsoft Shared\OFFICE16\Office Setup Controller\Setup.exe")
+
+for /f "skip=2 tokens=2*" %%a in ('"reg query %_86%\15.0\ClickToRun /v InstallPath" %nul6%') do if exist "%%b\root\Licenses\ProPlus*.xrm-ms" (set "c2r15_86=Office 15.0 C2R x86"      & set "c2r15repair86=%systemdrive%\Program Files\Microsoft Office 15\Client%arch%\integratedoffice.exe")
+for /f "skip=2 tokens=2*" %%a in ('"reg query %_68%\15.0\ClickToRun /v InstallPath" %nul6%') do if exist "%%b\root\Licenses\ProPlus*.xrm-ms" (set "c2r15_68=Office 15.0 C2R x86/x64"  & set "c2r15repair68=%systemdrive%\Program Files\Microsoft Office 15\Client%arch%\integratedoffice.exe")
+for /f "skip=2 tokens=2*" %%a in ('"reg query %_86%\ClickToRun /v InstallPath" %nul6%') do if exist "%%b\root\Licenses16\ProPlus*.xrm-ms"    (set "c2r16_86=Office 16.0 C2R x86"      & set "c2r16repair86=%systemdrive%\Program Files\Microsoft Office 15\Client%arch%\OfficeClickToRun.exe")
+for /f "skip=2 tokens=2*" %%a in ('"reg query %_68%\ClickToRun /v InstallPath" %nul6%') do if exist "%%b\root\Licenses16\ProPlus*.xrm-ms"    (set "c2r16_68=Office 16.0 C2R x86/x64"  & set "c2r16repair68=%systemdrive%\Program Files\Microsoft Office 15\Client%arch%\OfficeClickToRun.exe")
+
+set uwp16=
+if %winbuild% GEQ 10240 (
+%psc% "Get-AppxPackage -name "Microsoft.Office.Desktop"" | find /i "Office" %nul1% && set uwp16=Office 16.0 UWP
+)
+
+set /a counter=0
+echo Checking installed Office versions...
+echo:
+
+for %%# in (
+"%msi14_68%"
+"%msi14_86%"
+"%msi15_68%"
+"%msi15_86%"
+"%msi16_68%"
+"%msi16_86%"
+"%c2r14_68%"
+"%c2r14_86%"
+"%c2r15_68%"
+"%c2r15_86%"
+"%c2r16_68%"
+"%c2r16_86%"
+"%uwp16%"
+) do (
+if not "%%#"=="""" (
+set insoff=%%#
+set insoff=!insoff:"=!
+echo [!insoff!]
+set /a counter+=1
+)
+)
+
+if %counter% GTR 1 (
+%eline%
+echo Multiple office versions found.
+echo It's recommended to install only one version of office.
+echo ________________________________________________________________
+echo:
+)
+
+if %counter% EQU 0 (
+echo:
+echo Installed Office is not found.
+goto :repairend
+echo:
+) else (
+echo:
+call :_color %_Yellow% "A Window will popup, in that Window you need to select [Quick] Repair Option..."
+call :_color %_Yellow% "Press any key to continue..."
+echo:
+pause %nul1%
+)
+
+if defined uwp16 (
+echo:
+echo Note: Skipping repair for Office 16.0 UWP. 
+echo       You need to use reset option in Windows settings for it.
+echo ________________________________________________________________
+echo:
+start ms-settings:appsfeatures
+)
+
+set c2r14=
+if defined c2r14_68 set c2r14=1
+if defined c2r14_86 set c2r14=1
+
+if defined c2r14 (
+echo:
+echo Note: Skipping repair for Office 14.0 C2R 
+echo       You need to use Repair option in Windows settings for it.
+echo ________________________________________________________________
+echo:
+start appwiz.cpl
+)
+
+if defined msi14_68 if exist "%msi14repair68%" echo Running - "%msi14repair68%"                    & "%msi14repair68%"
+if defined msi14_86 if exist "%msi14repair86%" echo Running - "%msi14repair86%"                    & "%msi14repair86%"
+if defined msi15_68 if exist "%msi15repair68%" echo Running - "%msi15repair68%"                    & "%msi15repair68%"
+if defined msi15_86 if exist "%msi15repair86%" echo Running - "%msi15repair86%"                    & "%msi15repair86%"
+if defined msi16_68 if exist "%msi16repair68%" echo Running - "%msi16repair68%"                    & "%msi16repair68%"
+if defined msi16_86 if exist "%msi16repair86%" echo Running - "%msi16repair86%"                    & "%msi16repair86%"
+if defined c2r15_68 if exist "%c2r15repair68%" echo Running - "%c2r15repair68%" REPAIRUI RERUNMODE & "%c2r15repair68%" REPAIRUI RERUNMODE
+if defined c2r15_86 if exist "%c2r15repair86%" echo Running - "%c2r15repair86%" REPAIRUI RERUNMODE & "%c2r15repair86%" REPAIRUI RERUNMODE
+if defined c2r16_68 if exist "%c2r16repair68%" echo Running - "%c2r16repair68%" scenario=Repair    & "%c2r16repair68%" scenario=Repair
+if defined c2r16_86 if exist "%c2r16repair86%" echo Running - "%c2r16repair86%" scenario=Repair    & "%c2r16repair86%" scenario=Repair
+
+:repairend
+
+echo:
+echo %line%
+echo:
+echo:
+call :_color %Green% "Finished"
+goto :at_back
+
+::========================================================================================================================================
+
+:fixwmi
+
+cls
+mode 98, 34
+title  Fix WMI
+
+::  https://techcommunity.microsoft.com/t5/ask-the-performance-team/wmi-repository-corruption-or-not/ba-p/375484
+
+if exist "%SystemRoot%\Servicing\Packages\Microsoft-Windows-Server*Edition~*.mum" (
+%eline%
+echo WMI rebuild is not recommended on Windows Server. Aborting...
+goto :at_back
+)
+
+for %%# in (wmic.exe) do @if "%%~$PATH:#"=="" (
+%eline%
+echo wmic.exe file is not found in the system. Aborting...
+goto :at_back
+)
+
+echo:
+echo Checking WMI
+call :checkwmi
+
+::  Apply basic fix first and check
+
+if defined error (
+%psc% Stop-Service Winmgmt -force %nul%
+winmgmt /salvagerepository %nul%
+call :checkwmi
+)
+
+if not defined error (
+echo [Working]
+echo No need to apply this option. Aborting...
+goto :at_back
+)
+
+call :_color %Red% "[Not Responding]"
+
+set _corrupt=
+sc start Winmgmt %nul%
+if %errorlevel% EQU 1060 set _corrupt=1
+sc query Winmgmt %nul% || set _corrupt=1
+for %%G in (DependOnService Description DisplayName ErrorControl ImagePath ObjectName Start Type) do if not defined _corrupt (reg query HKLM\SYSTEM\CurrentControlSet\Services\Winmgmt /v %%G %nul% || set _corrupt=1)
+
+echo:
+if defined _corrupt (
+%eline%
+echo Winmgmt service is corrupted. Aborting...
+goto :at_back
+)
+
+echo Disabling Winmgmt service
+sc config Winmgmt start= disabled %nul%
+if %errorlevel% EQU 0 (
+echo [Successful]
+) else (
+call :_color %Red% "[Failed] Aborting..."
+sc config Winmgmt start= auto %nul%
+goto :at_back
+)
+
+echo:
+echo Stopping Winmgmt service
+%psc% Stop-Service Winmgmt -force %nul%
+%psc% Stop-Service Winmgmt -force %nul%
+%psc% Stop-Service Winmgmt -force %nul%
+sc query Winmgmt | find /i "STOPPED" %nul% && (
+echo [Successful]
+) || (
+call :_color %Red% "[Failed]"
+echo:
+call :_color %Blue% "Its recommended to select [Restart] option and then apply Fix WMI option again."
+echo %line%
+echo:
+choice /C:21 /N /M "> [1] Restart  [2] Revert Back Changes :"
+if !errorlevel!==1 (sc config Winmgmt start= auto %nul%&goto :at_back)
+echo:
+echo Restarting...
+shutdown -t 5 -r
+exit
+)
+
+echo:
+echo Deleting WMI repository
+rmdir /s /q "%windir%\System32\wbem\repository\" %nul%
+if exist "%windir%\System32\wbem\repository\" (
+call :_color %Red% "[Failed]"
+) else (
+echo [Successful]
+)
+
+echo:
+echo Enabling Winmgmt service
+sc config Winmgmt start= auto %nul%
+if %errorlevel% EQU 0 (
+echo [Successful]
+) else (
+call :_color %Red% "[Failed]"
+)
+
+call :checkwmi
+if not defined error (
+echo:
+echo Checking WMI
+call :_color %Green% "[Working]"
+goto :at_back
+)
+
+echo:
+echo Registering .dll's and Compiling .mof's, .mfl's
+call :registerobj %nul%
+
+echo:
+echo Checking WMI
+call :checkwmi
+if defined error (
+call :_color %Red% "[Not Responding]"
+echo:
+echo Run [Dism RestoreHealth] and [SFC Scannow] options and make sure there are no errors.
+) else (
+call :_color %Green% "[Working]"
+)
+
+goto :at_back
+
+:registerobj
+
+::  https://eskonr.com/2012/01/how-to-fix-wmi-issues-automatically/
+
+%psc% Stop-Service Winmgmt -force %nul%
+cd /d %systemroot%\system32\wbem\
+regsvr32 /s %systemroot%\system32\scecli.dll
+regsvr32 /s %systemroot%\system32\userenv.dll
+mofcomp cimwin32.mof
+mofcomp cimwin32.mfl
+mofcomp rsop.mof
+mofcomp rsop.mfl
+for /f %%s in ('dir /b /s *.dll') do regsvr32 /s %%s
+for /f %%s in ('dir /b *.mof') do mofcomp %%s
+for /f %%s in ('dir /b *.mfl') do mofcomp %%s
+
+winmgmt /salvagerepository
+winmgmt /resetrepository
+exit /b
+
+:checkwmi
+
+::  https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmi-error-constants
+
+set error=
+wmic path Win32_ComputerSystem get CreationClassName /value %nul2% | find /i "computersystem" %nul1%
+if %errorlevel% NEQ 0 (set error=1& exit /b)
+winmgmt /verifyrepository %nul%
+if %errorlevel% NEQ 0 (set error=1& exit /b)
+
+cscript //nologo %windir%\system32\slmgr.vbs /dlv %nul%
+cmd /c exit /b %errorlevel%
+echo "0x%=ExitCode%" | findstr /i "0x800410 0x800440" %nul1%
+if %errorlevel% EQU 0 set error=1
+exit /b
+
+::========================================================================================================================================
+
+:at_back
+
+echo:
+echo %line%
+echo:
+call :_color %_Yellow% "Press any key to go back..."
+pause %nul1%
+goto :at_menu
+
+::========================================================================================================================================
+
+:at_done
+
+echo:
+echo Press any key to %_exitmsg%...
+pause %nul1%
+exit /b
+
+::========================================================================================================================================
+
+:compresslog
+
+::  https://stackoverflow.com/a/46268232
+
+set "ddf="%SystemRoot%\Temp\ddf""
+%nul% del /q /f %ddf%
+echo/.New Cabinet>%ddf%
+echo/.set Cabinet=ON>>%ddf%
+echo/.set CabinetFileCountThreshold=0;>>%ddf%
+echo/.set Compress=ON>>%ddf%
+echo/.set CompressionType=LZX>>%ddf%
+echo/.set CompressionLevel=7;>>%ddf%
+echo/.set CompressionMemory=21;>>%ddf%
+echo/.set FolderFileCountThreshold=0;>>%ddf%
+echo/.set FolderSizeThreshold=0;>>%ddf%
+echo/.set GenerateInf=OFF>>%ddf%
+echo/.set InfFileName=nul>>%ddf%
+echo/.set MaxCabinetSize=0;>>%ddf%
+echo/.set MaxDiskFileCount=0;>>%ddf%
+echo/.set MaxDiskSize=0;>>%ddf%
+echo/.set MaxErrors=1;>>%ddf%
+echo/.set RptFileName=nul>>%ddf%
+echo/.set UniqueFiles=ON>>%ddf%
+for /f "tokens=* delims=" %%D in ('dir /a:-D/b/s "%SystemRoot%\logs\%1"') do (
+ echo/"%%~fD"  /inf=no;>>%ddf%
+)
+makecab /F %ddf% /D DiskDirectory1="" /D CabinetNameTemplate="!desktop!\AT_Logs\%2_%_time%.cab"
+del /q /f %ddf%
+exit /b
+
+::========================================================================================================================================
+
+::  This code checks for invalid registry keys in HKLM\SYSTEM\WPA. This issue may appear even on healthy systems
+
+:wpatest:
+$wpaKey = [Microsoft.Win32.RegistryKey]::OpenBaseKey('LocalMachine', 'Registry64').OpenSubKey("SYSTEM\\WPA")
+$count = $wpaKey.SubKeyCount
+
+$osVersion = [System.Environment]::OSVersion.Version
+$minBuildNumber = 14393
+
+if ($osVersion.Build -ge $minBuildNumber) {
+    $subkeyHashTable = @{}
+    foreach ($subkeyName in $wpaKey.GetSubKeyNames()) {
+        $keyNumber = $subkeyName -replace '.*-', ''
+        $subkeyHashTable[$keyNumber] = $true
+    }
+    for ($i=1; $i -le $count; $i++) {
+        if (-not $subkeyHashTable.ContainsKey("$i")) {
+            Write-Host "Total Keys $count. Error Found- $i key does not exist"
+			$wpaKey.Close()
+            exit
+        }
+    }
+}
+$wpaKey.GetSubKeyNames() | ForEach-Object {
+    $subkey = $wpaKey.OpenSubKey($_)
+    $p = $subkey.GetValueNames()
+    if (($p | Where-Object { $subkey.GetValueKind($_) -eq [Microsoft.Win32.RegistryValueKind]::Binary }).Count -eq 0) {
+        Write-Host "Total Keys $count. Error Found- Binary Data is corrupt"
+		$wpaKey.Close()
+        exit
+    }
+}
+$count
+$wpaKey.Close()
+:wpatest:
+
+::========================================================================================================================================
+
+:checkperms
+
+set permerror=
+if not exist "%tokenstore%\" set permerror=1
+
+for %%# in (
+"%tokenstore%"
+"HKLM:\SYSTEM\WPA"
+"HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform"
+) do if not defined permerror (
+%psc% "$acl = Get-Acl '%%#'; if ($acl.Access.Where{ $_.IdentityReference -eq 'NT SERVICE\sppsvc' -and $_.AccessControlType -eq 'Deny' -or $acl.Access.IdentityReference -notcontains 'NT SERVICE\sppsvc'}) {Exit 2}" %nul%
+if !errorlevel!==2 set permerror=1
+)
+exit /b
+
+::========================================================================================================================================
+
+:scandat
+
+set token=
+for %%# in (
+%Systemdrive%\Windows\System32\spp\store_test\2.0\
+%Systemdrive%\Windows\System32\spp\store\
+%Systemdrive%\Windows\System32\spp\store\2.0\
+%Systemdrive%\Windows\ServiceProfiles\NetworkService\AppData\Roaming\Microsoft\SoftwareProtectionPlatform\
+) do (
+
+if %1==check (
+if exist %%#tokens.dat set token=%%#tokens.dat
+)
+
+if %1==delete (
+if exist %%# (
+%nul% dir /a-d /s "%%#*.dat" && (
+attrib -r -s -h "%%#*.dat" /S
+del /S /F /Q "%%#*.dat"
+)
+)
+)
+)
+exit /b
+
+:scandatospp
+
+set token=
+for %%# in (
+%ProgramData%\Microsoft\OfficeSoftwareProtectionPlatform\
+) do (
+
+if %1==check (
+if exist %%#tokens.dat set token=%%#tokens.dat
+)
+
+if %1==delete (
+if exist %%# (
+%nul% dir /a-d /s "%%#*.dat" && (
+attrib -r -s -h "%%#*.dat" /S
+del /S /F /Q "%%#*.dat"
+)
+)
+)
+)
+exit /b
+
+::========================================================================================================================================
+
+:regownstart
+
+%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':regown\:.*';iex ($f[1]);"
+exit /b
+
+::  Below code takes ownership of a volatile registry key and deletes it
+::  HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ClipSVC\Volatile\PersistedSystemState
+
+:regown:
+$AssemblyBuilder = [AppDomain]::CurrentDomain.DefineDynamicAssembly(4, 1)
+$ModuleBuilder = $AssemblyBuilder.DefineDynamicModule(2, $False)
+$TypeBuilder = $ModuleBuilder.DefineType(0)
+
+$TypeBuilder.DefinePInvokeMethod('RtlAdjustPrivilege', 'ntdll.dll', 'Public, Static', 1, [int], @([int], [bool], [bool], [bool].MakeByRefType()), 1, 3) | Out-Null
+$TypeBuilder.CreateType()::RtlAdjustPrivilege(9, $true, $false, [ref]$false) | Out-Null
+
+$SID = New-Object System.Security.Principal.SecurityIdentifier('S-1-5-32-544')
+$IDN = ($SID.Translate([System.Security.Principal.NTAccount])).Value
+$Admin = New-Object System.Security.Principal.NTAccount($IDN)
+
+$path = 'SOFTWARE\Microsoft\Windows NT\CurrentVersion\ClipSVC\Volatile\PersistedSystemState'
+$key = [Microsoft.Win32.RegistryKey]::OpenBaseKey('LocalMachine', 'Registry64').OpenSubKey($path, 'ReadWriteSubTree', 'takeownership')
+
+$acl = $key.GetAccessControl()
+$acl.SetOwner($Admin)
+$key.SetAccessControl($acl)
+
+$rule = New-Object System.Security.AccessControl.RegistryAccessRule($Admin,"FullControl","Allow")
+$acl.SetAccessRule($rule)
+$key.SetAccessControl($acl)
+:regown:
+
+::========================================================================================================================================
+
+:_color
+
+if %_NCS% EQU 1 (
+echo %esc%[%~1%~2%esc%[0m
+) else (
+call :batcol %~1 "%~2"
+)
+exit /b
+
+:_color2
+
+if %_NCS% EQU 1 (
+echo %esc%[%~1%~2%esc%[%~3%~4%esc%[0m
+) else (
+call :batcol %~1 "%~2" %~3 "%~4"
+)
+exit /b
+
+::=======================================
+
+:: Colored text with pure batch method
+:: Thanks to @dbenham and @jeb
+:: stackoverflow.com/a/10407642
+
+:batcol
+
+pushd %_coltemp%
+if not exist "'" (<nul >"'" set /p "=.")
+setlocal
+set "s=%~2"
+set "t=%~4"
+call :_batcol %1 s %3 t
+del /f /q "'"
+del /f /q "`.txt"
+popd
+exit /b
+
+:_batcol
+
+setlocal EnableDelayedExpansion
+set "s=!%~2!"
+set "t=!%~4!"
+for /f delims^=^ eol^= %%i in ("!s!") do (
+  if "!" equ "" setlocal DisableDelayedExpansion
+    >`.txt (echo %%i\..\')
+    findstr /a:%~1 /f:`.txt "."
+    <nul set /p "=%_BS%%_BS%%_BS%%_BS%%_BS%%_BS%%_BS%"
+)
+if "%~4"=="" echo(&exit /b
+setlocal EnableDelayedExpansion
+for /f delims^=^ eol^= %%i in ("!t!") do (
+  if "!" equ "" setlocal DisableDelayedExpansion
+    >`.txt (echo %%i\..\')
+    findstr /a:%~3 /f:`.txt "."
+    <nul set /p "=%_BS%%_BS%%_BS%%_BS%%_BS%%_BS%%_BS%"
+)
+echo(
+exit /b
+
+::=======================================
+
+:_colorprep
+
+if %_NCS% EQU 1 (
+for /F %%a in ('echo prompt $E ^| cmd') do set "esc=%%a"
+
+set     "Red="41;97m""
+set    "Gray="100;97m""
+set   "Black="30m""
+set   "Green="42;97m""
+set    "Blue="44;97m""
+set  "Yellow="43;97m""
+set "Magenta="45;97m""
+
+set    "_Red="40;91m""
+set  "_Green="40;92m""
+set   "_Blue="40;94m""
+set  "_White="40;37m""
+set "_Yellow="40;93m""
+
+exit /b
+)
+
+for /f %%A in ('"prompt $H&for %%B in (1) do rem"') do set "_BS=%%A %%A"
+set "_coltemp=%SystemRoot%\Temp"
+
+set     "Red="CF""
+set    "Gray="8F""
+set   "Black="00""
+set   "Green="2F""
+set    "Blue="1F""
+set  "Yellow="6F""
+set "Magenta="5F""
+
+set    "_Red="0C""
+set  "_Green="0A""
+set   "_Blue="09""
+set  "_White="07""
+set "_Yellow="0E""
+
+exit /b
+
+::========================================================================================================================================
+:: Leave empty line below
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:Check_StatusL
+@setlocal DisableDelayedExpansion
+@echo off
+
+
+
+::  Check-Activation-Status
+::  Written by @abbodi1406
+::  forums.mydigitallife.net/posts/838808
+
+
+
+
+set WMI_VBS=0
+@cls
+set _args=
+set _args=%*
+for %%A in (%_args%) do (
+if /i "%%A"=="-wow" set _rel1=1
+if /i "%%A"=="-arm" set _rel2=1
+)
+set "_cmdf=%~f0"
+if exist "%SystemRoot%\Sysnative\cmd.exe" if not defined _rel1 (
+setlocal EnableDelayedExpansion
+start %SystemRoot%\Sysnative\cmd.exe /c ""!_cmdf!" -wow"
+exit /b
+)
+if exist "%SystemRoot%\SysArm32\cmd.exe" if /i %PROCESSOR_ARCHITECTURE%==AMD64 if not defined _rel2 (
+setlocal EnableDelayedExpansion
+start %SystemRoot%\SysArm32\cmd.exe /c ""!_cmdf!" -arm"
+exit /b
+)
+color 07
+title Check Activation Status [wmi]
+set wspp=SoftwareLicensingProduct
+set wsps=SoftwareLicensingService
+set ospp=OfficeSoftwareProtectionProduct
+set osps=OfficeSoftwareProtectionService
+set winApp=55c92734-d682-4d71-983e-d6ec3f16059f
+set o14App=59a52881-a989-479d-af46-f275c6370663
+set o15App=0ff1ce15-a989-479d-af46-f275c6370663
+for %%# in (spp_get,ospp_get,cW1nd0ws,sppw,c0ff1ce15,sppo,osppsvc,ospp14,ospp15) do set "%%#="
+for /f "tokens=6 delims=[]. " %%# in ('ver') do set winbuild=%%#
+set "spp_get=Description, DiscoveredKeyManagementServiceMachineName, DiscoveredKeyManagementServiceMachinePort, EvaluationEndDate, GracePeriodRemaining, ID, KeyManagementServiceMachine, KeyManagementServicePort, KeyManagementServiceProductKeyID, LicenseStatus, LicenseStatusReason, Name, PartialProductKey, ProductKeyID, VLActivationInterval, VLRenewalInterval"
+set "ospp_get=%spp_get%"
+if %winbuild% GEQ 9200 set "spp_get=%spp_get%, KeyManagementServiceLookupDomain, VLActivationTypeEnabled"
+if %winbuild% GEQ 9600 set "spp_get=%spp_get%, DiscoveredKeyManagementServiceMachineIpAddress, ProductKeyChannel"
+set "_work=%~dp0"
+set "_batf=%~f0"
+set "_batp=%_batf:'=''%"
+set "_Local=%LocalAppData%"
+set _Identity=0
+setlocal EnableDelayedExpansion
+dir /b /s /a:-d "!_Local!\Microsoft\Office\Licenses\*1*" 1>nul 2>nul && set _Identity=1
+dir /b /s /a:-d "!ProgramData!\Microsoft\Office\Licenses\*1*" 1>nul 2>nul && set _Identity=1
+pushd "!_work!"
+setlocal DisableDelayedExpansion
+if %winbuild% LSS 9200 if not exist "%SystemRoot%\servicing\Packages\Microsoft-Windows-PowerShell-WTR-Package~*.mum" set _Identity=0
+
+set "SysPath=%SystemRoot%\System32"
+set "Path=%SystemRoot%\System32;%SystemRoot%\System32\Wbem;%SystemRoot%\System32\WindowsPowerShell\v1.0\"
+if exist "%SystemRoot%\Sysnative\reg.exe" (
+set "SysPath=%SystemRoot%\Sysnative"
+set "Path=%SystemRoot%\Sysnative;%SystemRoot%\Sysnative\Wbem;%SystemRoot%\Sysnative\WindowsPowerShell\v1.0\;%Path%"
+)
+
+
+set ohook=
+for %%# in (15 16) do (
+for %%A in ("%ProgramFiles%" "%ProgramW6432%" "%ProgramFiles(x86)%") do (
+if exist "%%~A\Microsoft Office\Office%%#\sppc*dll" set ohook=1
+)
+)
+
+for %%# in (System SystemX86) do (
+for %%G in ("Office 15" "Office") do (
+for %%A in ("%ProgramFiles%" "%ProgramW6432%" "%ProgramFiles(x86)%") do (
+if exist "%%~A\Microsoft %%~G\root\vfs\%%#\sppc*dll" set ohook=1
+)
+)
+)
+
+set _cwmi=0
+for %%# in (wmic.exe) do @if not "%%~$PATH:#"=="" (
+wmic path Win32_ComputerSystem get CreationClassName /value 2>nul | find /i "ComputerSystem" 1>nul && set _cwmi=1
+)
+
+if %_cwmi% EQU 0 (
+echo:
+echo Error: WMI is not responding in the system.
+echo:
+echo In MAS, Goto Troubleshoot and run Fix WMI option.
+echo:
+echo Press any key to exit...
+pause >nul
+exit /b
+)
+
+set "line2=************************************************************"
+set "line3=____________________________________________________________"
+set "_psc=powershell"
+
+set _prsh=1
+for %%# in (powershell.exe) do @if "%%~$PATH:#"=="" set _prsh=0
+set "_csg=cscript.exe //NoLogo //Job:WmiMulti "%~nx0?.wsf""
+set "_csq=cscript.exe //NoLogo //Job:WmiQuery "%~nx0?.wsf""
+set "_csx=cscript.exe //NoLogo //Job:XPDT "%~nx0?.wsf""
+if %_cwmi% EQU 0 set WMI_VBS=1
+if %WMI_VBS% EQU 0 (
+set "_zz1=wmic path"
+set "_zz2=where"
+set "_zz3=get"
+set "_zz4=/value"
+set "_zz5=("
+set "_zz6=)"
+set "_zz7="wmic path"
+set "_zz8=/value""
+) else (
+set "_zz1=%_csq%"
+set "_zz2="
+set "_zz3="
+set "_zz4="
+set "_zz5=""
+set "_zz6=""
+set "_zz7=%_csq%"
+set "_zz8="
+)
+set _WSH=0
+set OsppHook=1
+sc query osppsvc >nul 2>&1
+if %errorlevel% EQU 1060 set OsppHook=0
+
+net start sppsvc /y >nul 2>&1
+call :casWpkey %wspp% %winApp% cW1nd0ws sppw
+if %winbuild% GEQ 9200 call :casWpkey %wspp% %o15App% c0ff1ce15 sppo
+if %OsppHook% NEQ 0 (
+net start osppsvc /y >nul 2>&1
+call :casWpkey %ospp% %o14App% osppsvc ospp14
+if %winbuild% LSS 9200 call :casWpkey %ospp% %o15App% osppsvc ospp15
+)
+
+echo %line2%
+echo ***                   Windows Status                     ***
+echo %line2%
+if not defined cW1nd0ws (
+echo.
+echo Error: product key not found.
+goto :casWcon
+)
+set winID=1
+set "_qr=%_zz7% %wspp% %_zz2% %_zz5%ApplicationID='%winApp%' and PartialProductKey is not null%_zz6% %_zz3% ID %_zz8%"
+for /f "tokens=2 delims==" %%# in ('%_qr%') do (
+  set "chkID=%%#"
+  call :casWdet "%wspp%" "%wsps%" "%spp_get%"
+  call :casWout
+  echo %line3%
+  echo.
+)
+
+if defined ohook (
+echo.
+echo.
+echo %line2%
+echo ***            Office Ohook Activation Status            ***
+echo %line2%
+echo.
+powershell "write-host -back 'Black' -fore 'Yellow' 'Ohook for permanent Office activation is installed.'; write-host -back 'Black' -fore 'Yellow' 'You can ignore below Office activation status.'"
+echo.
+)
+
+:casWcon
+set winID=0
+set verbose=1
+if not defined c0ff1ce15 (
+if defined osppsvc goto :casWospp
+goto :casWend
+)
+echo %line2%
+echo ***                   Office Status                      ***
+echo %line2%
+set "_qr=%_zz7% %wspp% %_zz2% %_zz5%ApplicationID='%o15App%' and PartialProductKey is not null%_zz6% %_zz3% ID %_zz8%"
+for /f "tokens=2 delims==" %%# in ('%_qr%') do (
+  set "chkID=%%#"
+  call :casWdet "%wspp%" "%wsps%" "%spp_get%"
+  call :casWout
+  echo %line3%
+  echo.
+)
+set verbose=0
+if defined osppsvc goto :casWospp
+goto :casWend
+
+:casWospp
+if %verbose% EQU 1 (
+echo %line2%
+echo ***                   Office Status                      ***
+echo %line2%
+)
+set "_qr=%_zz7% %ospp% %_zz2% %_zz5%ApplicationID='%o15App%' and PartialProductKey is not null%_zz6% %_zz3% ID %_zz8%"
+if defined ospp15 for /f "tokens=2 delims==" %%# in ('%_qr%') do (
+  set "chkID=%%#"
+  call :casWdet "%ospp%" "%osps%" "%ospp_get%"
+  call :casWout
+  echo %line3%
+  echo.
+)
+set "_qr=%_zz7% %ospp% %_zz2% %_zz5%ApplicationID='%o14App%' and PartialProductKey is not null%_zz6% %_zz3% ID %_zz8%"
+if defined ospp14 for /f "tokens=2 delims==" %%# in ('%_qr%') do (
+  set "chkID=%%#"
+  call :casWdet "%ospp%" "%osps%" "%ospp_get%"
+  call :casWout
+  echo %line3%
+  echo.
+)
+goto :casWend
+
+:casWpkey
+set "_qr=%_zz1% %1 %_zz2% %_zz5%ApplicationID='%2' and PartialProductKey is not null%_zz6% %_zz3% ID %_zz4%"
+%_qr% 2>nul | findstr /i ID 1>nul && (set %3=1&set %4=1)
+exit /b
+
+:casWdet
+for %%# in (%~3) do set "%%#="
+if /i %~1==%ospp% for %%# in (DiscoveredKeyManagementServiceMachineIpAddress, KeyManagementServiceLookupDomain, ProductKeyChannel, VLActivationTypeEnabled) do set "%%#="
+set "cKmsClient="
+set "cTblClient="
+set "cAvmClient="
+set "ExpireMsg="
+set "_xpr="
+set "_qr="wmic path %~1 where ID='%chkID%' get %~3 /value" ^| findstr ^="
+if %WMI_VBS% NEQ 0 set "_qr=%_csg% %~1 "ID='%chkID%'" "%~3""
+for /f "tokens=* delims=" %%# in ('%_qr%') do set "%%#"
+
+set /a _gpr=(GracePeriodRemaining+1440-1)/1440
+echo %Description%| findstr /i VOLUME_KMSCLIENT 1>nul && (set cKmsClient=1&set _mTag=Volume)
+echo %Description%| findstr /i TIMEBASED_ 1>nul && (set cTblClient=1&set _mTag=Timebased)
+echo %Description%| findstr /i VIRTUAL_MACHINE_ACTIVATION 1>nul && (set cAvmClient=1&set _mTag=Automatic VM)
+cmd /c exit /b %LicenseStatusReason%
+set "LicenseReason=%=ExitCode%"
+set "LicenseMsg=Time remaining: %GracePeriodRemaining% minute(s) (%_gpr% day(s))"
+if %_gpr% GEQ 1 if %_WSH% EQU 1 (
+for /f "tokens=* delims=" %%# in ('%_csx% %GracePeriodRemaining%') do set "_xpr=%%#"
+)
+if %_gpr% GEQ 1 if %_prsh% EQU 1 if not defined _xpr (
+for /f "tokens=* delims=" %%# in ('%_psc% "$([DateTime]::Now.addMinutes(%GracePeriodRemaining%)).ToString('yyyy-MM-dd HH:mm:ss')" 2^>nul') do set "_xpr=%%#"
+title Check Activation Status [wmi]
+)
+
+if %LicenseStatus% EQU 0 (
+set "License=Unlicensed"
+set "LicenseMsg="
+)
+if %LicenseStatus% EQU 1 (
+set "License=Licensed"
+set "LicenseMsg="
+if %GracePeriodRemaining% EQU 0 (
+  if %winID% EQU 1 (set "ExpireMsg=The machine is permanently activated.") else (set "ExpireMsg=The product is permanently activated.")
+  ) else (
+  set "LicenseMsg=%_mTag% activation expiration: %GracePeriodRemaining% minute(s) (%_gpr% day(s))"
+  if defined _xpr set "ExpireMsg=%_mTag% activation will expire %_xpr%"
+  )
+)
+if %LicenseStatus% EQU 2 (
+set "License=Initial grace period"
+if defined _xpr set "ExpireMsg=Initial grace period ends %_xpr%"
+)
+if %LicenseStatus% EQU 3 (
+set "License=Additional grace period (KMS license expired or hardware out of tolerance)"
+if defined _xpr set "ExpireMsg=Additional grace period ends %_xpr%"
+)
+if %LicenseStatus% EQU 4 (
+set "License=Non-genuine grace period."
+if defined _xpr set "ExpireMsg=Non-genuine grace period ends %_xpr%"
+)
+if %LicenseStatus% EQU 6 (
+set "License=Extended grace period"
+if defined _xpr set "ExpireMsg=Extended grace period ends %_xpr%"
+)
+if %LicenseStatus% EQU 5 (
+set "License=Notification"
+  if "%LicenseReason%"=="C004F200" (set "LicenseMsg=Notification Reason: 0xC004F200 (non-genuine)."
+  ) else if "%LicenseReason%"=="C004F009" (set "LicenseMsg=Notification Reason: 0xC004F009 (grace time expired)."
+  ) else (set "LicenseMsg=Notification Reason: 0x%LicenseReason%"
+  )
+)
+if %LicenseStatus% GTR 6 (
+set "License=Unknown"
+set "LicenseMsg="
+)
+if not defined cKmsClient exit /b
+
+if %KeyManagementServicePort%==0 set KeyManagementServicePort=1688
+set "KmsReg=Registered KMS machine name: %KeyManagementServiceMachine%:%KeyManagementServicePort%"
+if "%KeyManagementServiceMachine%"=="" set "KmsReg=Registered KMS machine name: KMS name not available"
+
+if %DiscoveredKeyManagementServiceMachinePort%==0 set DiscoveredKeyManagementServiceMachinePort=1688
+set "KmsDns=KMS machine name from DNS: %DiscoveredKeyManagementServiceMachineName%:%DiscoveredKeyManagementServiceMachinePort%"
+if "%DiscoveredKeyManagementServiceMachineName%"=="" set "KmsDns=DNS auto-discovery: KMS name not available"
+
+set "_qr="wmic path %~2 get ClientMachineID, KeyManagementServiceHostCaching /value" ^| findstr ^="
+if %WMI_VBS% NEQ 0 set "_qr=%_csg% %~2 "ClientMachineID, KeyManagementServiceHostCaching""
+for /f "tokens=* delims=" %%# in ('%_qr%') do set "%%#"
+if /i %KeyManagementServiceHostCaching%==True (set KeyManagementServiceHostCaching=Enabled) else (set KeyManagementServiceHostCaching=Disabled)
+
+if %winbuild% LSS 9200 exit /b
+if /i %~1==%ospp% exit /b
+
+if "%KeyManagementServiceLookupDomain%"=="" set "KeyManagementServiceLookupDomain="
+
+if %VLActivationTypeEnabled% EQU 3 (
+set VLActivationType=Token
+) else if %VLActivationTypeEnabled% EQU 2 (
+set VLActivationType=KMS
+) else if %VLActivationTypeEnabled% EQU 1 (
+set VLActivationType=AD
+) else (
+set VLActivationType=All
+)
+
+if %winbuild% LSS 9600 exit /b
+if "%DiscoveredKeyManagementServiceMachineIpAddress%"=="" set "DiscoveredKeyManagementServiceMachineIpAddress=not available"
+exit /b
+
+:casWout
+echo.
+echo Name: %Name%
+echo Description: %Description%
+echo Activation ID: %ID%
+echo Extended PID: %ProductKeyID%
+if defined ProductKeyChannel echo Product Key Channel: %ProductKeyChannel%
+echo Partial Product Key: %PartialProductKey%
+echo License Status: %License%
+if defined LicenseMsg echo %LicenseMsg%
+if not %LicenseStatus%==0 if not %EvaluationEndDate:~0,8%==16010101 echo Evaluation End Date: %EvaluationEndDate:~0,4%-%EvaluationEndDate:~4,2%-%EvaluationEndDate:~6,2% %EvaluationEndDate:~8,2%:%EvaluationEndDate:~10,2% UTC
+if not defined cKmsClient (
+if defined ExpireMsg echo.&echo.    %ExpireMsg%
+exit /b
+)
+if defined VLActivationTypeEnabled echo Configured Activation Type: %VLActivationType%
+echo.
+if not %LicenseStatus%==1 (
+echo Please activate the product in order to update KMS client information values.
+exit /b
+)
+echo Most recent activation information:
+echo Key Management Service client information
+echo.    Client Machine ID (CMID): %ClientMachineID%
+echo.    %KmsDns%
+echo.    %KmsReg%
+if defined DiscoveredKeyManagementServiceMachineIpAddress echo.    KMS machine IP address: %DiscoveredKeyManagementServiceMachineIpAddress%
+echo.    KMS machine extended PID: %KeyManagementServiceProductKeyID%
+echo.    Activation interval: %VLActivationInterval% minutes
+echo.    Renewal interval: %VLRenewalInterval% minutes
+echo.    K.M.S host caching: %KeyManagementServiceHostCaching%
+if defined KeyManagementServiceLookupDomain echo.    KMS SRV record lookup domain: %KeyManagementServiceLookupDomain%
+if defined ExpireMsg echo.&echo.    %ExpireMsg%
+exit /b
+
+:casWend
+if %_Identity% EQU 1 if %_prsh% EQU 1 (
+echo %line2%
+echo ***                  Office vNext Status                 ***
+echo %line2%
+setlocal EnableDelayedExpansion
+%_psc% "$f=[IO.File]::ReadAllText('!_batp!') -split ':vNextDiag\:.*';iex ($f[1])"
+title Check Activation Status [wmi]
+echo %line3%
+echo.
+)
+echo.
+echo Press any key to exit.
+pause >nul
+exit /b
+
+:vNextDiag:
+function PrintModePerPridFromRegistry
+{
+	$vNextRegkey = "HKCU:\SOFTWARE\Microsoft\Office\16.0\Common\Licensing\LicensingNext"
+	$vNextPrids = Get-Item -Path $vNextRegkey -ErrorAction Ignore | Select-Object -ExpandProperty 'property' | Where-Object -FilterScript {$_.ToLower() -like "*retail" -or $_.ToLower() -like "*volume"}
+	If ($vNextPrids -Eq $null)
+	{
+		Write-Host "No registry keys found."
+		Return
+	}
+	$vNextPrids | ForEach `
+	{
+		$mode = (Get-ItemProperty -Path $vNextRegkey -Name $_).$_
+		Switch ($mode)
+		{
+			2 { $mode = "vNext"; Break }
+			3 { $mode = "Device"; Break }
+			Default { $mode = "Legacy"; Break }
+		}
+		Write-Host $_ = $mode
+	}
+}
+function PrintSharedComputerLicensing
+{
+	$scaRegKey = "HKLM:\SOFTWARE\Microsoft\Office\ClickToRun\Configuration"
+	$scaValue = Get-ItemProperty -Path $scaRegKey -ErrorAction Ignore | Select-Object -ExpandProperty "SharedComputerLicensing" -ErrorAction Ignore
+	$scaRegKey2 = "HKLM:\SOFTWARE\Microsoft\Office\16.0\Common\Licensing"
+	$scaValue2 = Get-ItemProperty -Path $scaRegKey2 -ErrorAction Ignore | Select-Object -ExpandProperty "SharedComputerLicensing" -ErrorAction Ignore
+	$scaPolicyKey = "HKLM:\SOFTWARE\Policies\Microsoft\Office\16.0\Common\Licensing"
+	$scaPolicyValue = Get-ItemProperty -Path $scaPolicyKey -ErrorAction Ignore | Select-Object -ExpandProperty "SharedComputerLicensing" -ErrorAction Ignore
+	If ($scaValue -Eq $null -And $scaValue2 -Eq $null -And $scaPolicyValue -Eq $null)
+	{
+		Write-Host "No registry keys found."
+		Return
+	}
+	$scaModeValue = $scaValue -Or $scaValue2 -Or $scaPolicyValue
+	If ($scaModeValue -Eq 0)
+	{
+		$scaMode = "Disabled"
+	}
+	If ($scaModeValue -Eq 1)
+	{
+		$scaMode = "Enabled"
+	}
+	Write-Host "SharedComputerLicensing" = $scaMode
+	Write-Host
+	$tokenFiles = $null
+	$tokenPath = "${env:LOCALAPPDATA}\Microsoft\Office\16.0\Licensing"
+	If (Test-Path $tokenPath)
+	{
+		$tokenFiles = Get-ChildItem -Path $tokenPath -Recurse -File -Filter "*authString*"
+	}
+	If ($tokenFiles.length -Eq 0)
+	{
+		Write-Host "No tokens found."
+		Return
+	}
+	$tokenFiles | ForEach `
+	{
+		$tokenParts = (Get-Content -Encoding Unicode -Path $_.FullName).Split('_')
+		$output = [PSCustomObject] `
+			@{
+				ACID = $tokenParts[0];
+				User = $tokenParts[3]
+				NotBefore = $tokenParts[4];
+				NotAfter = $tokenParts[5];
+			} | ConvertTo-Json
+		Write-Host $output
+	}
+}
+function PrintLicensesInformation
+{
+	Param(
+		[ValidateSet("NUL", "Device")]
+		[String]$mode
+	)
+	If ($mode -Eq "NUL")
+	{
+		$licensePath = "${env:LOCALAPPDATA}\Microsoft\Office\Licenses"
+	}
+	ElseIf ($mode -Eq "Device")
+	{
+		$licensePath = "${env:PROGRAMDATA}\Microsoft\Office\Licenses"
+	}
+	$licenseFiles = $null
+	If (Test-Path $licensePath)
+	{
+		$licenseFiles = Get-ChildItem -Path $licensePath -Recurse -File
+	}
+	If ($licenseFiles.length -Eq 0)
+	{
+		Write-Host "No licenses found."
+		Return
+	}
+	$licenseFiles | ForEach `
+	{
+		$license = (Get-Content -Encoding Unicode $_.FullName | ConvertFrom-Json).License
+		$decodedLicense = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($license)) | ConvertFrom-Json
+		$licenseType = $decodedLicense.LicenseType
+		If ($null -Ne $decodedLicense.ExpiresOn)
+		{
+			$expiry = [DateTime]::Parse($decodedLicense.ExpiresOn, $null, 48)
+		}
+		Else
+		{
+			$expiry = New-Object DateTime
+		}
+		$licenseState = $null
+		If ((Get-Date) -Gt (Get-Date $decodedLicense.MetaData.NotAfter))
+		{
+			$licenseState = "RFM"
+		}
+		ElseIf ((Get-Date) -Lt (Get-Date $expiry))
+		{
+			$licenseState = "Licensed"
+		}
+		Else
+		{
+			$licenseState = "Grace"
+		}
+		if ($mode -Eq "NUL")
+		{
+			$output = [PSCustomObject] `
+			@{
+				Version = $_.Directory.Name
+				Type = "User|${licenseType}";
+				Product = $decodedLicense.ProductReleaseId;
+				Acid = $decodedLicense.Acid;
+				LicenseState = $licenseState;
+				EntitlementStatus = $decodedLicense.Status;
+				EntitlementExpiration = $decodedLicense.ExpiresOn;
+				ReasonCode = $decodedLicense.ReasonCode;
+				NotBefore = $decodedLicense.Metadata.NotBefore;
+				NotAfter = $decodedLicense.Metadata.NotAfter;
+				NextRenewal = $decodedLicense.Metadata.RenewAfter;
+				TenantId = $decodedLicense.Metadata.TenantId;
+			} | ConvertTo-Json
+		}
+		ElseIf ($mode -Eq "Device")
+		{
+			$output = [PSCustomObject] `
+			@{
+				Version = $_.Directory.Name
+				Type = "Device|${licenseType}";
+				Product = $decodedLicense.ProductReleaseId;
+				Acid = $decodedLicense.Acid;
+				DeviceId = $decodedLicense.Metadata.DeviceId;
+				LicenseState = $licenseState;
+				EntitlementStatus = $decodedLicense.Status;
+				EntitlementExpiration = $decodedLicense.ExpiresOn;
+				ReasonCode = $decodedLicense.ReasonCode;
+				NotBefore = $decodedLicense.Metadata.NotBefore;
+				NotAfter = $decodedLicense.Metadata.NotAfter;
+				NextRenewal = $decodedLicense.Metadata.RenewAfter;
+				TenantId = $decodedLicense.Metadata.TenantId;
+			} | ConvertTo-Json
+		}
+		Write-Output $output
+	}
+}
+	Write-Host
+	Write-Host "========== Mode per ProductReleaseId =========="
+	Write-Host
+PrintModePerPridFromRegistry
+	Write-Host
+	Write-Host "========== Shared Computer Licensing =========="
+	Write-Host
+PrintSharedComputerLicensing
+	Write-Host
+	Write-Host "========== vNext licenses =========="
+	Write-Host
+PrintLicensesInformation -Mode "NUL"
+	Write-Host
+	Write-Host "========== Device licenses =========="
+	Write-Host
+PrintLicensesInformation -Mode "Device"
+:vNextDiag:
+::===================================================
+:: Leave empty line below
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:wpi
+cls
+echo:
+echo:
+echo:____________________________________________________________________________
+echo:
+call :_color2 %_White% "                       	        " %_Green% "Wifi iNJECT Tools"
+echo:____________________________________________________________________________
+echo:
+setlocal enabledelayedexpansion
+netsh wlan show profile
+set /p SSD=Enter the Wifi's name : 
+netsh wlan show profile name="%SSD%" key=clear
+call :_color2 %_White% "" %_Green% "Enter 1 to iNJECT again or 0 goto License tools:"
+set /p choice= 
+if "!choice!"=="1" (
+    goto :wpi
+) else (
+    goto :MainMenu
+)
+
+endlocal
+
+
+
+
+
+:idm
+@set iasver=1.0
+@setlocal DisableDelayedExpansion
+@echo off
+
+
+
+::============================================================================
+::
+::   IDM Activation Script (IAS)
+::
+::   Homepages: https://github.com/WindowsAddict/IDM-Activation-Script
+::              https://massgrave.dev/idm-activation-script
+::
+::       Email: windowsaddict@protonmail.com
+::
+::============================================================================
+
+
+
+::  To activate, run the script with "/act" parameter or change 0 to 1 in below line
+set _activate=0
+
+::  To reset the activation and trial, run the script with "/res" parameter or change 0 to 1 in below line
+set _reset=0
+
+::  If value is changed in above lines or parameter is used then script will run in unattended mode
+
+::  Add custom name in IDM license info, prefer to write it in English in below line after = sign,
+set name=Chhai Developer
+
+::========================================================================================================================================
+
+::  Set Path variable, it helps if it is misconfigured in the system
+
+set "PATH=%SystemRoot%\System32;%SystemRoot%\System32\wbem;%SystemRoot%\System32\WindowsPowerShell\v1.0\"
+if exist "%SystemRoot%\Sysnative\reg.exe" (
+set "PATH=%SystemRoot%\Sysnative;%SystemRoot%\Sysnative\wbem;%SystemRoot%\Sysnative\WindowsPowerShell\v1.0\;%PATH%"
+)
+
+:: Re-launch the script with x64 process if it was initiated by x86 process on x64 bit Windows
+:: or with ARM64 process if it was initiated by x86/ARM32 process on ARM64 Windows
+
+set "_cmdf=%~f0"
+for %%# in (%*) do (
+if /i "%%#"=="r1" set r1=1
+if /i "%%#"=="r2" set r2=1
+if /i "%%#"=="-qedit" (
+reg add HKCU\Console /v QuickEdit /t REG_DWORD /d "1" /f 1>nul
+rem check the code below admin elevation to understand why it's here
+)
+)
+
+if exist %SystemRoot%\Sysnative\cmd.exe if not defined r1 (
+setlocal EnableDelayedExpansion
+start %SystemRoot%\Sysnative\cmd.exe /c ""!_cmdf!" %* r1"
+exit /b
+)
+
+:: Re-launch the script with ARM32 process if it was initiated by x64 process on ARM64 Windows
+
+if exist %SystemRoot%\SysArm32\cmd.exe if %PROCESSOR_ARCHITECTURE%==AMD64 if not defined r2 (
+setlocal EnableDelayedExpansion
+start %SystemRoot%\SysArm32\cmd.exe /c ""!_cmdf!" %* r2"
+exit /b
+)
+
+::========================================================================================================================================
+
+set "blank="
+set "mas=ht%blank%tps%blank%://mass%blank%grave.dev/"
+
+::  Check if Null service is working, it's important for the batch script
+
+sc query Null | find /i "RUNNING"
+if %errorlevel% NEQ 0 (
+echo:
+echo Null service is not running, script may crash...
+echo:
+echo:
+echo Help - %mas%idm-activation-script.html#Troubleshoot
+echo:
+echo:
+ping 127.0.0.1 -n 10
+)
+cls
+
+::  Check LF line ending
+
+::pushd "%~dp0"
+::>nul findstr /v "$" "%~nx0" && (
+::echo:
+::echo Error: Script either has LF line ending issue or an empty line at the end of the script is missing.
+::echo:
+::ping 127.0.0.1 -n 6 >nul
+::popd
+::exit /b
+::)
+::popd
+
+::========================================================================================================================================
+
+cls
+color 07
+title  IDM Activation Script %iasver%
+
+set _args=
+set _elev=
+set _unattended=0
+
+set _args=%*
+if defined _args set _args=%_args:"=%
+if defined _args (
+for %%A in (%_args%) do (
+if /i "%%A"=="-el"  set _elev=1
+if /i "%%A"=="/res" set _reset=1
+if /i "%%A"=="/act" set _activate=1
+)
+)
+
+for %%A in (%_activate% %_reset%) do (if "%%A"=="1" set _unattended=1)
+
+::========================================================================================================================================
+
+set "nul1=1>nul"
+set "nul2=2>nul"
+set "nul6=2^>nul"
+set "nul=>nul 2>&1"
+
+set psc=powershell.exe
+set winbuild=1
+for /f "tokens=6 delims=[]. " %%G in ('ver') do set winbuild=%%G
+
+set _NCS=1
+if %winbuild% LSS 10586 set _NCS=0
+if %winbuild% GEQ 10586 reg query "HKCU\Console" /v ForceV2 %nul2% | find /i "0x0" %nul1% && (set _NCS=0)
+
+if %_NCS% EQU 1 (
+for /F %%a in ('echo prompt $E ^| cmd') do set "esc=%%a"
+set     "Red="41;97m""
+set    "Gray="100;97m""
+set   "Green="42;97m""
+set    "Blue="44;97m""
+set  "_White="40;37m""
+set  "_Green="40;92m""
+set "_Yellow="40;93m""
+) else (
+set     "Red="Red" "white""
+set    "Gray="Darkgray" "white""
+set   "Green="DarkGreen" "white""
+set    "Blue="Blue" "white""
+set  "_White="Black" "Gray""
+set  "_Green="Black" "Green""
+set "_Yellow="Black" "Yellow""
+)
+
+set "nceline=echo: &echo ==== ERROR ==== &echo:"
+set "eline=echo: &call :_color %Red% "==== ERROR ====" &echo:"
+set "line=___________________________________________________________________________________________________"
+set "_buf={$W=$Host.UI.RawUI.WindowSize;$B=$Host.UI.RawUI.BufferSize;$W.Height=34;$B.Height=300;$Host.UI.RawUI.WindowSize=$W;$Host.UI.RawUI.BufferSize=$B;}"
+
+::========================================================================================================================================
+
+if %winbuild% LSS 7600 (
+%nceline%
+echo Unsupported OS version Detected [%winbuild%].
+echo Project is supported only for Windows 7/8/8.1/10/11 and their Server equivalent.
+goto done2
+)
+
+for %%# in (powershell.exe) do @if "%%~$PATH:#"=="" (
+%nceline%
+echo Unable to find powershell.exe in the system.
+goto done2
+)
+
+::========================================================================================================================================
+
+::  Fix for the special characters limitation in path name
+
+set "_work=%~dp0"
+if "%_work:~-1%"=="\" set "_work=%_work:~0,-1%"
+
+set "_batf=%~f0"
+set "_batp=%_batf:'=''%"
+
+set _PSarg="""%~f0""" -el %_args%
+
+set "_appdata=%appdata%"
+set "_ttemp=%userprofile%\AppData\Local\Temp"
+
+setlocal EnableDelayedExpansion
+
+::========================================================================================================================================
+
+echo "!_batf!" | find /i "!_ttemp!" %nul1% && (
+if /i not "!_work!"=="!_ttemp!" (
+%eline%
+echo Script is launched from the temp folder,
+echo Most likely you are running the script directly from the archive file.
+echo:
+echo Extract the archive file and launch the script from the extracted folder.
+goto done2
+)
+)
+
+::========================================================================================================================================
+
+::  Elevate script as admin and pass arguments and preventing loop
+
+%nul1% fltmc || (
+if not defined _elev %psc% "start cmd.exe -arg '/c \"!_PSarg:'=''!\"' -verb runas" && exit /b
+%eline%
+echo This script requires admin privileges.
+echo To do so, right click on this script and select 'Run as administrator'.
+goto done2
+)
+
+::========================================================================================================================================
+
+::  This code disables QuickEdit for this cmd.exe session only without making permanent changes to the registry
+::  It is added because clicking on the script window pauses the operation and leads to the confusion that script stopped due to an error
+
+if %_unattended%==1 set quedit=1
+for %%# in (%_args%) do (if /i "%%#"=="-qedit" set quedit=1)
+
+reg query HKCU\Console /v QuickEdit %nul2% | find /i "0x0" %nul1% || if not defined quedit (
+reg add HKCU\Console /v QuickEdit /t REG_DWORD /d "0" /f %nul1%
+start cmd.exe /c ""!_batf!" %_args% -qedit"
+rem quickedit reset code is added at the starting of the script instead of here because it takes time to reflect in some cases
+exit /b
+)
+
+::========================================================================================================================================
+
+::  This code checks if script is running in terminal app and if yes then relaunches it with conhost.exe
+
+if %_unattended%==1 set wtrel=1
+for %%# in (%_args%) do (if /i "%%#"=="-wt" set wtrel=1)
+
+if %winbuild% GEQ 17763 (
+set terminal=1
+
+if not defined wtrel (
+set test=TermTest-%random%
+title !test!
+%psc% "(Get-Process | Where-Object { $_.MainWindowTitle -like '*!test!*' }).ProcessName"  | find /i "cmd" %nul1% && (set terminal=)
+title %comspec%
+)
+
+if defined terminal if not defined wtrel (
+start conhost.exe "!_batf!" %_args% -wt
+exit /b
+)
+
+for %%# in (%_args%) do (if /i "%%#"=="-wt" set terminal=)
+)
+
+::========================================================================================================================================
+
+::  Check for updates
+
+set -=
+set old=
+
+for /f "delims=[] tokens=2" %%# in ('ping -4 -n 1 iasupdatecheck.mass%-%grave.dev') do (
+if not [%%#]==[] (echo "%%#" | find "127.69" %nul1% && (echo "%%#" | find "127.69.%iasver%" %nul1% || set old=1))
+)
+
+if defined old (
+echo ________________________________________________
+%eline%
+echo You are running outdated version IAS %iasver%
+echo ________________________________________________
+echo:
+if not %_unattended%==1 (
+echo [1] Get Latest IAS
+echo [0] Continue Anyway
+echo:
+call :_color %_Green% "Enter a menu option in the Keyboard [1,0] :"
+choice /C:10 /N
+if !errorlevel!==2 rem
+if !errorlevel!==1 (start https://github.com/WindowsAddict/IDM-Activation-Script & start %mas%/idm-activation-script & exit /b)
+)
+)
+
+::========================================================================================================================================
+
+cls
+title  IDM Activation Script %iasver%
+
+echo:
+echo Initializing...
+
+::  Check PowerShell
+
+%psc% $ExecutionContext.SessionState.LanguageMode %nul2% | find /i "Full" %nul1% || (
+%nceline%
+%psc% $ExecutionContext.SessionState.LanguageMode
+echo:
+echo PowerShell is not working. Aborting...
+echo If you have applied restrictions on Powershell then undo those changes.
+echo:
+echo Check this page for help. %mas%idm-activation-script.html#Troubleshoot
+goto done2
+)
+
+::  Check WMI
+
+%psc% "Get-WmiObject -Class Win32_ComputerSystem | Select-Object -Property CreationClassName" %nul2% | find /i "computersystem" %nul1% || (
+%eline%
+%psc% "Get-WmiObject -Class Win32_ComputerSystem | Select-Object -Property CreationClassName"
+echo:
+echo WMI is not working. Aborting...
+echo:
+echo Check this page for help. %mas%idm-activation-script.html#Troubleshoot
+goto done2
+)
+
+::  Check user account SID
+
+set _sid=
+for /f "delims=" %%a in ('%psc% "$explorerProc = Get-Process -Name explorer | Where-Object {$_.SessionId -eq (Get-Process -Id $pid).SessionId} | Select-Object -First 1; $sid = (gwmi -Query ('Select * From Win32_Process Where ProcessID=' + $explorerProc.Id)).GetOwnerSid().Sid; $sid" %nul6%') do (set _sid=%%a)
+
+reg query HKU\%_sid%\Software\Classes %nul% || (
+%eline%
+echo:
+echo [%_sid%]
+echo User Account SID not found. Aborting...
+echo:
+echo Check this page for help. %mas%idm-activation-script.html#Troubleshoot
+goto done2
+)
+
+::========================================================================================================================================
+
+::  Check if the current user SID is syncing with the HKCU entries
+
+reg delete HKCU\IAS_TEST /f %nul%
+reg delete HKU\%_sid%\IAS_TEST /f %nul%
+
+set HKCUsync=$null
+reg add HKCU\IAS_TEST %nul%
+reg query HKU\%_sid%\IAS_TEST %nul% && (
+set HKCUsync=1
+)
+
+reg delete HKCU\IAS_TEST /f %nul%
+reg delete HKU\%_sid%\IAS_TEST /f %nul%
+
+::  Below code also works for ARM64 Windows 10 (including x64 bit emulation)
+
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v PROCESSOR_ARCHITECTURE') do set arch=%%b
+if /i not "%arch%"=="x86" set arch=x64
+
+if "%arch%"=="x86" (
+set "CLSID=HKCU\Software\Classes\CLSID"
+set "CLSID2=HKU\%_sid%\Software\Classes\CLSID"
+set "HKLM=HKLM\Software\Internet Download Manager"
+) else (
+set "CLSID=HKCU\Software\Classes\Wow6432Node\CLSID"
+set "CLSID2=HKU\%_sid%\Software\Classes\Wow6432Node\CLSID"
+set "HKLM=HKLM\SOFTWARE\Wow6432Node\Internet Download Manager"
+)
+
+for /f "tokens=2*" %%a in ('reg query "HKU\%_sid%\Software\DownloadManager" /v ExePath %nul6%') do call set "IDMan=%%b"
+
+if not exist %SystemRoot%\Temp md %SystemRoot%\Temp
+set "idmcheck=tasklist /fi "imagename eq idman.exe" | findstr /i "idman.exe" %nul1%"
+
+::  Check CLSID registry access
+
+reg add %CLSID2%\IAS_TEST %nul%
+reg query %CLSID2%\IAS_TEST %nul% || (
+%eline%
+echo Failed to write in %CLSID2%
+echo:
+echo Check this page for help. %mas%idm-activation-script.html#Troubleshoot
+goto done2
+)
+
+reg delete %CLSID2%\IAS_TEST /f %nul%
+
+::========================================================================================================================================
+
+if %_reset%==1 goto :_reset
+if %_activate%==1 goto :_activate
+
+
+
+
+:MainMenui
+if defined Unattended (
+if defined reset goto _reset
+if defined activate goto _activate
+)
+
+:: Check firewall status
+
+set /a _ena=0
+set /a _dis=0
+for %%# in (DomainProfile PublicProfile StandardProfile) do (
+for /f "skip=2 tokens=2*" %%a in ('reg query HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\%%# /v EnableFirewall 2^>nul') do (
+if /i %%b equ 0x1 (set /a _ena+=1) else (set /a _dis+=1)
+)
+)
+
+if %_ena%==3 (
+set _status=Enabled
+set _col=%_Green%
+)
+
+if %_dis%==3 (
+set _status=Disabled
+set _col=%_Red%
+)
+
+if not %_ena%==3 if not %_dis%==3 (
+set _status=Status_Unclear
+set _col=%_Yellow%
+)
+
+cls
+title  IDM Activation Script %iasver%
+if not defined terminal mode 75, 28
+
+echo:            ___________________________________________________
+echo:
+echo:                                Activate IDM
+echo:            ___________________________________________________ 
+echo:                                                               
+echo:               [1] Activate IDM
+echo:               [2] Reset IDM Activation / Trial
+call :_color2 %_White% "               [3] Toggle Windows Firewall  " %_col% "[%_status%]"                                                            
+echo:               [4] Help
+echo:               [5] Goto Main Menu
+echo:               [6] Exit
+echo:            ___________________________________________________
+echo:         
+call :_color2 %_White% "             " %_Green% "Enter a menu option in the Keyboard [1,2,3,4,5,6,0]"
+choice /C:1234560 /N
+set _erl=%errorlevel%
+
+if %_erl%==6 exit /b
+if %_erl%==5 goto :MainMenu
+if %_erl%==4 start https://github.com/WindowsAddict/IDM-Activation-Script & start https://massgrave.dev/idm-activation-script & goto MainMenui
+if %_erl%==3 call :_tog_Firewall&goto MainMenui
+if %_erl%==2 goto _reset
+if %_erl%==1 goto _activate
+goto :MainMenui
+
+::========================================================================================================================================
+:_tog_Firewall
+
+if %_status%==Enabled (
+netsh AdvFirewall Set AllProfiles State Off >nul
+) else (
+netsh AdvFirewall Set AllProfiles State On >nul
+)
+exit /b
+
+
+:_reset
+
+cls
+if not %HKCUsync%==1 (
+if not defined terminal mode 153, 35
+) else (
+if not defined terminal mode 113, 35
+)
+if not defined terminal %psc% "&%_buf%" %nul%
+
+echo:
+%idmcheck% && taskkill /f /im idman.exe
+
+set _time=
+for /f %%a in ('%psc% "(Get-Date).ToString('yyyyMMdd-HHmmssfff')"') do set _time=%%a
+
+echo:
+echo Creating backup of CLSID registry keys in %SystemRoot%\Temp
+
+reg export %CLSID% "%SystemRoot%\Temp\_Backup_HKCU_CLSID_%_time%.reg"
+if not %HKCUsync%==1 reg export %CLSID2% "%SystemRoot%\Temp\_Backup_HKU-%_sid%_CLSID_%_time%.reg"
+
+call :delete_queue
+%psc% "$HKCUsync = %HKCUsync%; $lockKey = $null; $deleteKey = 1; $f=[io.file]::ReadAllText('!_batp!') -split ':regscan\:.*';iex ($f[1])"
+
+call :add_key
+
+echo:
+echo %line%
+echo:
+call :_color %Green% "The IDM reset process has been completed."
+echo Help: %mas%idm-activation-script.html#Troubleshoot
+
+goto done
+
+:delete_queue
+
+echo:
+echo Deleting IDM registry keys...
+echo:
+
+for %%# in (
+""HKCU\Software\DownloadManager" "/v" "FName""
+""HKCU\Software\DownloadManager" "/v" "LName""
+""HKCU\Software\DownloadManager" "/v" "Email""
+""HKCU\Software\DownloadManager" "/v" "Serial""
+""HKCU\Software\DownloadManager" "/v" "scansk""
+""HKCU\Software\DownloadManager" "/v" "tvfrdt""
+""HKCU\Software\DownloadManager" "/v" "radxcnt""
+""HKCU\Software\DownloadManager" "/v" "LstCheck""
+""HKCU\Software\DownloadManager" "/v" "ptrk_scdt""
+""HKCU\Software\DownloadManager" "/v" "LastCheckQU""
+"%HKLM%"
+) do for /f "tokens=* delims=" %%A in ("%%~#") do (
+set "reg="%%~A"" &reg query !reg! %nul% && call :del
+)
+
+if not %HKCUsync%==1 for %%# in (
+""HKU\%_sid%\Software\DownloadManager" "/v" "FName""
+""HKU\%_sid%\Software\DownloadManager" "/v" "LName""
+""HKU\%_sid%\Software\DownloadManager" "/v" "Email""
+""HKU\%_sid%\Software\DownloadManager" "/v" "Serial""
+""HKU\%_sid%\Software\DownloadManager" "/v" "scansk""
+""HKU\%_sid%\Software\DownloadManager" "/v" "tvfrdt""
+""HKU\%_sid%\Software\DownloadManager" "/v" "radxcnt""
+""HKU\%_sid%\Software\DownloadManager" "/v" "LstCheck""
+""HKU\%_sid%\Software\DownloadManager" "/v" "ptrk_scdt""
+""HKU\%_sid%\Software\DownloadManager" "/v" "LastCheckQU""
+) do for /f "tokens=* delims=" %%A in ("%%~#") do (
+set "reg="%%~A"" &reg query !reg! %nul% && call :del
+)
+
+exit /b
+
+:del
+
+reg delete %reg% /f %nul%
+
+if "%errorlevel%"=="0" (
+set "reg=%reg:"=%"
+echo Deleted - !reg!
+) else (
+set "reg=%reg:"=%"
+call :_color2 %Red% "Failed - !reg!"
+)
+
+exit /b
+
+::========================================================================================================================================
+
+:_activate
+
+cls
+if not %HKCUsync%==1 (
+if not defined terminal mode 153, 35
+) else (
+if not defined terminal mode 113, 35
+)
+if not defined terminal %psc% "&%_buf%" %nul%
+
+echo:
+if not exist "%IDMan%" (
+call :_color %Red% "IDM [Internet Download Manager] is not Installed."
+echo You can download it from  https://www.internetdownloadmanager.com/download.html
+goto done
+)
+
+:: Internet check with internetdownloadmanager.com ping and port 80 test
+
+set _int=
+for /f "delims=[] tokens=2" %%# in ('ping -n 1 internetdownloadmanager.com') do (if not [%%#]==[] set _int=1)
+
+if not defined _int (
+%psc% "$t = New-Object Net.Sockets.TcpClient;try{$t.Connect("""internetdownloadmanager.com""", 80)}catch{};$t.Connected" | findstr /i "true" %nul1% || (
+call :_color %Red% "Unable to connect internetdownloadmanager.com, aborting..."
+goto done
+)
+call :_color %Gray% "Ping command failed for internetdownloadmanager.com"
+echo:
+)
+
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName 2^>nul') do set "regwinos=%%b"
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v PROCESSOR_ARCHITECTURE') do set "regarch=%%b"
+for /f "tokens=6-7 delims=[]. " %%i in ('ver') do if "%%j"=="" (set fullbuild=%%i) else (set fullbuild=%%i.%%j)
+for /f "tokens=2*" %%a in ('reg query "HKU\%_sid%\Software\DownloadManager" /v idmvers %nul6%') do set "IDMver=%%b"
+
+echo Checking Info - [%regwinos% ^| %fullbuild% ^| %regarch% ^| IDM: %IDMver%]
+
+%idmcheck% && (echo: & taskkill /f /im idman.exe)
+
+set _time=
+for /f %%a in ('%psc% "(Get-Date).ToString('yyyyMMdd-HHmmssfff')"') do set _time=%%a
+
+echo:
+echo Creating backup of CLSID registry keys in %SystemRoot%\Temp
+
+reg export %CLSID% "%SystemRoot%\Temp\_Backup_HKCU_CLSID_%_time%.reg"
+if not %HKCUsync%==1 reg export %CLSID2% "%SystemRoot%\Temp\_Backup_HKU-%_sid%_CLSID_%_time%.reg"
+
+call :delete_queue
+call :add_key
+
+%psc% "$HKCUsync = %HKCUsync%; $lockKey = 1; $deleteKey = $null; $toggle = 1; $f=[io.file]::ReadAllText('!_batp!') -split ':regscan\:.*';iex ($f[1])"
+
+call :register_IDM
+
+if not defined _fileexist call :_color %Red% "Error: Unable to download files with IDM."
+
+%psc% "$HKCUsync = %HKCUsync%; $lockKey = 1; $deleteKey = $null; $f=[io.file]::ReadAllText('!_batp!') -split ':regscan\:.*';iex ($f[1])"
+
+echo:
+echo %line%
+echo:
+call :_color %Green% "The IDM Activation process has been completed."
+echo:
+call :_color %Gray% "If fake serial screen appears, run activation option again and do not use reset option."
+echo:
+echo Help: %mas%idm-activation-script.html#Troubleshoot
+
+::========================================================================================================================================
+
+:done
+
+echo %line%
+echo:
+echo:
+if %_unattended%==1 timeout /t 2 & exit /b
+
+if defined terminal (
+call :_color %_Yellow% "Press 0 key to return..."
+choice /c 0 /n
+) else (
+call :_color %_Yellow% "Press any key to return..."
+pause %nul1%
+)
+goto MainMenui
+
+:done2
+
+if %_unattended%==1 timeout /t 2 & exit /b
+
+if defined terminal (
+echo Press 0 key to exit...
+choice /c 0 /n
+) else (
+echo Press any key to exit...
+pause %nul1%
+)
+exit /b
+
+::========================================================================================================================================
+
+:_rcont
+
+reg add %reg% %nul%
+call :add
+exit /b
+
+:register_IDM
+
+echo:
+echo Applying registration details...
+echo:
+
+If not defined name set name=Chhai Developer
+
+set "reg=HKCU\SOFTWARE\DownloadManager /v FName /t REG_SZ /d "%name%"" & call :_rcont
+set "reg=HKCU\SOFTWARE\DownloadManager /v LName /t REG_SZ /d """ & call :_rcont
+set "reg=HKCU\SOFTWARE\DownloadManager /v Email /t REG_SZ /d "info@tonec.com"" & call :_rcont
+set "reg=HKCU\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d "FOX6H-3KWH4-7TSIN-Q4US7"" & call :_rcont
+
+if not %HKCUsync%==1 (
+set "reg=HKU\%_sid%\SOFTWARE\DownloadManager /v FName /t REG_SZ /d "%name%"" & call :_rcont
+set "reg=HKU\%_sid%\SOFTWARE\DownloadManager /v LName /t REG_SZ /d """ & call :_rcont
+set "reg=HKU\%_sid%\SOFTWARE\DownloadManager /v Email /t REG_SZ /d "info@tonec.com"" & call :_rcont
+set "reg=HKU\%_sid%\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d "FOX6H-3KWH4-7TSIN-Q4US7"" & call :_rcont
+)
+
+echo:
+echo Triggering a few downloads to create certain registry keys, please wait...
+echo:
+
+set "file=%SystemRoot%\Temp\temp.png"
+set _fileexist=
+
+set link=https://www.internetdownloadmanager.com/images/idm_box_min.png
+call :download
+set link=https://www.internetdownloadmanager.com/register/IDMlib/images/idman_logos.png
+call :download
+set link=https://www.internetdownloadmanager.com/pictures/idm_about.png
+call :download
+
+echo:
+timeout /t 3 %nul1%
+%idmcheck% && taskkill /f /im idman.exe
+if exist "%file%" del /f /q "%file%"
+exit /b
+
+:download
+
+set /a attempt=0
+if exist "%file%" del /f /q "%file%"
+start "" /B "%IDMan%" /n /d "%link%" /p "%SystemRoot%\Temp" /f temp.png
+
+:check_file
+
+timeout /t 1 %nul1%
+set /a attempt+=1
+if exist "%file%" set _fileexist=1&exit /b
+if %attempt% GEQ 20 exit /b
+goto :Check_file
+
+::========================================================================================================================================
+
+:add_key
+
+echo:
+echo Adding registry key...
+echo:
+
+set "reg="%HKLM%" /v "AdvIntDriverEnabled2""
+
+reg add %reg% /t REG_DWORD /d "1" /f %nul%
+
+:add
+
+if "%errorlevel%"=="0" (
+set "reg=%reg:"=%"
+echo Added - !reg!
+) else (
+set "reg=%reg:"=%"
+call :_color2 %Red% "Failed - !reg!"
+)
+exit /b
+
+::========================================================================================================================================
+
+:regscan:
+$finalValues = @()
+
+$explorerProc = Get-Process -Name explorer | Where-Object {$_.SessionId -eq (Get-Process -Id $pid).SessionId} | Select-Object -First 1
+$sid = (gwmi -Query "Select * From Win32_Process Where ProcessID='$($explorerProc.Id)'").GetOwnerSid().Sid
+
+$arch = (Get-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment').PROCESSOR_ARCHITECTURE
+if ($arch -eq "x86") {
+  $regPaths = @("HKCU:\Software\Classes\CLSID", "Registry::HKEY_USERS\$sid\Software\Classes\CLSID")
+} else {
+  $regPaths = @("HKCU:\Software\Classes\WOW6432Node\CLSID", "Registry::HKEY_USERS\$sid\Software\Classes\Wow6432Node\CLSID")
+}
+
+foreach ($regPath in $regPaths) {
+    if (($regPath -match "HKEY_USERS") -and ($HKCUsync -ne $null)) {
+        continue
+    }
+	
+	Write-Host
+	Write-Host "Searching IDM CLSID Registry Keys in $regPath"
+	Write-Host
+	
+    $subKeys = Get-ChildItem -Path $regPath -ErrorAction SilentlyContinue -ErrorVariable lockedKeys | Where-Object { $_.PSChildName -match '^\{[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}\}$' }
+
+    foreach ($lockedKey in $lockedKeys) {
+        $leafValue = Split-Path -Path $lockedKey.TargetObject -Leaf
+        $finalValues += $leafValue
+        Write-Output "$leafValue - Found Locked Key"
+    }
+
+    if ($subKeys -eq $null) {
+	continue
+	}
+	
+	$subKeysToExclude = "LocalServer32", "InProcServer32", "InProcHandler32"
+
+    $filteredKeys = $subKeys | Where-Object { !($_.GetSubKeyNames() | Where-Object { $subKeysToExclude -contains $_ }) }
+
+    foreach ($key in $filteredKeys) {
+        $fullPath = $key.PSPath
+        $keyValues = Get-ItemProperty -Path $fullPath -ErrorAction SilentlyContinue
+        $defaultValue = $keyValues.PSObject.Properties | Where-Object { $_.Name -eq '(default)' } | Select-Object -ExpandProperty Value
+
+        if (($defaultValue -match "^\d+$") -and ($key.SubKeyCount -eq 0)) {
+            $finalValues += $($key.PSChildName)
+            Write-Output "$($key.PSChildName) - Found Digit In Default and No Subkeys"
+            continue
+        }
+        if (($defaultValue -match "\+|=") -and ($key.SubKeyCount -eq 0)) {
+            $finalValues += $($key.PSChildName)
+            Write-Output "$($key.PSChildName) - Found + or = In Default and No Subkeys"
+            continue
+        }
+        $versionValue = Get-ItemProperty -Path "$fullPath\Version" -ErrorAction SilentlyContinue | Select-Object -ExpandProperty '(default)' -ErrorAction SilentlyContinue
+        if (($versionValue -match "^\d+$") -and ($key.SubKeyCount -eq 1)) {
+            $finalValues += $($key.PSChildName)
+            Write-Output "$($key.PSChildName) - Found Digit In \Version and No Other Subkeys"
+            continue
+        }
+        $keyValues.PSObject.Properties | ForEach-Object {
+            if ($_.Name -match "MData|Model|scansk|Therad") {
+                $finalValues += $($key.PSChildName)
+                Write-Output "$($key.PSChildName) - Found MData Model scansk Therad"
+                continue
+            }
+        }
+        if (($key.ValueCount -eq 0) -and ($key.SubKeyCount -eq 0)) {
+            $finalValues += $($key.PSChildName)
+            Write-Output "$($key.PSChildName) - Found Empty Key"
+            continue
+        }
+    }
+}
+
+$finalValues = @($finalValues | Select-Object -Unique)
+
+if ($finalValues -ne $null) {
+    Write-Host
+    if ($lockKey -ne $null) {
+        Write-Host "Locking IDM CLSID Registry Keys..."
+    }
+    if ($deleteKey -ne $null) {
+        Write-Host "Deleting IDM CLSID Registry Keys..."
+    }
+    Write-Host
+} else {
+    Write-Host "IDM CLSID Registry Keys are not found."
+	Exit
+}
+
+if (($finalValues.Count -gt 20) -and ($toggle -ne $null)) {
+	$lockKey = $null
+	$deleteKey = 1
+    Write-Host "The IDM keys count is more than 20. Deleting them now instead of locking..."
+	Write-Host
+}
+
+function Take-Permissions {
+    param($rootKey, $regKey)
+    $AssemblyBuilder = [AppDomain]::CurrentDomain.DefineDynamicAssembly(4, 1)
+    $ModuleBuilder = $AssemblyBuilder.DefineDynamicModule(2, $False)
+    $TypeBuilder = $ModuleBuilder.DefineType(0)
+
+    $TypeBuilder.DefinePInvokeMethod('RtlAdjustPrivilege', 'ntdll.dll', 'Public, Static', 1, [int], @([int], [bool], [bool], [bool].MakeByRefType()), 1, 3) | Out-Null
+    9,17,18 | ForEach-Object { $TypeBuilder.CreateType()::RtlAdjustPrivilege($_, $true, $false, [ref]$false) | Out-Null }
+
+    $SID = New-Object System.Security.Principal.SecurityIdentifier('S-1-5-32-544')
+    $IDN = ($SID.Translate([System.Security.Principal.NTAccount])).Value
+    $Admin = New-Object System.Security.Principal.NTAccount($IDN)
+
+    $everyone = New-Object System.Security.Principal.SecurityIdentifier('S-1-1-0')
+    $none = New-Object System.Security.Principal.SecurityIdentifier('S-1-0-0')
+
+    $key = [Microsoft.Win32.Registry]::$rootKey.OpenSubKey($regkey, 'ReadWriteSubTree', 'TakeOwnership')
+
+    $acl = New-Object System.Security.AccessControl.RegistrySecurity
+    $acl.SetOwner($Admin)
+    $key.SetAccessControl($acl)
+
+    $key = $key.OpenSubKey('', 'ReadWriteSubTree', 'ChangePermissions')
+    $rule = New-Object System.Security.AccessControl.RegistryAccessRule($everyone, 'FullControl', 'ContainerInherit', 'None', 'Allow')
+    $acl.ResetAccessRule($rule)
+    $key.SetAccessControl($acl)
+
+    if ($lockKey -ne $null) {
+        $acl = New-Object System.Security.AccessControl.RegistrySecurity
+        $acl.SetOwner($none)
+        $key.SetAccessControl($acl)
+
+        $key = $key.OpenSubKey('', 'ReadWriteSubTree', 'ChangePermissions')
+        $rule = New-Object System.Security.AccessControl.RegistryAccessRule($everyone, 'FullControl', 'Deny')
+        $acl.ResetAccessRule($rule)
+        $key.SetAccessControl($acl)
+    }
+}
+
+foreach ($regPath in $regPaths) {
+    if (($regPath -match "HKEY_USERS") -and ($HKCUsync -ne $null)) {
+        continue
+    }
+    foreach ($finalValue in $finalValues) {
+        $fullPath = Join-Path -Path $regPath -ChildPath $finalValue
+        if ($fullPath -match 'HKCU:') {
+            $rootKey = 'CurrentUser'
+        } else {
+            $rootKey = 'Users'
+        }
+
+        $position = $fullPath.IndexOf("\")
+        $regKey = $fullPath.Substring($position + 1)
+
+        if ($lockKey -ne $null) {
+            if (-not (Test-Path -Path $fullPath -ErrorAction SilentlyContinue)) { New-Item -Path $fullPath -Force -ErrorAction SilentlyContinue | Out-Null }
+            Take-Permissions $rootKey $regKey
+            try {
+                Remove-Item -Path $fullPath -Force -Recurse -ErrorAction Stop
+                Write-Host -back 'DarkRed' -fore 'white' "Failed - $fullPath"
+            }
+            catch {
+                Write-Host "Locked - $fullPath"
+            }
+        }
+
+        if ($deleteKey -ne $null) {
+            if (Test-Path -Path $fullPath) {
+                Remove-Item -Path $fullPath -Force -Recurse -ErrorAction SilentlyContinue
+                if (Test-Path -Path $fullPath) {
+                    Take-Permissions $rootKey $regKey
+                    try {
+                        Remove-Item -Path $fullPath -Force -Recurse -ErrorAction Stop
+                        Write-Host "Deleted - $fullPath"
+                    }
+                    catch {
+                        Write-Host -back 'DarkRed' -fore 'white' "Failed - $fullPath"
+                    }
+                }
+                else {
+                    Write-Host "Deleted - $fullPath"
+                }
+            }
+        }
+    }
+}
+:regscan:
+
+::========================================================================================================================================
+
+:_color
+
+if %_NCS% EQU 1 (
+echo %esc%[%~1%~2%esc%[0m
+) else (
+%psc% write-host -back '%1' -fore '%2' '%3'
+)
+exit /b
+
+:_color2
+
+if %_NCS% EQU 1 (
+echo %esc%[%~1%~2%esc%[%~3%~4%esc%[0m
+) else (
+%psc% write-host -back '%1' -fore '%2' '%3' -NoNewline; write-host -back '%4' -fore '%5' '%6'
+)
+exit /b
+
+::========================================================================================================================================
+:: Leave empty line below
+
+
+
+
+
+
+
+
+
+::CHANGEDITION=================================================================================================
+:CHEW
+
+
+
+@set masver=2.5
+@setlocal DisableDelayedExpansion
+@echo off
+
+
+
+::============================================================================
+::
+::   This script is a part of 'Microsoft_Activation_Scripts' (MAS) project.
+::
+::   Homepage: mass grave[.]dev
+::      Email: windowsaddict@protonmail.com
+::
+::============================================================================
+
+
+
+::  To stage current edition while changing edition with CBS Upgrade Method, change 0 to 1 in below line
+set _stg=0
+
+
+
+::========================================================================================================================================
+
+::  Set Path variable, it helps if it is misconfigured in the system
+
+set "PATH=%SystemRoot%\System32;%SystemRoot%\System32\wbem;%SystemRoot%\System32\WindowsPowerShell\v1.0\"
+if exist "%SystemRoot%\Sysnative\reg.exe" (
+set "PATH=%SystemRoot%\Sysnative;%SystemRoot%\Sysnative\wbem;%SystemRoot%\Sysnative\WindowsPowerShell\v1.0\;%PATH%"
+)
+
+:: Re-launch the script with x64 process if it was initiated by x86 process on x64 bit Windows
+:: or with ARM64 process if it was initiated by x86/ARM32 process on ARM64 Windows
+
+set "_cmdf=%~f0"
+for %%# in (%*) do (
+if /i "%%#"=="r1" set r1=1
+if /i "%%#"=="r2" set r2=1
+if /i "%%#"=="-qedit" (
+reg add HKCU\Console /v QuickEdit /t REG_DWORD /d "1" /f %nul1%
+rem check the code below admin elevation to understand why it's here
+)
+)
+
+if exist %SystemRoot%\Sysnative\cmd.exe if not defined r1 (
+setlocal EnableDelayedExpansion
+start %SystemRoot%\Sysnative\cmd.exe /c ""!_cmdf!" %* r1"
+exit /b
+)
+
+:: Re-launch the script with ARM32 process if it was initiated by x64 process on ARM64 Windows
+
+if exist %SystemRoot%\SysArm32\cmd.exe if %PROCESSOR_ARCHITECTURE%==AMD64 if not defined r2 (
+setlocal EnableDelayedExpansion
+start %SystemRoot%\SysArm32\cmd.exe /c ""!_cmdf!" %* r2"
+exit /b
+)
+
+::========================================================================================================================================
+
+set "blank="
+set "mas=ht%blank%tps%blank%://mass%blank%grave.dev/"
+
+::  Check if Null service is working, it's important for the batch script
+
+sc query Null | find /i "RUNNING"
+if %errorlevel% NEQ 0 (
+echo:
+echo Null service is not running, script may crash...
+echo:
+echo:
+echo Help - %mas%troubleshoot.html
+echo:
+echo:
+ping 127.0.0.1 -n 10
+)
+cls
+
+
+::========================================================================================================================================
+
+cls
+color 07
+title  Change Windows Edition %masver%
+
+set _args=
+set _elev=
+
+set _args=%*
+if defined _args set _args=%_args:"=%
+if defined _args (
+for %%A in (%_args%) do (
+if /i "%%A"=="-el"                    set _elev=1
+)
+)
+
+set "nul1=1>nul"
+set "nul2=2>nul"
+set "nul6=2^>nul"
+set "nul=>nul 2>&1"
+
+set psc=powershell.exe
+set winbuild=1
+for /f "tokens=6 delims=[]. " %%G in ('ver') do set winbuild=%%G
+
+set _NCS=1
+if %winbuild% LSS 10586 set _NCS=0
+if %winbuild% GEQ 10586 reg query "HKCU\Console" /v ForceV2 %nul2% | find /i "0x0" %nul1% && (set _NCS=0)
+
+if %_NCS% EQU 1 (
+for /F %%a in ('echo prompt $E ^| cmd') do set "esc=%%a"
+set     "Red="41;97m""
+set    "Gray="100;97m""
+set   "Green="42;97m""
+set    "Blue="44;97m""
+set  "_White="40;37m""
+set  "_Green="40;92m""
+set "_Yellow="40;93m""
+) else (
+set     "Red="Red" "white""
+set    "Gray="Darkgray" "white""
+set   "Green="DarkGreen" "white""
+set    "Blue="Blue" "white""
+set  "_White="Black" "Gray""
+set  "_Green="Black" "Green""
+set "_Yellow="Black" "Yellow""
+)
+
+set "nceline=echo: &echo ==== ERROR ==== &echo:"
+set "eline=echo: &call :dk_color %Red% "==== ERROR ====" &echo:"
+set "line=echo ___________________________________________________________________________________________"
+if %~z0 GEQ 200000 (set "_exitmsg=Go back") else (set "_exitmsg=Exit")
+
+::========================================================================================================================================
+
+if %winbuild% LSS 7600 (
+%nceline%
+echo Unsupported OS version detected [%winbuild%].
+echo Project is supported only for Windows 7/8/8.1/10/11 and their Server equivalent.
+goto ced_done
+)
+
+for %%# in (powershell.exe) do @if "%%~$PATH:#"=="" (
+%nceline%
+echo Unable to find powershell.exe in the system.
+goto ced_done
+)
+
+::========================================================================================================================================
+
+::  Fix for the special characters limitation in path name
+
+set "_work=%~dp0"
+if "%_work:~-1%"=="\" set "_work=%_work:~0,-1%"
+
+set "_batf=%~f0"
+set "_batp=%_batf:'=''%"
+
+set _PSarg="""%~f0""" -el %_args%
+
+set "_ttemp=%userprofile%\AppData\Local\Temp"
+
+setlocal EnableDelayedExpansion
+
+::========================================================================================================================================
+
+echo "!_batf!" | find /i "!_ttemp!" %nul1% && (
+if /i not "!_work!"=="!_ttemp!" (
+%eline%
+echo Script is launched from the temp folder,
+echo Most likely you are running the script directly from the archive file.
+echo:
+echo Extract the archive file and launch the script from the extracted folder.
+goto ced_done
+)
+)
+
+::========================================================================================================================================
+
+::  Elevate script as admin and pass arguments and preventing loop
+
+%nul1% fltmc || (
+if not defined _elev %psc% "start cmd.exe -arg '/c \"!_PSarg:'=''!\"' -verb runas" && exit /b
+%eline%
+echo This script requires admin privileges.
+echo To do so, right click on this script and select 'Run as administrator'.
+goto ced_done
+)
+
+::========================================================================================================================================
+
+::  This code disables QuickEdit for this cmd.exe session only without making permanent changes to the registry
+::  It is added because clicking on the script window pauses the operation and leads to the confusion that script stopped due to an error
+
+for %%# in (%_args%) do (if /i "%%#"=="-qedit" set quedit=1)
+
+reg query HKCU\Console /v QuickEdit %nul2% | find /i "0x0" %nul1% || if not defined quedit (
+reg add HKCU\Console /v QuickEdit /t REG_DWORD /d "0" /f %nul1%
+start cmd.exe /c ""!_batf!" %_args% -qedit"
+rem quickedit reset code is added at the starting of the script instead of here because it takes time to reflect in some cases
+exit /b
+)
+
+::========================================================================================================================================
+
+::  Check for updates
+
+set -=
+set old=
+
+for /f "delims=[] tokens=2" %%# in ('ping -4 -n 1 updatecheck.mass%-%grave.dev') do (
+if not [%%#]==[] (echo "%%#" | find "127.69" %nul1% && (echo "%%#" | find "127.69.%masver%" %nul1% || set old=1))
+)
+
+if defined old (
+echo ________________________________________________
+%eline%
+echo You are running outdated version MAS %masver%
+echo ________________________________________________
+echo:
+echo [1] Get Latest MAS
+echo [0] Continue Anyway
+echo:
+call :dk_color %_Green% "Enter a menu option in the Keyboard [1,0] :"
+choice /C:10 /N
+if !errorlevel!==2 rem
+if !errorlevel!==1 (start ht%-%tps://github.com/mass%-%gravel/Microsoft-Acti%-%vation-Scripts & start %mas% & exit /b)
+)
+
+::========================================================================================================================================
+
+cls
+mode 98, 30
+
+echo:
+echo Initializing...
+echo:
+call :dk_product
+call :dk_ckeckwmic
+
+::  Show info for potential script stuck scenario
+
+sc start sppsvc %nul%
+if %errorlevel% NEQ 1056 if %errorlevel% NEQ 0 (
+echo:
+echo Error code: %errorlevel%
+call :dk_color %Red% "Failed to start [sppsvc] service, rest of the process may take a long time..."
+echo:
+)
+
+::========================================================================================================================================
+
+::  Check Activation IDs
+
+call :dk_actids
+if not defined applist (
+net stop sppsvc /y %nul%
+cscript //nologo %windir%\system32\slmgr.vbs /rilc %nul%
+if !errorlevel! NEQ 0 cscript //nologo %windir%\system32\slmgr.vbs /rilc %nul%
+call :dk_refresh
+call :dk_actids
+if not defined applist (
+%eline%
+echo Activation IDs not found. Aborting...
+echo:
+echo Check this page for help. %mas%troubleshoot
+goto ced_done
+)
+)
+
+::========================================================================================================================================
+
+call :dk_checksku
+
+if not defined osSKU (
+%eline%
+echo SKU value was not detected properly. Aborting...
+goto ced_done
+)
+
+::========================================================================================================================================
+
+::  Check Windows Edition
+
+set osedition=
+set dismedition=
+set dismnotworking=
+
+set d1=%ref% [void]$TypeBuilder.DefinePInvokeMethod('SLGetWindowsInformation', 'slc.dll', 22, 1, [int], @([String], [int], [int].MakeByRefType(), [String].MakeByRefType()), 1, 3);
+set d1=%d1% $editionName = 0; [void]$TypeBuilder.CreateType()::SLGetWindowsInformation('Kernel-EditionName', 0, [ref]0, [ref]$editionName); $editionName
+if %winbuild% GEQ 14393 for /f "delims=" %%s in ('"%psc% %d1%"') do if not errorlevel 1 (set osedition=%%s)
+if "%osedition%"=="0" set osedition=
+
+if not defined osedition (
+for /f "skip=2 tokens=3" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v EditionID %nul6%') do set "osedition=%%a"
+)
+
+::  Workaround for an issue in builds between 1607 and 1709 where ProfessionalEducation is shown as Professional
+
+if %osSKU%==164 set osedition=ProfessionalEducation
+if %osSKU%==165 set osedition=ProfessionalEducationN
+
+for /f "tokens=3 delims=: " %%a in ('DISM /English /Online /Get-CurrentEdition %nul6% ^| find /i "Current Edition :"') do set "dismedition=%%a"
+if not defined dismedition set dismnotworking=1
+
+if defined dismedition if not defined osedition set osedition=%dismedition%
+
+if not defined osedition (
+%eline%
+DISM /English /Online /Get-CurrentEdition %nul%
+cmd /c exit /b !errorlevel!
+echo DISM command failed [Error Code - 0x!=ExitCode!]
+echo OS Edition was not detected properly. Aborting...
+echo:
+echo Check this page for help. %mas%troubleshoot
+goto ced_done
+)
+
+::========================================================================================================================================
+
+set branch=
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v BuildBranch %nul6%') do set "branch=%%b"
+
+::  Check PowerShell
+
+%psc% $ExecutionContext.SessionState.LanguageMode %nul2% | find /i "Full" %nul1% || (
+%eline%
+%psc% $ExecutionContext.SessionState.LanguageMode
+echo:
+echo PowerShell is not working. Aborting...
+echo If you have applied restrictions on Powershell then undo those changes.
+echo:
+echo Check this page for help. %mas%troubleshoot
+goto ced_done
+)
+
+::========================================================================================================================================
+
+::  Get Target editions list
+
+set _target=
+set _dtarget=
+set _ptarget=
+set _ntarget=
+set _wtarget=
+
+if %winbuild% GEQ 10240 for /f "tokens=4" %%a in ('dism /online /english /Get-TargetEditions ^| findstr /i /c:"Target Edition : "') do (if defined _dtarget (set "_dtarget= !_dtarget! %%a ") else (set "_dtarget= %%a "))
+if %winbuild% LSS 10240 for /f "tokens=4" %%a in ('%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':cbsxml\:.*';& ([ScriptBlock]::Create($f[1])) -GetTargetEditions;" ^| findstr /i /c:"Target Edition : "') do (if defined _ptarget (set "_ptarget= !_ptarget! %%a ") else (set "_ptarget= %%a "))
+
+if %winbuild% GEQ 10240 if not exist "%SystemRoot%\Servicing\Packages\Microsoft-Windows-Server*Edition~*.mum" (
+call :ced_edilist
+if /i "%osedition:~0,4%"=="Core" (set "_wtarget= Professional !_wtarget! ")
+set "_dtarget= %_dtarget% !_wtarget! "
+)
+
+::========================================================================================================================================
+
+::  Block the change to/from CloudEdition editions
+
+for %%# in (202 203) do if %osSKU%==%%# (
+%eline%
+echo [%winos% ^| SKU:%osSKU% ^| %winbuild%]
+echo It's not recommended to change this installed edition to any other.
+echo Aborting...
+goto ced_done
+)
+
+for %%# in ( %_dtarget% %_ptarget% ) do if /i not "%%#"=="%osedition%" (
+echo "!_target!" | find /i " %%# " %nul1% || set "_target= !_target! %%# "
+)
+
+if defined _target (
+for %%# in (%_target%) do (
+echo %%# | findstr /i "CountrySpecific CloudEdition ServerRdsh" %nul% || (set "_ntarget=!_ntarget! %%#")
+)
+)
+
+if not defined _ntarget (
+%line%
+echo:
+if defined dismnotworking call :dk_color %Red% "DISM.exe is not responding."
+call :dk_color %Gray% "Target Edition not found."
+echo Current Edition [%osedition% ^| %winbuild%] can not be changed to any other Edition.
+%line%
+goto ced_done
+)
+
+::========================================================================================================================================
+
+:cedmenu2
+
+cls
+mode 98, 30
+set inpt=
+set counter=0
+set verified=0
+set targetedition=
+
+%line%
+echo:
+call :dk_color %Gray% "You can change the Edition [%osedition%] [%winbuild%] to one of the following."
+if defined dismnotworking (
+call :dk_color %_Yellow% "Note - DISM.exe is not responding."
+if /i "%osedition:~0,4%"=="Core" call :dk_color %_Yellow% "     - You will see more edition options to choose once its changed to Pro."
+)
+%line%
+echo:
+
+for %%A in (%_ntarget%) do (
+set /a counter+=1
+echo [!counter!]  %%A
+set targetedition!counter!=%%A
+)
+
+%line%
+echo:
+echo [0]  %_exitmsg%
+echo:
+call :dk_color %_Green% "Enter option number in keyboard, and press "Enter":"
+set /p inpt=
+if "%inpt%"=="" goto cedmenu2
+if "%inpt%"=="0" exit /b
+for /l %%i in (1,1,%counter%) do (if "%inpt%"=="%%i" set verified=1)
+set targetedition=!targetedition%inpt%!
+if %verified%==0 goto cedmenu2
+
+::========================================================================================================================================
+
+if %winbuild% LSS 10240 goto :cbsmethod
+if exist "%SystemRoot%\Servicing\Packages\Microsoft-Windows-Server*Edition~*.mum" goto :ced_change_server
+
+cls
+mode con cols=105 lines=32
+
+set key=
+set _chan=
+set _dismapi=0
+
+::  Check if DISM Api or slmgr.vbs is required for edition upgrade
+
+if not exist "%SystemRoot%\System32\spp\tokens\skus\%targetedition%\" (
+set _dismapi=1
+)
+
+set "keyflow=Retail OEM:NONSLP OEM:DM Volume:MAK Volume:GVLK"
+
+call :ced_targetSKU %targetedition%
+if defined targetSKU call :ced_windowskey
+if defined key if defined pkeychannel set _chan=%pkeychannel%
+if not defined key call :changeeditiondata
+
+if not defined key (
+%eline%
+echo [%targetedition% ^| %winbuild%]
+echo Unable to get product key from pkeyhelper.dll
+echo:
+echo Check this page for help. %mas%troubleshoot
+goto ced_done
+)
+
+::========================================================================================================================================
+
+::  Changing from Core to Non-Core & Changing editions in Windows build older than 17134 requires "changepk /productkey" or DISM Api method and restart
+::  In other cases, editions can be changed instantly with "slmgr /ipk"
+
+if %_dismapi%==1 (
+mode con cols=105 lines=40
+%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':checkrebootflag\:.*';iex ($f[1]);" | find /i "True" %nul% && (
+%eline%
+echo Pending Reboot flags found.
+echo:
+echo Restart the system and try again.
+goto ced_done
+)
+)
+
+cls
+%line%
+echo:
+if defined dismnotworking call :dk_color %_Yellow% "DISM.exe is not responding."
+echo Changing the Current Edition [%osedition%] %winbuild% to [%targetedition%]
+echo:
+
+if %_dismapi%==1 (
+call :dk_color %Green% "Notes-"
+echo:
+echo  - Save your work before continue, system will auto restart.
+echo:
+echo  - You will need to activate with HWID option once the edition is changed.
+%line%
+echo:
+choice /C:21 /N /M "[1] Continue [2] %_exitmsg% : "
+if !errorlevel!==1 exit /b
+)
+
+::========================================================================================================================================
+
+if %_dismapi%==0 (
+echo Installing %_chan% Key [%key%]
+echo:
+if %_wmic% EQU 1 wmic path SoftwareLicensingService where __CLASS='SoftwareLicensingService' call InstallProductKey ProductKey="%key%" %nul%
+if %_wmic% EQU 0 %psc% "(([WMISEARCHER]'SELECT Version FROM SoftwareLicensingService').Get()).InstallProductKey('%key%')" %nul%
+if not !errorlevel!==0 cscript //nologo %windir%\system32\slmgr.vbs /ipk %key% %nul%
+
+set error_code=!errorlevel!
+cmd /c exit /b !error_code!
+if !error_code! NEQ 0 set "error_code=[0x!=ExitCode!]"
+
+if !error_code! EQU 0 (
+call :dk_refresh
+call :dk_color %Green% "[Successful]"
+echo:
+call :dk_color %Gray% "Reboot is required to properly change the Edition."
+) else (
+call :dk_color %Red% "[Unsuccessful] [Error Code: 0x!=ExitCode!]"
+echo Check this page for help. %mas%troubleshoot
+)
+)
+
+if %_dismapi%==1 (
+echo:
+echo Applying the DISM API method with %_chan% Key %key%. Please wait...
+echo:
+%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':dismapi\:.*';& ([ScriptBlock]::Create($f[1])) %targetedition% %key%;"
+timeout /t 3 %nul1%
+echo:
+call :dk_color %Blue% "Incase of errors, you must restart your system before trying again."
+echo Check this page for help. %mas%troubleshoot
+)
+%line%
+
+goto ced_done
+
+::========================================================================================================================================
+
+:cbsmethod
+
+cls
+mode con cols=105 lines=32
+%psc% "&{$W=$Host.UI.RawUI.WindowSize;$B=$Host.UI.RawUI.BufferSize;$W.Height=31;$B.Height=200;$Host.UI.RawUI.WindowSize=$W;$Host.UI.RawUI.BufferSize=$B;}"
+
+%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':checkrebootflag\:.*';iex ($f[1]);" | find /i "True" %nul% && (
+%eline%
+echo Pending reboot flags found.
+echo:
+echo Restart the system and try again.
+goto ced_done
+)
+
+echo:
+if defined dismnotworking call :dk_color %_Yellow% "Note - DISM.exe is not responding."
+echo Changing the Current Edition [%osedition%] %winbuild% to [%targetedition%]
+echo:
+call :dk_color %Blue% "Important - Save your work before continue, system will auto reboot."
+echo:
+choice /C:01 /N /M "[1] Continue [0] %_exitmsg% : "
+if %errorlevel%==1 exit /b
+
+echo:
+echo Initializing...
+echo:
+
+if %_stg%==0 (set stage=) else (set stage=-StageCurrent)
+%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':cbsxml\:.*';& ([ScriptBlock]::Create($f[1])) -SetEdition %targetedition% %stage%;"
+echo:
+call :dk_color %Blue% "Incase of errors, you must restart your system before trying again."
+echo Check this page for help. %mas%troubleshoot
+%line%
+
+goto ced_done
+
+::========================================================================================================================================
+
+:ced_change_server
+
+cls
+mode con cols=105 lines=32
+%psc% "&{$W=$Host.UI.RawUI.WindowSize;$B=$Host.UI.RawUI.BufferSize;$W.Height=31;$B.Height=200;$Host.UI.RawUI.WindowSize=$W;$Host.UI.RawUI.BufferSize=$B;}"
+
+set key=
+set _chan=
+set "keyflow=Volume:GVLK Retail Volume:MAK OEM:NONSLP OEM:DM"
+
+call :ced_targetSKU %targetedition%
+if defined targetSKU call :ced_windowskey
+if defined key if defined pkeychannel set _chan=%pkeychannel%
+if not defined key call :changeeditiondata
+
+if not defined key (
+%eline%
+echo [%targetedition% ^| %winbuild%]
+echo Unable to get product key from pkeyhelper.dll
+echo:
+echo Check this page for help. %mas%troubleshoot
+goto ced_done
+)
+
+::========================================================================================================================================
+
+%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':checkrebootflag\:.*';iex ($f[1]);" | find /i "True" %nul% && (
+%eline%
+echo Pending reboot flags found.
+echo:
+echo Restart the system and try again.
+goto ced_done
+)
+
+cls
+echo:
+if defined dismnotworking call :dk_color %_Yellow% "Note - DISM.exe is not responding."
+echo Changing the Current Edition [%osedition%] %winbuild% to [%targetedition%]
+echo:
+echo Applying the command with %_chan% Key
+echo DISM /online /Set-Edition:%targetedition% /ProductKey:%key% /AcceptEula
+DISM /online /Set-Edition:%targetedition% /ProductKey:%key% /AcceptEula
+
+call :dk_color %Blue% "You must restart the system at this stage."
+echo Help: %mas%troubleshoot
+
+::========================================================================================================================================
+
+:ced_done
+
+echo:
+call :dk_color %_Yellow% "Press any key to %_exitmsg%..."
+pause %nul1%
+exit /b
+
+::========================================================================================================================================
+
+::  Check SKU value
+
+:dk_checksku
+
+set osSKU=
+set slcSKU=
+set wmiSKU=
+set regSKU=
+
+if %winbuild% GEQ 14393 (set info=Kernel-BrandingInfo) else (set info=Kernel-ProductInfo)
+set d1=%ref% [void]$TypeBuilder.DefinePInvokeMethod('SLGetWindowsInformationDWORD', 'slc.dll', 'Public, Static', 1, [int], @([String], [int].MakeByRefType()), 1, 3);
+set d1=%d1% $Sku = 0; [void]$TypeBuilder.CreateType()::SLGetWindowsInformationDWORD('%info%', [ref]$Sku); $Sku
+for /f "delims=" %%s in ('"%psc% %d1%"') do if not errorlevel 1 (set slcSKU=%%s)
+if "%slcSKU%"=="0" set slcSKU=
+if 1%slcSKU% NEQ +1%slcSKU% set slcSKU=
+
+for /f "tokens=3 delims=." %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\ProductOptions" /v OSProductPfn %nul6%') do set "regSKU=%%a"
+if %_wmic% EQU 1 for /f "tokens=2 delims==" %%a in ('"wmic Path Win32_OperatingSystem Get OperatingSystemSKU /format:LIST" %nul6%') do if not errorlevel 1 set "wmiSKU=%%a"
+if %_wmic% EQU 0 for /f "tokens=1" %%a in ('%psc% "([WMI]'Win32_OperatingSystem=@').OperatingSystemSKU" %nul6%') do if not errorlevel 1 set "wmiSKU=%%a"
+
+set osSKU=%slcSKU%
+if not defined osSKU set osSKU=%wmiSKU%
+if not defined osSKU set osSKU=%regSKU%
+exit /b
+
+::  Refresh license status
+
+:dk_refresh
+
+if %_wmic% EQU 1 wmic path SoftwareLicensingService where __CLASS='SoftwareLicensingService' call RefreshLicenseStatus %nul%
+if %_wmic% EQU 0 %psc% "$null=(([WMICLASS]'SoftwareLicensingService').GetInstances()).RefreshLicenseStatus()" %nul%
+exit /b
+
+::  Get Windows Activation IDs
+
+:dk_actids
+
+set applist=
+if %_wmic% EQU 1 set "chkapp=for /f "tokens=2 delims==" %%a in ('"wmic path SoftwareLicensingProduct where (ApplicationID='55c92734-d682-4d71-983e-d6ec3f16059f') get ID /VALUE" %nul6%')"
+if %_wmic% EQU 0 set "chkapp=for /f "tokens=2 delims==" %%a in ('%psc% "(([WMISEARCHER]'SELECT ID FROM SoftwareLicensingProduct WHERE ApplicationID=''55c92734-d682-4d71-983e-d6ec3f16059f''').Get()).ID ^| %% {echo ('ID='+$_)}" %nul6%')"
+%chkapp% do (if defined applist (call set "applist=!applist! %%a") else (call set "applist=%%a"))
+exit /b
+
+::  Get Edition list
+
+:ced_edilist
+
+if %_wmic% EQU 1 set "chkedi=for /f "tokens=2 delims==" %%a in ('"wmic path SoftwareLicensingProduct where (ApplicationID='55c92734-d682-4d71-983e-d6ec3f16059f') get LicenseFamily /VALUE" %nul6%')"
+if %_wmic% EQU 0 set "chkedi=for /f "tokens=2 delims==" %%a in ('%psc% "(([WMISEARCHER]'SELECT LicenseFamily FROM SoftwareLicensingProduct WHERE ApplicationID=''55c92734-d682-4d71-983e-d6ec3f16059f''').Get()).LicenseFamily ^| %% {echo ('LicenseFamily='+$_)}" %nul6%')"
+%chkedi% do (
+call if exist %Systemdrive%\Windows\System32\spp\tokens\skus\%%a (
+call set "_wtarget= !_wtarget! %%a "
+)
+)
+exit /b
+
+::  Check wmic.exe
+
+:dk_ckeckwmic
+
+set _wmic=0
+for %%# in (wmic.exe) do @if not "%%~$PATH:#"=="" (
+wmic path Win32_ComputerSystem get CreationClassName /value %nul2% | find /i "computersystem" %nul1% && set _wmic=1
+)
+exit /b
+
+::  Get Product name (WMI/REG methods are not reliable in all conditions, hence winbrand.dll method is used)
+
+:dk_product
+
+call :dk_reflection
+
+set d1=%ref% $meth = $TypeBuilder.DefinePInvokeMethod('BrandingFormatString', 'winbrand.dll', 'Public, Static', 1, [String], @([String]), 1, 3);
+set d1=%d1% $meth.SetImplementationFlags(128); $TypeBuilder.CreateType()::BrandingFormatString('%%WINDOWS_LONG%%')
+
+set winos=
+for /f "delims=" %%s in ('"%psc% %d1%"') do if not errorlevel 1 (set winos=%%s)
+echo "%winos%" | find /i "Windows" %nul1% || (
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName %nul6%') do set "winos=%%b"
+if %winbuild% GEQ 22000 (
+set winos=!winos:Windows 10=Windows 11!
+)
+)
+exit /b
+
+::  Common lines used in PowerShell reflection code
+
+:dk_reflection
+
+set ref=$AssemblyBuilder = [AppDomain]::CurrentDomain.DefineDynamicAssembly(4, 1);
+set ref=%ref% $ModuleBuilder = $AssemblyBuilder.DefineDynamicModule(2, $False);
+set ref=%ref% $TypeBuilder = $ModuleBuilder.DefineType(0);
+exit /b
+
+::========================================================================================================================================
+
+::  Check pending reboot flags
+
+:checkrebootflag:
+function Test-PendingReboot
+{
+ if (Test-Path -Path "$env:windir\WinSxS\pending.xml") { return $true }
+ if (Get-ChildItem "HKLM:\Software\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending" -EA Ignore) { return $true }
+ if (Get-Item "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired" -EA Ignore) { return $true }
+ try { 
+   $util = [wmiclass]"\\.\root\ccm\clientsdk:CCM_ClientUtilities"
+   $status = $util.DetermineIfRebootPending()
+   if(($status -ne $null) -and $status.RebootPending){
+     return $true
+   }
+ }catch{}
+ 
+ return $false
+}
+Test-PendingReboot
+:checkrebootflag:
+
+::========================================================================================================================================
+
+::  Get Product Key from pkeyhelper.dll for future new editions
+::  It works on Windows 10 1803 (17134) and later builds.
+
+:dk_pkey
+
+call :dk_reflection
+
+set d1=%ref% [void]$TypeBuilder.DefinePInvokeMethod('SkuGetProductKeyForEdition', 'pkeyhelper.dll', 'Public, Static', 1, [int], @([int], [String], [String].MakeByRefType(), [String].MakeByRefType()), 1, 3);
+set d1=%d1% $out = ''; [void]$TypeBuilder.CreateType()::SkuGetProductKeyForEdition(%1, %2, [ref]$out, [ref]$null); $out
+
+set pkey=
+for /f %%a in ('%psc% "%d1%"') do if not errorlevel 1 (set pkey=%%a)
+exit /b
+
+
+::  Get channel name for the key which was extracted from pkeyhelper.dll
+
+:dk_pkeychannel
+
+set k=%1
+set m=[Runtime.InteropServices.Marshal]
+set p=%SystemRoot%\System32\spp\tokens\pkeyconfig\pkeyconfig.xrm-ms
+
+set d1=%ref% [void]$TypeBuilder.DefinePInvokeMethod('PidGenX', 'pidgenx.dll', 'Public, Static', 1, [int], @([String], [String], [String], [int], [IntPtr], [IntPtr], [IntPtr]), 1, 3);
+set d1=%d1% $r = [byte[]]::new(0x04F8); $r[0] = 0xF8; $r[1] = 0x04; $f = %m%::AllocHGlobal(0x04F8); %m%::Copy($r, 0, $f, 0x04F8);
+set d1=%d1% [void]$TypeBuilder.CreateType()::PidGenX('%k%', '%p%', '00000', 0, 0, 0, $f); %m%::Copy($f, $r, 0, 0x04F8); %m%::FreeHGlobal($f); [Text.Encoding]::Unicode.GetString($r, 1016, 128)
+
+set pkeychannel=
+for /f %%a in ('%psc% "%d1%"') do if not errorlevel 1 (set pkeychannel=%%a)
+exit /b
+
+:ced_windowskey
+
+for %%# in (pkeyhelper.dll) do @if "%%~$PATH:#"=="" exit /b
+for %%# in (%keyflow%) do (
+call :dk_pkey %targetSKU% '%%#'
+if defined pkey call :dk_pkeychannel !pkey!
+if /i [!pkeychannel!]==[%%#] (
+set key=!pkey!
+exit /b
+)
+)
+exit /b
+
+::========================================================================================================================================
+
+:ced_targetSKU
+
+set k=%1
+set targetSKU=
+for %%# in (pkeyhelper.dll) do @if "%%~$PATH:#"=="" exit /b
+
+call :dk_reflection
+
+set d1=%ref% [void]$TypeBuilder.DefinePInvokeMethod('GetEditionIdFromName', 'pkeyhelper.dll', 'Public, Static', 1, [int], @([String], [int].MakeByRefType()), 1, 3);
+set d1=%d1% $out = 0; [void]$TypeBuilder.CreateType()::GetEditionIdFromName('%k%', [ref]$out); $out
+
+for /f %%a in ('%psc% "%d1%"') do if not errorlevel 1 (set targetSKU=%%a)
+if "%targetSKU%"=="0" set targetSKU=
+exit /b
+
+::========================================================================================================================================
+
+:dk_color
+
+if %_NCS% EQU 1 (
+echo %esc%[%~1%~2%esc%[0m
+) else (
+%psc% write-host -back '%1' -fore '%2' '%3'
+)
+exit /b
+
+:dk_color2
+
+if %_NCS% EQU 1 (
+echo %esc%[%~1%~2%esc%[%~3%~4%esc%[0m
+) else (
+%psc% write-host -back '%1' -fore '%2' '%3' -NoNewline; write-host -back '%4' -fore '%5' '%6'
+)
+exit /b
+
+::========================================================================================================================================
+
+::  https://github.com/Gamers-Against-Weed/Set-WindowsCbsEdition
+
+:cbsxml:[
+param (
+    [Parameter()]
+    [String]$SetEdition,
+
+    [Parameter()]
+    [Switch]$GetTargetEditions,
+
+    [Parameter()]
+    [Switch]$StageCurrent
+)
+
+function Get-AssemblyIdentity {
+    param (
+        [String]$PackageName
+    )
+
+    $PackageName = [String]$PackageName
+    $packageData = ($PackageName -split '~')
+
+    if($packageData[3] -eq '') {
+        $packageData[3] = 'neutral'
+    }
+
+    return "<assemblyIdentity name=`"$($packageData[0])`" version=`"$($packageData[4])`" processorArchitecture=`"$($packageData[2])`" publicKeyToken=`"$($packageData[1])`" language=`"$($packageData[3])`" />"
+}
+
+function Get-SxsName {
+    param (
+        [String]$PackageName
+    )
+
+    $name = ($PackageName -replace '[^A-z0-9\-\._]', '')
+
+    if($name.Length -gt 40) {
+        $name = ($name[0..18] -join '') + '\.\.' + ($name[-19..-1] -join '')
+    }
+
+    return $name.ToLower()
+}
+
+function Find-EditionXmlInSxs {
+    param (
+        [String]$Edition
+    )
+
+    $candidates = @($Edition, 'Client', 'Server')
+    $winSxs = $Env:SystemRoot + '\WinSxS'
+    $allInSxs = Get-ChildItem -Path $winSxs | select Name
+
+    foreach($candidate in $candidates) {
+        $name = Get-SxsName -PackageName "Microsoft-Windows-Editions-$candidate"
+        $packages = $allInSxs | where name -Match ('^.*_'+$name+'_31bf3856ad364e35')
+
+        if($packages.Length -eq 0) {
+            continue
+        }
+
+        $package = $packages[-1].Name
+        $testPath = $winSxs + "\$package\" + $Edition + 'Edition.xml'
+
+        if(Test-Path -Path $testPath -PathType Leaf) {
+            return $testPath
+        }
+    }
+
+    return $null
+}
+
+function Find-EditionXml {
+    param (
+        [String]$Edition
+    )
+
+    $servicingEditions = $Env:SystemRoot + '\servicing\Editions'
+    $editionXml = $Edition + 'Edition.xml'
+
+    $editionXmlInServicing = $servicingEditions + '\' + $editionXml
+
+    if(Test-Path -Path $editionXmlInServicing -PathType Leaf) {
+        return $editionXmlInServicing
+    }
+
+    return Find-EditionXmlInSxs -Edition $Edition
+}
+
+function Write-UpgradeCandidates {
+    param (
+        [HashTable]$InstallCandidates
+    )
+
+    $editionCount = 0
+    Write-Host 'Editions that can be upgraded to:'
+    foreach($candidate in $InstallCandidates.Keys) {
+        Write-Host "Target Edition : $candidate"
+        $editionCount++
+    }
+
+    if($editionCount -eq 0) {
+        Write-Host '(no editions are available)'
+    }
+}
+
+function Write-UpgradeXml {
+    param (
+        [Array]$RemovalCandidates,
+        [Array]$InstallCandidates,
+        [Boolean]$Stage
+    )
+
+    $removeAction = 'remove'
+    if($Stage) {
+        $removeAction = 'stage'
+    }
+
+    Write-Output '<?xml version="1.0"?>'
+    Write-Output '<unattend xmlns="urn:schemas-microsoft-com:unattend">'
+    Write-Output '<servicing>'
+
+    foreach($package in $InstallCandidates) {
+        Write-Output '<package action="install">'
+        Write-Output (Get-AssemblyIdentity -PackageName $package)
+        Write-Output '</package>'
+    }
+
+    foreach($package in $RemovalCandidates) {
+        Write-Output "<package action=`"$removeAction`">"
+        Write-Output (Get-AssemblyIdentity -PackageName $package)
+        Write-Output '</package>'
+    }
+
+    Write-Output '</servicing>'
+    Write-Output '</unattend>'
+}
+
+function Write-Usage {
+    Get-Help $script:MyInvocation.MyCommand.Path -detailed
+}
+
+$version = '1.0'
+$getTargetsParam = $GetTargetEditions.IsPresent
+$stageCurrentParam = $StageCurrent.IsPresent
+
+if($SetEdition -eq '' -and ($false -eq $getTargetsParam)) {
+    Write-Usage
+    Exit 1
+}
+
+$removalCandidates = @();
+$installCandidates = @{};
+
+$packages = Get-ChildItem -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages' | select Name | where { $_.name -match '^.*\\Microsoft-Windows-.*Edition~' }
+foreach($package in $packages) {
+    $state = (Get-ItemProperty -Path "Registry::$($package.Name)").CurrentState
+    $packageName = ($package.Name -split '\\')[-1]
+    $packageEdition = (($packageName -split 'Edition~')[0] -split 'Microsoft-Windows-')[-1]
+
+    if($state -eq 0x40) {
+        if($null -eq $installCandidates[$packageEdition]) {
+            $installCandidates[$packageEdition] = @()
+        }
+
+        if($false -eq ($installCandidates[$packageEdition] -contains $packageName)) {
+            $installCandidates[$packageEdition] = $installCandidates[$packageEdition] + @($packageName)
+        }
+    }
+
+    if((($state -eq 0x50) -or ($state -eq 0x70)) -and ($false -eq ($removalCandidates -contains $packageName))) {
+        $removalCandidates = $removalCandidates + @($packageName)
+    }
+}
+
+if($getTargetsParam) {
+    Write-UpgradeCandidates -InstallCandidates $installCandidates
+    Exit
+}
+
+if($false -eq ($installCandidates.Keys -contains $SetEdition)) {
+    Write-Error "The system cannot be upgraded to `"$SetEdition`""
+    Exit 1
+}
+
+$xmlPath = $Env:SystemRoot + '\Temp' + '\CbsUpgrade.xml'
+
+Write-UpgradeXml -RemovalCandidates $removalCandidates `
+    -InstallCandidates $installCandidates[$SetEdition] `
+    -Stage $stageCurrentParam >$xmlPath
+
+$editionXml = Find-EditionXml -Edition $SetEdition
+if($null -eq $editionXml) {
+    Write-Warning 'Unable to find edition specific settings XML. Proceeding without it...'
+}
+
+Write-Host 'Starting the upgrade process. This may take a while...'
+
+DISM.EXE /English /NoRestart /Online /Apply-Unattend:$xmlPath
+$dismError = $LASTEXITCODE
+
+Remove-Item -Path $xmlPath -Force
+
+if(($dismError -ne 0) -and ($dismError -ne 3010)) {
+    Write-Error 'Failed to upgrade to the target edition'
+    Exit $dismError
+}
+
+if($null -ne $editionXml) {
+    $destination = $Env:SystemRoot + '\' + $SetEdition + '.xml'
+    Copy-Item -Path $editionXml -Destination $destination
+
+    DISM.EXE /English /NoRestart /Online /Apply-Unattend:$editionXml
+    $dismError = $LASTEXITCODE
+
+    if(($dismError -ne 0) -and ($dismError -ne 3010)) {
+        Write-Error 'Failed to apply edition specific settings'
+        Exit $dismError
+    }
+}
+
+Restart-Computer
+:cbsxml:]
+
+::========================================================================================================================================
+
+::  Change edition using DISM API
+::  Thanks to Alex (aka may, ave9858)
+
+:dismapi:[
+param (
+    [Parameter()]
+    [String]$TargetEdition,
+
+    [Parameter()]
+    [String]$Key
+)
+
+$AssemblyBuilder = [AppDomain]::CurrentDomain.DefineDynamicAssembly(4, 1)
+$ModuleBuilder = $AssemblyBuilder.DefineDynamicModule(2, $False)
+$TB = $ModuleBuilder.DefineType(0)
+
+[void]$TB.DefinePInvokeMethod('DismInitialize', 'DismApi.dll', 22, 1, [int], @([int], [IntPtr], [IntPtr]), 1, 3)
+[void]$TB.DefinePInvokeMethod('DismOpenSession', 'DismApi.dll', 22, 1, [int], @([String], [IntPtr], [IntPtr], [UInt32].MakeByRefType()), 1, 3)
+[void]$TB.DefinePInvokeMethod('_DismSetEdition', 'DismApi.dll', 22, 1, [int], @([UInt32], [String], [String], [IntPtr], [IntPtr], [IntPtr]), 1, 3)
+$Dism = $TB.CreateType()
+
+[void]$Dism::DismInitialize(2, 0, 0)
+$Session = 0
+[void]$Dism::DismOpenSession('DISM_{53BFAE52-B167-4E2F-A258-0A37B57FF845}', 0, 0, [ref]$Session)
+if (!$Dism::_DismSetEdition($Session, "$TargetEdition", "$Key", 0, 0, 0)) {
+    Restart-Computer
+}
+:dismapi:]
+
+::========================================================================================================================================
+
+::  1st column = Generic Retail/OEM/MAK/GVLK Key
+::  2nd column = Key Type
+::  3rd column = WMI Edition ID
+::  4th column = Version name incase same Edition ID is used in different OS versions with different key
+::  Separator  = _
+
+::  For Windows 10/11 editions, HWID key is listed where ever possible, in Server versions, KMS key is listed where ever possible.
+::  Only RS3 and older version Generic keys are stored here, later ones are extracted from the pkeyhelper.dll itself
+
+:changeeditiondata
+
+if %winbuild% GTR 17763 exit /b
+if exist "%SystemRoot%\Servicing\Packages\Microsoft-Windows-Server*CorEdition~*.mum" (set Cor=Cor) else (set Cor=)
+
+set h=
+for %%# in (
+XGV%h%PP-NM%h%H47-7TT%h%HJ-W%h%3FW7-8HV%h%2C__OEM:NONSLP_Enterprise
+D6R%h%D9-D4%h%N8T-RT9%h%QX-Y%h%W6YT-FCW%h%WJ______Retail_Starter
+3V6%h%Q6-NQ%h%XCX-V8Y%h%XR-9%h%QCYV-QPF%h%CT__Volume:MAK_EnterpriseN
+3NF%h%XW-2T%h%27M-2BD%h%W6-4%h%GHRV-68X%h%RX______Retail_StarterN
+VK7%h%JG-NP%h%HTM-C97%h%JM-9%h%MPGT-3V6%h%6T______Retail_Professional
+2B8%h%7N-8K%h%FHP-DKV%h%6R-Y%h%2C8J-PKC%h%KT______Retail_ProfessionalN
+4CP%h%RK-NM%h%3K3-X6X%h%XQ-R%h%XX86-WXC%h%HW______Retail_CoreN
+N24%h%34-X9%h%D7W-8PF%h%6X-8%h%DV9T-8TY%h%MD______Retail_CoreCountrySpecific
+BT7%h%9Q-G7%h%N6G-PGB%h%YW-4%h%YWX6-6F4%h%BT______Retail_CoreSingleLanguage
+YTM%h%G3-N6%h%DKC-DKB%h%77-7%h%M9GH-8HV%h%X7______Retail_Core
+XKC%h%NC-J2%h%6Q9-KFH%h%D2-F%h%KTHY-KD7%h%2Y__OEM:NONSLP_PPIPro
+YNM%h%GQ-8R%h%YV3-4PG%h%Q3-C%h%8XTP-7CF%h%BY______Retail_Education
+84N%h%GF-MH%h%BT6-FXB%h%X8-Q%h%WJK7-DRR%h%8H______Retail_EducationN
+NK9%h%6Y-D9%h%CD8-W44%h%CQ-R%h%8YTK-DYJ%h%WX__OEM:NONSLP_EnterpriseS_RS1
+FWN%h%7H-PF%h%93Q-4GG%h%P8-M%h%8RF3-MDW%h%WW__OEM:NONSLP_EnterpriseS_TH
+2DB%h%W3-N2%h%PJG-MVH%h%W3-G%h%7TDK-9HK%h%R4__Volume:MAK_EnterpriseSN_RS1
+NTX%h%6B-BR%h%YC2-K67%h%86-F%h%6MVQ-M7V%h%2X__Volume:MAK_EnterpriseSN_TH
+G3K%h%NM-CH%h%G6T-R36%h%X3-9%h%QDG6-8M8%h%K9______Retail_ProfessionalSingleLanguage
+HNG%h%CC-Y3%h%8KG-QVK%h%8D-W%h%MWRK-X86%h%VK______Retail_ProfessionalCountrySpecific
+DXG%h%7C-N3%h%6C4-C4H%h%TG-X%h%4T3X-2YV%h%77______Retail_ProfessionalWorkstation
+WYP%h%NQ-8C%h%467-V2W%h%6J-T%h%X4WX-WT2%h%RQ______Retail_ProfessionalWorkstationN
+8PT%h%T6-RN%h%W4C-6V7%h%J2-C%h%2D3X-MHB%h%PB______Retail_ProfessionalEducation
+GJT%h%YN-HD%h%MQY-FRR%h%76-H%h%VGC7-QPF%h%8P______Retail_ProfessionalEducationN
+C4N%h%TJ-CX%h%6Q2-VXD%h%MR-X%h%VKGM-F9D%h%JC__Volume:MAK_EnterpriseG
+46P%h%N6-R9%h%BK9-CVH%h%KB-H%h%WQ9V-MBJ%h%Y8__Volume:MAK_EnterpriseGN
+NJC%h%F7-PW%h%8QT-332%h%4D-6%h%88JX-2YV%h%66______Retail_ServerRdsh
+V3W%h%VW-N2%h%PV2-CGW%h%C3-3%h%4QGF-VMJ%h%2C______Retail_Cloud
+NH9%h%J3-68%h%WK7-6FB%h%93-4%h%K3DF-DJ4%h%F6______Retail_CloudN
+2HN%h%6V-HG%h%TM8-6C9%h%7C-R%h%K67V-JQP%h%FD______Retail_CloudE
+WC2%h%BQ-8N%h%RM3-FDD%h%YY-2%h%BFGV-KHK%h%QY_Volume:GVLK_ServerStandard%Cor%_RS1
+CB7%h%KF-BW%h%N84-R7R%h%2Y-7%h%93K2-8XD%h%DG_Volume:GVLK_ServerDatacenter%Cor%_RS1
+JCK%h%RF-N3%h%7P4-C2D%h%82-9%h%YXRT-4M6%h%3B_Volume:GVLK_ServerSolution_RS1
+QN4%h%C6-GB%h%JD2-FB4%h%22-G%h%HWJK-GJG%h%2R_Volume:GVLK_ServerCloudStorage_RS1
+VP3%h%4G-4N%h%PPG-79J%h%TQ-8%h%64T4-R3M%h%QX_Volume:GVLK_ServerAzureCor_RS1
+9JQ%h%NQ-V8%h%HQ6-PKB%h%8H-G%h%GHRY-R62%h%H6______Retail_ServerAzureNano_RS1
+VN8%h%D3-PR%h%82H-DB6%h%BJ-J%h%9P4M-92F%h%6J______Retail_ServerStorageStandard_RS1
+48T%h%QX-NV%h%K3R-D8Q%h%R3-G%h%THHM-8FH%h%XC______Retail_ServerStorageWorkgroup_RS1
+2HX%h%DN-KR%h%XHB-GPY%h%C7-Y%h%CKFJ-7FV%h%DG_Volume:GVLK_ServerDatacenterACor_RS3
+PTX%h%N8-JF%h%HJM-4WC%h%78-M%h%PCBR-9W4%h%KR_Volume:GVLK_ServerStandardACor_RS3
+) do (
+for /f "tokens=1-4 delims=_" %%A in ("%%#") do if /i %targetedition%==%%C (
+
+if not defined key (
+set 4th=%%D
+if not defined 4th (
+set "key=%%A" & set "_chan=%%B"
+) else (
+echo "%branch%" | find /i "%%D" %nul1% && (set "key=%%A" & set "_chan=%%B")
+)
+)
+)
+)
+exit /b
+
+::========================================================================================================================================
+:: Leave empty line below
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+::KMS38=================================================================================================
+:KMS38
+
+
+@set masver=2.5
+@setlocal DisableDelayedExpansion
+@echo off
+
+
+
+::============================================================================
+::
+::   This script is a part of 'Microsoft_Activation_Scripts' (MAS) project.
+::
+::   Homepage: mass grave[.]dev
+::      Email: windowsaddict@protonmail.com
+::
+::============================================================================
+
+
 
 ::  To activate, run the script with "/KMS38" parameter or change 0 to 1 in below line
 set _act=0
@@ -4009,6 +7862,66 @@ set _rem=0
 set _NoEditionChange=0
 
 ::  If value is changed in above lines or parameter is used then script will run in unattended mode
+
+
+
+::========================================================================================================================================
+
+::  Set Path variable, it helps if it is misconfigured in the system
+
+set "PATH=%SystemRoot%\System32;%SystemRoot%\System32\wbem;%SystemRoot%\System32\WindowsPowerShell\v1.0\"
+if exist "%SystemRoot%\Sysnative\reg.exe" (
+set "PATH=%SystemRoot%\Sysnative;%SystemRoot%\Sysnative\wbem;%SystemRoot%\Sysnative\WindowsPowerShell\v1.0\;%PATH%"
+)
+
+:: Re-launch the script with x64 process if it was initiated by x86 process on x64 bit Windows
+:: or with ARM64 process if it was initiated by x86/ARM32 process on ARM64 Windows
+
+set "_cmdf=%~f0"
+for %%# in (%*) do (
+if /i "%%#"=="r1" set r1=1
+if /i "%%#"=="r2" set r2=1
+if /i "%%#"=="-qedit" (
+reg add HKCU\Console /v QuickEdit /t REG_DWORD /d "1" /f 1>nul
+rem check the code below admin elevation to understand why it's here
+)
+)
+
+if exist %SystemRoot%\Sysnative\cmd.exe if not defined r1 (
+setlocal EnableDelayedExpansion
+start %SystemRoot%\Sysnative\cmd.exe /c ""!_cmdf!" %* r1"
+exit /b
+)
+
+:: Re-launch the script with ARM32 process if it was initiated by x64 process on ARM64 Windows
+
+if exist %SystemRoot%\SysArm32\cmd.exe if %PROCESSOR_ARCHITECTURE%==AMD64 if not defined r2 (
+setlocal EnableDelayedExpansion
+start %SystemRoot%\SysArm32\cmd.exe /c ""!_cmdf!" %* r2"
+exit /b
+)
+
+::========================================================================================================================================
+
+set "blank="
+set "mas=ht%blank%tps%blank%://mass%blank%grave.dev/"
+
+::  Check if Null service is working, it's important for the batch script
+
+sc query Null | find /i "RUNNING"
+if %errorlevel% NEQ 0 (
+echo:
+echo Null service is not running, script may crash...
+echo:
+echo:
+echo Help - %mas%troubleshoot.html
+echo:
+echo:
+ping 127.0.0.1 -n 10
+)
+cls
+
+
 
 ::========================================================================================================================================
 
@@ -4089,6 +8002,12 @@ echo KMS38 Activation is supported for Windows 10/11/Server, build 14393 and lat
 goto dk_done
 )
 
+for %%# in (powershell.exe) do @if "%%~$PATH:#"=="" (
+%nceline%
+echo Unable to find powershell.exe in the system.
+goto dk_done
+)
+
 ::========================================================================================================================================
 
 ::  Fix for the special characters limitation in path name
@@ -4107,6 +8026,75 @@ setlocal EnableDelayedExpansion
 
 ::========================================================================================================================================
 
+echo "!_batf!" | find /i "!_ttemp!" %nul1% && (
+if /i not "!_work!"=="!_ttemp!" (
+%eline%
+echo Script is launched from the temp folder,
+echo Most likely you are running the script directly from the archive file.
+echo:
+echo Extract the archive file and launch the script from the extracted folder.
+goto dk_done
+)
+)
+
+::========================================================================================================================================
+
+::  Elevate script as admin and pass arguments and preventing loop
+
+%nul1% fltmc || (
+if not defined _elev %psc% "start cmd.exe -arg '/c \"!_PSarg:'=''!\"' -verb runas" && exit /b
+%eline%
+echo This script requires admin privileges.
+echo To do so, right click on this script and select 'Run as administrator'.
+goto dk_done
+)
+
+::========================================================================================================================================
+
+::  This code disables QuickEdit for this cmd.exe session only without making permanent changes to the registry
+::  It is added because clicking on the script window pauses the operation and leads to the confusion that script stopped due to an error
+
+if %_unattended%==1 set quedit=1
+for %%# in (%_args%) do (if /i "%%#"=="-qedit" set quedit=1)
+
+reg query HKCU\Console /v QuickEdit %nul2% | find /i "0x0" %nul1% || if not defined quedit (
+reg add HKCU\Console /v QuickEdit /t REG_DWORD /d "0" /f %nul1%
+start cmd.exe /c ""!_batf!" %_args% -qedit"
+rem quickedit reset code is added at the starting of the script instead of here because it takes time to reflect in some cases
+exit /b
+)
+
+::========================================================================================================================================
+
+::  Check for updates
+
+set -=
+set old=
+
+for /f "delims=[] tokens=2" %%# in ('ping -4 -n 1 updatecheck.mass%-%grave.dev') do (
+if not [%%#]==[] (echo "%%#" | find "127.69" %nul1% && (echo "%%#" | find "127.69.%masver%" %nul1% || set old=1))
+)
+
+if defined old (
+echo ________________________________________________
+%eline%
+echo You are running outdated version MAS %masver%
+echo ________________________________________________
+echo:
+if not %_unattended%==1 (
+echo [1] Get Latest MAS
+echo [0] Continue Anyway
+echo:
+call :dk_color %_Green% "Enter a menu option in the Keyboard [1,0] :"
+choice /C:10 /N
+if !errorlevel!==2 rem
+if !errorlevel!==1 (start ht%-%tps://github.com/mass%-%gravel/Microsoft-Acti%-%vation-Scripts & start %mas% & exit /b)
+)
+)
+cls
+
+::========================================================================================================================================
+
 if %_rem%==1 goto :k_uninstall
 
 :k_menu
@@ -4117,13 +8105,16 @@ mode 76, 25
 title  KMS38 Activation %masver%
 
 echo:
-echo         ____________________________________________________________
 echo:
-echo:                               KMS38 Activation
+echo:
+echo:
 echo         ____________________________________________________________
 echo:
 echo                 [1] KMS38 Activation
+echo                 ____________________________________________
+echo:
 echo                 [2] Remove KM38 Protection
+echo:
 echo                 [0] %_exitmsg%
 echo         ____________________________________________________________
 echo: 
@@ -4140,8 +8131,10 @@ goto :k_menu
 
 :k_menu2
 
-Powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /KMS38"
-goto :MainMenu
+cls
+mode 110, 34
+if exist "%Systemdrive%\Windows\System32\spp\store_test\" mode 134, 34
+title  KMS38 Activation %masver%
 
 echo:
 echo Initializing...
@@ -4613,8 +8606,9 @@ goto :dk_done
 
 :k_uninstall
 
-Powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /KMS38-RemoveProtection"
-goto :MainMenu
+cls
+mode 99, 28
+title  Remove KMS38 Protection %masver%
 
 %nul% reg delete "HKLM\%specific_kms%" /f
 %nul% reg delete "HKU\S-1-5-20\%specific_kms%" /f
@@ -4665,6 +8659,31 @@ $key.SetAccessControl($acl)
 
 ::========================================================================================================================================
 
+::  Check SKU value
+
+:dk_checksku
+
+set osSKU=
+set slcSKU=
+set wmiSKU=
+set regSKU=
+
+if %winbuild% GEQ 14393 (set info=Kernel-BrandingInfo) else (set info=Kernel-ProductInfo)
+set d1=%ref% [void]$TypeBuilder.DefinePInvokeMethod('SLGetWindowsInformationDWORD', 'slc.dll', 'Public, Static', 1, [int], @([String], [int].MakeByRefType()), 1, 3);
+set d1=%d1% $Sku = 0; [void]$TypeBuilder.CreateType()::SLGetWindowsInformationDWORD('%info%', [ref]$Sku); $Sku
+for /f "delims=" %%s in ('"%psc% %d1%"') do if not errorlevel 1 (set slcSKU=%%s)
+if "%slcSKU%"=="0" set slcSKU=
+if 1%slcSKU% NEQ +1%slcSKU% set slcSKU=
+
+for /f "tokens=3 delims=." %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\ProductOptions" /v OSProductPfn %nul6%') do set "regSKU=%%a"
+if %_wmic% EQU 1 for /f "tokens=2 delims==" %%a in ('"wmic Path Win32_OperatingSystem Get OperatingSystemSKU /format:LIST" %nul6%') do if not errorlevel 1 set "wmiSKU=%%a"
+if %_wmic% EQU 0 for /f "tokens=1" %%a in ('%psc% "([WMI]'Win32_OperatingSystem=@').OperatingSystemSKU" %nul6%') do if not errorlevel 1 set "wmiSKU=%%a"
+
+set osSKU=%slcSKU%
+if not defined osSKU set osSKU=%wmiSKU%
+if not defined osSKU set osSKU=%regSKU%
+exit /b
+
 ::  Check KMS activation status
 
 :k_actinfo
@@ -4684,12 +8703,76 @@ if %_wmic% EQU 0 for /f "tokens=2 delims==" %%# in ('%psc% "(([WMISEARCHER]'SELE
 if %gpr% GTR 259200 (set _k38=1) else (set _k38=)
 exit /b
 
+::  Get Windows permanent activation status
+
+:dk_checkperm
+
+if %_wmic% EQU 1 wmic path SoftwareLicensingProduct where (LicenseStatus='1' and GracePeriodRemaining='0' and PartialProductKey is not NULL) get Name /value %nul2% | findstr /i "Windows" %nul1% && set _perm=1||set _perm=
+if %_wmic% EQU 0 %psc% "(([WMISEARCHER]'SELECT Name FROM SoftwareLicensingProduct WHERE LicenseStatus=1 AND GracePeriodRemaining=0 AND PartialProductKey IS NOT NULL').Get()).Name | %% {echo ('Name='+$_)}" %nul2% | findstr /i "Windows" %nul1% && set _perm=1||set _perm=
+exit /b
+
+::  Refresh license status
+
+:dk_refresh
+
+if %_wmic% EQU 1 wmic path SoftwareLicensingService where __CLASS='SoftwareLicensingService' call RefreshLicenseStatus %nul%
+if %_wmic% EQU 0 %psc% "$null=(([WMICLASS]'SoftwareLicensingService').GetInstances()).RefreshLicenseStatus()" %nul%
+exit /b
+
 ::  Get Windows installed key channel
 
 :dk_channel
 
 if %_wmic% EQU 1 for /f "tokens=2 delims==" %%# in ('wmic path SoftwareLicensingProduct where "ApplicationID='55c92734-d682-4d71-983e-d6ec3f16059f' and PartialProductKey<>null" Get ProductKeyChannel /value %nul6%') do set "_channel=%%#"
 if %_wmic% EQU 0 for /f "tokens=2 delims==" %%# in ('%psc% "(([WMISEARCHER]'SELECT ProductKeyChannel FROM SoftwareLicensingProduct WHERE ApplicationID=''55c92734-d682-4d71-983e-d6ec3f16059f'' AND PartialProductKey IS NOT NULL').Get()).ProductKeyChannel | %% {echo ('ProductKeyChannel='+$_)}" %nul6%') do set "_channel=%%#"
+exit /b
+
+::  Get Windows Activation IDs
+
+:dk_actids
+
+set applist=
+if %_wmic% EQU 1 set "chkapp=for /f "tokens=2 delims==" %%a in ('"wmic path SoftwareLicensingProduct where (ApplicationID='55c92734-d682-4d71-983e-d6ec3f16059f') get ID /VALUE" %nul6%')"
+if %_wmic% EQU 0 set "chkapp=for /f "tokens=2 delims==" %%a in ('%psc% "(([WMISEARCHER]'SELECT ID FROM SoftwareLicensingProduct WHERE ApplicationID=''55c92734-d682-4d71-983e-d6ec3f16059f''').Get()).ID ^| %% {echo ('ID='+$_)}" %nul6%')"
+%chkapp% do (if defined applist (call set "applist=!applist! %%a") else (call set "applist=%%a"))
+exit /b
+
+::  Check wmic.exe
+
+:dk_ckeckwmic
+
+set _wmic=0
+for %%# in (wmic.exe) do @if not "%%~$PATH:#"=="" (
+wmic path Win32_ComputerSystem get CreationClassName /value %nul2% | find /i "computersystem" %nul1% && set _wmic=1
+)
+exit /b
+
+::  Get Product name (WMI/REG methods are not reliable in all conditions, hence winbrand.dll method is used)
+
+:dk_product
+
+call :dk_reflection
+
+set d1=%ref% $meth = $TypeBuilder.DefinePInvokeMethod('BrandingFormatString', 'winbrand.dll', 'Public, Static', 1, [String], @([String]), 1, 3);
+set d1=%d1% $meth.SetImplementationFlags(128); $TypeBuilder.CreateType()::BrandingFormatString('%%WINDOWS_LONG%%')
+
+set winos=
+for /f "delims=" %%s in ('"%psc% %d1%"') do if not errorlevel 1 (set winos=%%s)
+echo "%winos%" | find /i "Windows" %nul1% || (
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName %nul6%') do set "winos=%%b"
+if %winbuild% GEQ 22000 (
+set winos=!winos:Windows 10=Windows 11!
+)
+)
+exit /b
+
+::  Common lines used in PowerShell reflection code
+
+:dk_reflection
+
+set ref=$AssemblyBuilder = [AppDomain]::CurrentDomain.DefineDynamicAssembly(4, 1);
+set ref=%ref% $ModuleBuilder = $AssemblyBuilder.DefineDynamicModule(2, $False);
+set ref=%ref% $TypeBuilder = $ModuleBuilder.DefineType(0);
 exit /b
 
 ::========================================================================================================================================
@@ -4735,6 +8818,403 @@ set key=!pkey!
 exit /b
 )
 )
+exit /b
+
+::========================================================================================================================================
+
+:dk_errorcheck
+
+set showfix=
+
+::  Check corrupt services
+
+set serv_cor=
+for %%# in (%_serv%) do (
+set _corrupt=
+sc start %%# %nul%
+if !errorlevel! EQU 1060 set _corrupt=1
+sc query %%# %nul% || set _corrupt=1
+for %%G in (DependOnService Description DisplayName ErrorControl ImagePath ObjectName Start Type) do if not defined _corrupt (
+reg query HKLM\SYSTEM\CurrentControlSet\Services\%%# /v %%G %nul% || set _corrupt=1
+if /i %%#==TrustedInstaller if /i %%G==DependOnService set _corrupt=
+)
+
+if defined _corrupt (if defined serv_cor (set "serv_cor=!serv_cor! %%#") else (set "serv_cor=%%#"))
+)
+
+if defined serv_cor (
+set error=1
+call :dk_color %Red% "Checking Corrupt Services               [%serv_cor%]"
+)
+
+::========================================================================================================================================
+
+::  Check disabled services
+
+set serv_ste=
+for %%# in (%_serv%) do (
+sc start %%# %nul%
+if !errorlevel! EQU 1058 (if defined serv_ste (set "serv_ste=!serv_ste! %%#") else (set "serv_ste=%%#"))
+)
+
+::  Change disabled services startup type to default
+
+set serv_csts=
+set serv_cste=
+
+if defined serv_ste (
+for %%# in (%serv_ste%) do (
+if /i %%#==ClipSVC          (reg add "HKLM\SYSTEM\CurrentControlSet\Services\%%#" /v "Start" /t REG_DWORD /d "3" /f %nul% & sc config %%# start= demand %nul%)
+if /i %%#==wlidsvc          sc config %%# start= demand %nul%
+if /i %%#==sppsvc           (reg add "HKLM\SYSTEM\CurrentControlSet\Services\%%#" /v "Start" /t REG_DWORD /d "2" /f %nul% & sc config %%# start= delayed-auto %nul%)
+if /i %%#==KeyIso           sc config %%# start= demand %nul%
+if /i %%#==LicenseManager   sc config %%# start= demand %nul%
+if /i %%#==Winmgmt          sc config %%# start= auto %nul%
+if /i %%#==DoSvc            sc config %%# start= delayed-auto %nul%
+if /i %%#==UsoSvc           sc config %%# start= delayed-auto %nul%
+if /i %%#==CryptSvc         sc config %%# start= auto %nul%
+if /i %%#==BITS             sc config %%# start= delayed-auto %nul%
+if /i %%#==wuauserv         sc config %%# start= demand %nul%
+if /i %%#==WaaSMedicSvc     sc config %%# start= demand %nul%
+if !errorlevel!==0 (
+if defined serv_csts (set "serv_csts=!serv_csts! %%#") else (set "serv_csts=%%#")
+) else (
+if defined serv_cste (set "serv_cste=!serv_cste! %%#") else (set "serv_cste=%%#")
+)
+)
+)
+
+if defined serv_csts call :dk_color %Gray% "Enabling Disabled Services              [Successful] [%serv_csts%]"
+
+if defined serv_cste (
+set error=1
+call :dk_color %Red% "Enabling Disabled Services              [Failed] [%serv_cste%]"
+)
+
+::========================================================================================================================================
+
+::  Check if the services are able to run or not
+::  Workarounds are added to get correct status and error code because sc query doesn't output correct results in some conditions
+
+set serv_e=
+for %%# in (%_serv%) do (
+set errorcode=
+set checkerror=
+
+sc query %%# | find /i "RUNNING" %nul% || (
+%psc% Start-Service %%# %nul%
+set errorcode=!errorlevel!
+sc query %%# | find /i "RUNNING" %nul% || set checkerror=1
+)
+
+sc start %%# %nul%
+if !errorlevel! NEQ 1056 if !errorlevel! NEQ 0 (set errorcode=!errorlevel!&set checkerror=1)
+if defined checkerror if defined serv_e (set "serv_e=!serv_e!, %%#-!errorcode!") else (set "serv_e=%%#-!errorcode!")
+)
+
+if defined serv_e (
+set error=1
+call :dk_color %Red% "Starting Services                       [Failed] [%serv_e%]"
+echo %serv_e% | findstr /i "ClipSVC-1058 sppsvc-1058" %nul% && (
+call :dk_color %Blue% "Restart the system to fix this error."
+set showfix=1
+)
+)
+
+::========================================================================================================================================
+
+::  Various error checks
+
+if defined safeboot_option (
+set error=1
+set showfix=1
+call :dk_color2 %Red% "Checking Boot Mode                      [%safeboot_option%] " %Blue% "[Safe mode found. Run in normal mode.]"
+)
+
+
+for /f "skip=2 tokens=2*" %%A in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State" /v ImageState') do (set imagestate=%%B)
+if /i not "%imagestate%"=="IMAGE_STATE_COMPLETE" (
+set error=1
+call :dk_color %Red% "Checking Windows Setup State            [%imagestate%]"
+echo "%imagestate%" | find /i "RESEAL" %nul% && (
+set showfix=1
+call :dk_color %Blue% "You need to run it in normal mode in case you are running it in Audit Mode."
+)
+)
+
+
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WinPE" /v InstRoot %nul% && (
+set error=1
+set showfix=1
+call :dk_color2 %Red% "Checking WinPE                          " %Blue% "[WinPE mode found. Run in normal mode.]"
+)
+
+
+set wpainfo=
+set wpaerror=
+for /f "delims=" %%a in ('%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':wpatest\:.*';iex ($f[1]);" %nul6%') do (set wpainfo=%%a)
+echo "%wpainfo%" | find /i "Error Found" %nul% && (
+set error=1
+set wpaerror=1
+call :dk_color %Red% "Checking WPA Registry Error             [%wpainfo%]"
+) || (
+echo Checking WPA Registry Count             [%wpainfo%]
+)
+
+
+DISM /English /Online /Get-CurrentEdition %nul%
+set dism_error=%errorlevel%
+cmd /c exit /b %dism_error%
+if %dism_error% NEQ 0 set "dism_error=0x%=ExitCode%"
+if %dism_error% NEQ 0 (
+call :dk_color %Red% "Checking DISM                           [Not Responding] [%dism_error%]"
+)
+
+
+if not defined officeact if exist "%SystemRoot%\Servicing\Packages\Microsoft-Windows-*EvalEdition~*.mum" (
+set error=1
+set showfix=1
+call :dk_color %Red% "Checking Eval Packages                  [Non-Eval Licenses are installed in Eval Windows]"
+call :dk_color %Blue% "Evaluation Windows can not be activated and different License install may lead to errors."
+call :dk_color %Blue% "It is recommended to install full version of %winos%."
+call :dk_color %Blue% "You can download it from %mas%genuine-installation-media.html"
+)
+
+
+set osedition=
+for /f "skip=2 tokens=3" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v EditionID %nul6%') do set "osedition=%%a"
+
+::  Workaround for an issue in builds between 1607 and 1709 where ProfessionalEducation is shown as Professional
+
+if "%osSKU%"=="164" set osedition=ProfessionalEducation
+if "%osSKU%"=="165" set osedition=ProfessionalEducationN
+
+if not defined officeact (
+if not defined osedition (
+call :dk_color %Red% "Checking Edition Name                   [Not Found In Registry]"
+) else (
+
+if not exist "%SystemRoot%\System32\spp\tokens\skus\%osedition%\%osedition%*.xrm-ms" (
+set error=1
+call :dk_color %Red% "Checking License Files                  [Not Found] [%osedition%]"
+)
+
+if not exist "%SystemRoot%\Servicing\Packages\Microsoft-Windows-*-%osedition%-*.mum" (
+set error=1
+call :dk_color %Red% "Checking Package File                   [Not Found] [%osedition%]"
+)
+)
+)
+
+
+cscript //nologo %windir%\system32\slmgr.vbs /dlv %nul%
+set error_code=%errorlevel%
+cmd /c exit /b %error_code%
+if %error_code% NEQ 0 set "error_code=0x%=ExitCode%"
+if %error_code% NEQ 0 (
+set error=1
+call :dk_color %Red% "Checking slmgr /dlv                     [Not Responding] %error_code%"
+)
+
+
+for %%# in (wmic.exe) do @if "%%~$PATH:#"=="" (
+call :dk_color %Gray% "Checking WMIC.exe                       [Not Found]"
+)
+
+
+set wmifailed=
+if %_wmic% EQU 1 wmic path Win32_ComputerSystem get CreationClassName /value %nul2% | find /i "computersystem" %nul1%
+if %_wmic% EQU 0 %psc% "Get-CIMInstance -Class Win32_ComputerSystem | Select-Object -Property CreationClassName" %nul2% | find /i "computersystem" %nul1%
+
+if %errorlevel% NEQ 0 set wmifailed=1
+echo "%error_code%" | findstr /i "0x800410 0x800440" %nul1% && set wmifailed=1& ::  https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmi-error-constants
+if defined wmifailed (
+set error=1
+call :dk_color %Red% "Checking WMI                            [Not Responding]"
+call :dk_color %Blue% "In MAS, Goto Troubleshoot and run Fix WMI option."
+set showfix=1
+)
+
+
+%nul% set /a "sum=%slcSKU%+%regSKU%+%wmiSKU%"
+set /a "sum/=3"
+if not defined officeact if not "%sum%"=="%slcSKU%" (
+call :dk_color %Red% "Checking SLC/WMI/REG SKU                [Difference Found - SLC:%slcSKU% WMI:%wmiSKU% Reg:%regSKU%]"
+)
+
+
+reg query "HKU\S-1-5-20\Software\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform\PersistedTSReArmed" %nul% && (
+set error=1
+set showfix=1
+call :dk_color2 %Red% "Checking Rearm                          " %Blue% "[System Restart Is Required]"
+)
+
+
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ClipSVC\Volatile\PersistedSystemState" %nul% && (
+set error=1
+set showfix=1
+call :dk_color2 %Red% "Checking ClipSVC                        " %Blue% "[System Restart Is Required]"
+)
+
+
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "SkipRearm" %nul6%') do if /i %%b NEQ 0x0 (
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "SkipRearm" /t REG_DWORD /d "0" /f %nul%
+call :dk_color %Red% "Checking SkipRearm                      [Default 0 Value Not Found. Changing To 0]"
+%psc% Restart-Service sppsvc %nul%
+set error=1
+)
+
+
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform\Plugins\Objects\msft:rm/algorithm/hwid/4.0" /f ba02fed39662 /d %nul% || (
+call :dk_color %Red% "Checking SPP Registry Key               [Incorrect ModuleId Found]"
+call :dk_color %Blue% "Possibly Caused By Gaming Spoofers. Help: %mas%troubleshoot"
+set error=1
+set showfix=1
+)
+
+
+set tokenstore=
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v TokenStore %nul6%') do call set "tokenstore=%%b"
+if not exist "%tokenstore%\" (
+set error=1
+REM This code creates token folder only if it's missing and sets default permission for it
+mkdir "%tokenstore%" %nul%
+set "d=$sddl = 'O:BAG:BAD:PAI(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;OICIIO;GR;;;BU)(A;;FR;;;BU)(A;OICI;FA;;;S-1-5-80-123231216-2592883651-3715271367-3753151631-4175906628)';"
+set "d=!d! $AclObject = New-Object System.Security.AccessControl.DirectorySecurity;"
+set "d=!d! $AclObject.SetSecurityDescriptorSddlForm($sddl);"
+set "d=!d! Set-Acl -Path %tokenstore% -AclObject $AclObject;"
+%psc% "!d!" %nul%
+call :dk_color %Gray% "Checking SPP Token Folder               [Not Found. Creating Now] [%tokenstore%\]"
+)
+
+
+call :dk_actids
+if not defined applist (
+%psc% Stop-Service sppsvc %nul%
+cscript //nologo %windir%\system32\slmgr.vbs /rilc %nul%
+if !errorlevel! NEQ 0 cscript //nologo %windir%\system32\slmgr.vbs /rilc %nul%
+call :dk_refresh
+call :dk_actids
+if not defined applist (
+set error=1
+call :dk_color %Red% "Checking Activation IDs                 [Not Found]"
+)
+)
+
+
+if exist "%tokenstore%\" if not exist "%tokenstore%\tokens.dat" (
+set error=1
+call :dk_color %Red% "Checking SPP tokens.dat                 [Not Found] [%tokenstore%\]"
+)
+
+
+if not exist %SystemRoot%\system32\sppsvc.exe (
+set error=1
+set showfix=1
+call :dk_color %Red% "Checking sppsvc.exe File                [Not Found]"
+)
+
+
+::  This code checks if NT SERVICE\sppsvc has permission access to tokens folder and required registry keys. It's often caused by gaming spoofers. 
+
+set permerror=
+if not exist "%tokenstore%\" set permerror=1
+
+for %%# in (
+"%tokenstore%"
+"HKLM:\SYSTEM\WPA"
+"HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform"
+) do if not defined permerror (
+%psc% "$acl = Get-Acl '%%#'; if ($acl.Access.Where{ $_.IdentityReference -eq 'NT SERVICE\sppsvc' -and $_.AccessControlType -eq 'Deny' -or $acl.Access.IdentityReference -notcontains 'NT SERVICE\sppsvc'}) {Exit 2}" %nul%
+if !errorlevel!==2 set permerror=1
+)
+if defined permerror (
+set error=1
+set showfix=1
+call :dk_color %Red% "Checking SPP Permissions                [Error Found]"
+call :dk_color %Blue% "%_fixmsg%"
+)
+
+
+::  If required services are not disabled or corrupted + if there is any error + slmgr /dlv errorlevel is not Zero + no fix was shown before
+
+if not defined serv_cor if not defined serv_cste if defined error if /i not %error_code%==0 if not defined showfix (
+set showfix=1
+call :dk_color %Blue% "%_fixmsg%"
+if not defined permerror call :dk_color %Blue% "If activation still fails then run Fix WPA Registry option."
+)
+
+if not defined showfix if defined wpaerror (
+set showfix=1
+call :dk_color %Blue% "If activation fails then go back to Main Menu, select Troubleshoot and run Fix WPA Registry option."
+)
+
+exit /b
+
+::  This code checks for invalid registry keys in HKLM\SYSTEM\WPA. This issue may appear even on healthy systems
+
+:wpatest:
+$wpaKey = [Microsoft.Win32.RegistryKey]::OpenBaseKey('LocalMachine', 'Registry64').OpenSubKey("SYSTEM\\WPA")
+$count = $wpaKey.SubKeyCount
+
+$osVersion = [System.Environment]::OSVersion.Version
+$minBuildNumber = 14393
+
+if ($osVersion.Build -ge $minBuildNumber) {
+    $subkeyHashTable = @{}
+    foreach ($subkeyName in $wpaKey.GetSubKeyNames()) {
+        $keyNumber = $subkeyName -replace '.*-', ''
+        $subkeyHashTable[$keyNumber] = $true
+    }
+    for ($i=1; $i -le $count; $i++) {
+        if (-not $subkeyHashTable.ContainsKey("$i")) {
+            Write-Host "Total Keys $count. Error Found- $i key does not exist"
+			$wpaKey.Close()
+            exit
+        }
+    }
+}
+$wpaKey.GetSubKeyNames() | ForEach-Object {
+    $subkey = $wpaKey.OpenSubKey($_)
+    $p = $subkey.GetValueNames()
+    if (($p | Where-Object { $subkey.GetValueKind($_) -eq [Microsoft.Win32.RegistryValueKind]::Binary }).Count -eq 0) {
+        Write-Host "Total Keys $count. Error Found- Binary Data is corrupt"
+		$wpaKey.Close()
+        exit
+    }
+}
+$count
+$wpaKey.Close()
+:wpatest:
+
+::========================================================================================================================================
+
+:dk_color
+
+if %_NCS% EQU 1 (
+echo %esc%[%~1%~2%esc%[0m
+) else (
+%psc% write-host -back '%1' -fore '%2' '%3'
+)
+exit /b
+
+:dk_color2
+
+if %_NCS% EQU 1 (
+echo %esc%[%~1%~2%esc%[%~3%~4%esc%[0m
+) else (
+%psc% write-host -back '%1' -fore '%2' '%3' -NoNewline; write-host -back '%4' -fore '%5' '%6'
+)
+exit /b
+
+::========================================================================================================================================
+
+:dk_done
+
+echo:
+if %_unattended%==1 timeout /t 2 & exit /b
+call :dk_color %_Yellow% "Press any key to %_exitmsg%..."
+pause %nul1%
 exit /b
 
 ::========================================================================================================================================
@@ -4852,11 +9332,105 @@ set notfoundaltactID=1
 )
 exit /b
 
-:+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+::========================================================================================================================================
+:: Leave empty line below
+::KMS38=================================================================================================
 
-:KMSActivation
+
+
+
+
+
+
+
+
+
+
+
+
+
+::ONLINE KMS =================================================================================================
+:ONLINE_KMS
+@set masver=2.5
 @setlocal DisableDelayedExpansion
 @echo off
+
+
+
+::=================================================================================================
+::
+::  Online KMS Script is a fork of @abbodi1406's KMS_VL_ALL  forums.mydigitallife.net/posts/838808
+::  
+::  This fork's purpose is to avoid having any KMS binary files and activate Windows/Office using 
+::  only transparent batch script with online public KMS servers.
+::_____________________________________
+::
+::  Online KMS Activation Script is a part of 'Microsoft_Activation_Scripts' (MAS) project.
+::  
+::  Homepage: mass grave[.]dev
+::     Email: windowsaddict@protonmail.com
+::  
+::=================================================================================================
+
+
+
+::========================================================================================================================================
+
+::  Set Path variable, it helps if it is misconfigured in the system
+
+set "PATH=%SystemRoot%\System32;%SystemRoot%\System32\wbem;%SystemRoot%\System32\WindowsPowerShell\v1.0\"
+if exist "%SystemRoot%\Sysnative\reg.exe" (
+set "PATH=%SystemRoot%\Sysnative;%SystemRoot%\Sysnative\wbem;%SystemRoot%\Sysnative\WindowsPowerShell\v1.0\;%PATH%"
+)
+
+:: Re-launch the script with x64 process if it was initiated by x86 process on x64 bit Windows
+:: or with ARM64 process if it was initiated by x86/ARM32 process on ARM64 Windows
+
+set "_cmdf=%~f0"
+for %%# in (%*) do (
+if /i "%%#"=="r1" set r1=1
+if /i "%%#"=="r2" set r2=1
+if /i "%%#"=="-qedit" (
+reg add HKCU\Console /v QuickEdit /t REG_DWORD /d "1" /f 1>nul
+rem check the code below admin elevation to understand why it's here
+)
+)
+
+if exist %SystemRoot%\Sysnative\cmd.exe if not defined r1 (
+setlocal EnableDelayedExpansion
+start %SystemRoot%\Sysnative\cmd.exe /c ""!_cmdf!" %* r1"
+exit /b
+)
+
+:: Re-launch the script with ARM32 process if it was initiated by x64 process on ARM64 Windows
+
+if exist %SystemRoot%\SysArm32\cmd.exe if %PROCESSOR_ARCHITECTURE%==AMD64 if not defined r2 (
+setlocal EnableDelayedExpansion
+start %SystemRoot%\SysArm32\cmd.exe /c ""!_cmdf!" %* r2"
+exit /b
+)
+
+::========================================================================================================================================
+
+set "blank="
+set "mas=ht%blank%tps%blank%://mass%blank%grave.dev/"
+
+::  Check if Null service is working, it's important for the batch script
+
+sc query Null | find /i "RUNNING"
+if %errorlevel% NEQ 0 (
+echo:
+echo Null service is not running, script may crash...
+echo:
+echo:
+echo Help - %mas%troubleshoot.html
+echo:
+echo:
+ping 127.0.0.1 -n 10
+)
+cls
+
+::========================================================================================================================================
 
 cls
 color 07
@@ -4904,14 +9478,18 @@ if /i "%%A"=="-el"  (set _elev=1
 
 ::========================================================================================================================================
 
+set "nul1=1>nul"
+set "nul2=2>nul"
+set "nul6=2^>nul"
 set "nul=>nul 2>&1"
+
 set psc=powershell.exe
 set winbuild=1
 for /f "tokens=6 delims=[]. " %%G in ('ver') do set winbuild=%%G
 
 set _NCS=1
 if %winbuild% LSS 10586 set _NCS=0
-if %winbuild% GEQ 10586 reg query "HKCU\Console" /v ForceV2 2>nul | find /i "0x0" 1>nul && (set _NCS=0)
+if %winbuild% GEQ 10586 reg query "HKCU\Console" /v ForceV2 %nul2% | find /i "0x0" %nul1% && (set _NCS=0)
 
 call :_colorprep
 set "_buf={$W=$Host.UI.RawUI.WindowSize;$B=$Host.UI.RawUI.BufferSize;$W.Height=31;$B.Height=300;$Host.UI.RawUI.WindowSize=$W;$Host.UI.RawUI.BufferSize=$B;}"
@@ -4919,6 +9497,21 @@ set "_buf={$W=$Host.UI.RawUI.WindowSize;$B=$Host.UI.RawUI.BufferSize;$W.Height=3
 set "nceline=echo. &echo ==== ERROR ==== &echo."
 set "eline=echo. &call :_color %Red% "==== ERROR ====" &echo."
 if %_Debug% EQU 1 set _unattended=1
+
+::========================================================================================================================================
+
+if %winbuild% LSS 7600 (
+%nceline%
+echo Unsupported OS version detected [%winbuild%].
+echo Project is supported for Windows 7/8/8.1/10/11 and their Server equivalent.
+goto Done
+)
+
+for %%# in (powershell.exe) do @if "%%~$PATH:#"=="" (
+%nceline%
+echo Unable to find powershell.exe in the system.
+goto Done
+)
 
 ::========================================================================================================================================
 
@@ -4936,6 +9529,75 @@ set "_ttemp=%userprofile%\AppData\Local\Temp"
 set "_Local=%LocalAppData%"
 
 setlocal EnableDelayedExpansion
+
+::========================================================================================================================================
+
+echo "!_batf!" | find /i "!_ttemp!" %nul1% && (
+if /i not "!_work!"=="!_ttemp!" (
+%nceline%
+echo Script is launched from the temp folder,
+echo Most likely you are running the script directly from the archive file.
+echo.
+echo Extract the archive file and launch the script from the extracted folder.
+goto Done
+)
+)
+
+::========================================================================================================================================
+
+::  Elevate script as admin and pass arguments and preventing loop
+
+%nul1% fltmc || (
+if not defined _elev %psc% "start cmd.exe -arg '/c \"!_PSarg:'=''!\"' -verb runas" && exit /b
+%nceline%
+echo This script requires admin privileges.
+echo To do so, right click on this script and select 'Run as administrator'.
+goto Done
+)
+
+::========================================================================================================================================
+
+::  This code disables QuickEdit for this cmd.exe session only without making permanent changes to the registry
+::  It is added because clicking on the script window pauses the operation and leads to the confusion that script stopped due to an error
+
+if defined _unattended set quedit=1
+for %%# in (%_args%) do (if /i "%%#"=="-qedit" set quedit=1)
+
+reg query HKCU\Console /v QuickEdit %nul2% | find /i "0x0" %nul1% || if not defined quedit (
+reg add HKCU\Console /v QuickEdit /t REG_DWORD /d "0" /f %nul1%
+start cmd.exe /c ""!_batf!" %_args% -qedit"
+rem quickedit reset code is added at the starting of the script instead of here because it takes time to reflect in some cases
+exit /b
+)
+
+::========================================================================================================================================
+
+::  Check for updates
+
+set -=
+set old=
+
+for /f "delims=[] tokens=2" %%# in ('ping -4 -n 1 updatecheck.mass%-%grave.dev') do (
+if not [%%#]==[] (echo "%%#" | find "127.69" %nul1% && (echo "%%#" | find "127.69.%masver%" %nul1% || set old=1))
+)
+
+if defined old (
+echo ________________________________________________
+%eline%
+echo You are running outdated version MAS %masver%
+echo ________________________________________________
+echo:
+if not defined _unattended (
+echo [1] Get Latest MAS
+echo [0] Continue Anyway
+echo:
+call :_color %_Green% "Enter a menu option in the Keyboard [1,0] :"
+choice /C:10 /N
+if !errorlevel!==2 rem
+if !errorlevel!==1 (start ht%-%tps://github.com/mass%-%gravel/Microsoft-Acti%-%vation-Scripts & start %mas% & exit /b)
+)
+)
+cls
 
 ::========================================================================================================================================
 
@@ -5022,18 +9684,18 @@ title  %_title%
 mode con: cols=76 lines=30
 
 echo.
-echo.       ______________________________________________________________
+echo.____________________________________________________________________________
 echo.
 echo.                            Online KMS Activation
-echo.       ______________________________________________________________
+echo.____________________________________________________________________________
 echo.
-echo.              [1] Activate - Windows
-echo.              [2] Activate - Office
-echo.              [3] Activate - All
-echo.
+echo.              [1] Activate Windows                     ^| 180 Days
+echo.              [2] Activate Office                      ^| 180 Days
+echo.              [3] Activate All                         ^| Window ^& Office
+echo.              
 if defined _tskinstalled call :_color2 %_White% "              [4] Install Auto-Renewal      " %_Green% "[Installed]"
 if defined _oldtsk       call :_color2 %_White% "              [4] Install Auto-Renewal      " %_Red% "[Old Installed]"
-if not defined _tskinstalled if not defined _oldtsk echo.              [4] Install Auto-Renewal
+if not defined _tskinstalled if not defined _oldtsk echo.              [4] Install Auto-Renewal                 ^| Lifetime 
 echo.              [5] Uninstall
 echo.              _______________________________________________  
 echo.
@@ -5058,7 +9720,7 @@ echo               [7] Override Office vNext     [No]
 echo.              _______________________________________________       
 echo.
 echo.              [0] %_exitmsg%
-echo.       ______________________________________________________________
+echo.____________________________________________________________________________
 echo.
 call :_color2 %_White% "           " %_Green% "Enter a menu option in the Keyboard [1,2,3,4,5,6,7,0]"
 choice /C:12345670 /N
@@ -5086,6 +9748,10 @@ pause >nul
 exit /b
 
 :=========================================================================================================================================
+
+:Activation_Start
+
+@setlocal DisableDelayedExpansion
 
 set nil=
 for %%# in (SppE%nil%xtComObj.exe,sppsvc.exe,osppsvc.exe) do (
@@ -8091,10 +12757,13 @@ if exist "%ProgramFiles%\Activation-Renewal\" (set error_=1)
 exit /b
 
 :=========================================================================================================================================
+
 :RenTask
+
 cls
 mode con cols=91 lines=30
 title  Install Activation Auto-Renewal %masver%
+
 set error_=
 set "_dest=%ProgramFiles%\Activation-Renewal"
 set "key=HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\taskcache\tasks"
@@ -8949,2703 +13618,6 @@ if ($OSPP) {
 UninstallLicenses("sppc.dll")
 :cleanlicense:
 
-:+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-:_Check_Status_vbs
-@setlocal DisableDelayedExpansion
-@echo off
-@cls
-mode con cols=100 lines=32
-powershell "&{$W=$Host.UI.RawUI.WindowSize;$B=$Host.UI.RawUI.BufferSize;$W.Height=31;$B.Height=300;$Host.UI.RawUI.WindowSize=$W;$Host.UI.RawUI.BufferSize=$B;}"
-color 07
-title Check Activation Status [vbs]
-set "SysPath=%SystemRoot%\System32"
-set "Path=%SystemRoot%\System32;%SystemRoot%\System32\Wbem;%SystemRoot%\System32\WindowsPowerShell\v1.0\"
-if exist "%SystemRoot%\Sysnative\reg.exe" (
-set "SysPath=%SystemRoot%\Sysnative"
-set "Path=%SystemRoot%\Sysnative;%SystemRoot%\Sysnative\Wbem;%SystemRoot%\Sysnative\WindowsPowerShell\v1.0\;%Path%"
-)
-
-set ohook=
-for %%# in (15 16) do (
-for %%A in ("%ProgramFiles%" "%ProgramW6432%" "%ProgramFiles(x86)%") do (
-if exist "%%~A\Microsoft Office\Office%%#\sppc*dll" set ohook=1
-)
-)
-
-for %%# in (System SystemX86) do (
-for %%G in ("Office 15" "Office") do (
-for %%A in ("%ProgramFiles%" "%ProgramW6432%" "%ProgramFiles(x86)%") do (
-if exist "%%~A\Microsoft %%~G\root\vfs\%%#\sppc*dll" set ohook=1
-)
-)
-)
-
-set "_bit=64"
-set "_wow=1"
-if /i "%PROCESSOR_ARCHITECTURE%"=="x86" if "%PROCESSOR_ARCHITEW6432%"=="" set "_wow=0"&set "_bit=32"
-set "_utemp=%TEMP%"
-set "line2=************************************************************"
-set "line3=____________________________________________________________"
-set _sO16vbs=0
-set _sO15vbs=0
-if exist "%ProgramFiles%\Microsoft Office\Office15\ospp.vbs" (
-  set _sO15vbs=1
-) else if exist "%ProgramW6432%\Microsoft Office\Office15\ospp.vbs" (
-  set _sO15vbs=1
-) else if exist "%ProgramFiles(x86)%\Microsoft Office\Office15\ospp.vbs" (
-  set _sO15vbs=1
-)
-setlocal EnableDelayedExpansion
-echo %line2%
-echo ***                   Windows Status                     ***
-echo %line2%
-pushd "!_utemp!"
-copy /y %SystemRoot%\System32\slmgr.vbs . >nul 2>&1
-net start sppsvc /y >nul 2>&1
-cscript //nologo slmgr.vbs /dli || (echo Error executing slmgr.vbs&del /f /q slmgr.vbs&popd&goto :casVend)
-cscript //nologo slmgr.vbs /xpr
-del /f /q slmgr.vbs >nul 2>&1
-popd
-echo %line3%
-
-if defined ohook (
-echo.
-echo.
-echo %line2%
-echo ***            Office Ohook Activation Status            ***
-echo %line2%
-echo.
-powershell "write-host -back 'Black' -fore 'Yellow' 'Ohook for permanent Office activation is installed.'; write-host -back 'Black' -fore 'Yellow' 'You can ignore below Office activation status.'"
-echo.
-)
-
-:casVo16
-set office=
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\16.0\Common\InstallRoot /v Path" 2^>nul') do (set "office=%%b")
-if exist "!office!\ospp.vbs" (
-set _sO16vbs=1
-echo.
-echo %line2%
-if %_sO15vbs% EQU 0 (
-echo ***              Office 2016 %_bit%-bit Status               ***
-) else (
-echo ***               Office 2013/2016 Status                ***
-)
-echo %line2%
-cscript //nologo "!office!\ospp.vbs" /dstatus
-)
-if %_wow%==0 goto :casVo13
-set office=
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\16.0\Common\InstallRoot /v Path" 2^>nul') do (set "office=%%b")
-if exist "!office!\ospp.vbs" (
-set _sO16vbs=1
-echo.
-echo %line2%
-if %_sO15vbs% EQU 0 (
-echo ***              Office 2016 32-bit Status               ***
-) else (
-echo ***               Office 2013/2016 Status                ***
-)
-echo %line2%
-cscript //nologo "!office!\ospp.vbs" /dstatus
-)
-
-:casVo13
-if %_sO16vbs% EQU 1 goto :casVo10
-set office=
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\Common\InstallRoot /v Path" 2^>nul') do (set "office=%%b")
-if exist "!office!\ospp.vbs" (
-echo.
-echo %line2%
-echo ***              Office 2013 %_bit%-bit Status               ***
-echo %line2%
-cscript //nologo "!office!\ospp.vbs" /dstatus
-)
-if %_wow%==0 goto :casVo10
-set office=
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\15.0\Common\InstallRoot /v Path" 2^>nul') do (set "office=%%b")
-if exist "!office!\ospp.vbs" (
-echo.
-echo %line2%
-echo ***              Office 2013 32-bit Status               ***
-echo %line2%
-cscript //nologo "!office!\ospp.vbs" /dstatus
-)
-
-:casVo10
-set office=
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\14.0\Common\InstallRoot /v Path" 2^>nul') do (set "office=%%b")
-if exist "!office!\ospp.vbs" (
-echo.
-echo %line2%
-echo ***              Office 2010 %_bit%-bit Status               ***
-echo %line2%
-cscript //nologo "!office!\ospp.vbs" /dstatus
-)
-if %_wow%==0 goto :casVc16
-set office=
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\14.0\Common\InstallRoot /v Path" 2^>nul') do (set "office=%%b")
-if exist "!office!\ospp.vbs" (
-echo.
-echo %line2%
-echo ***              Office 2010 32-bit Status               ***
-echo %line2%
-cscript //nologo "!office!\ospp.vbs" /dstatus
-)
-
-:casVc16
-reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun /v InstallPath >nul 2>&1 || (
-reg query HKLM\SOFTWARE\WOW6432Node\Microsoft\Office\ClickToRun /v InstallPath >nul 2>&1 || goto :casVc13
-)
-set office=
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun /v InstallPath" 2^>nul') do (set "office=%%b\Office16")
-if exist "!office!\ospp.vbs" (
-set _sO16vbs=1
-echo.
-echo %line2%
-if %_sO15vbs% EQU 0 (
-echo ***              Office 2016-2021 C2R Status             ***
-) else (
-echo ***                Office 2013-2021 Status               ***
-)
-echo %line2%
-cscript //nologo "!office!\ospp.vbs" /dstatus
-)
-if %_wow%==0 goto :casVc13
-set office=
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\WOW6432Node\Microsoft\Office\ClickToRun /v InstallPath" 2^>nul') do (set "office=%%b\Office16")
-if exist "!office!\ospp.vbs" (
-set _sO16vbs=1
-echo.
-echo %line2%
-if %_sO15vbs% EQU 0 (
-echo ***              Office 2016-2021 C2R Status             ***
-) else (
-echo ***                Office 2013-2021 Status               ***
-)
-echo %line2%
-cscript //nologo "!office!\ospp.vbs" /dstatus
-)
-
-:casVc13
-if %_sO16vbs% EQU 1 goto :casVc10
-reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun /v InstallPath >nul 2>&1 || (
-reg query HKLM\SOFTWARE\WOW6432Node\Microsoft\Office\15.0\ClickToRun /v InstallPath >nul 2>&1 || goto :casVc10
-)
-set office=
-if exist "%ProgramFiles%\Microsoft Office\Office15\ospp.vbs" (
-  set "office=%ProgramFiles%\Microsoft Office\Office15"
-) else if exist "%ProgramW6432%\Microsoft Office\Office15\ospp.vbs" (
-  set "office=%ProgramW6432%\Microsoft Office\Office15"
-) else if exist "%ProgramFiles(x86)%\Microsoft Office\Office15\ospp.vbs" (
-  set "office=%ProgramFiles(x86)%\Microsoft Office\Office15"
-)
-if exist "!office!\ospp.vbs" (
-echo.
-echo %line2%
-echo ***                Office 2013 C2R Status                ***
-echo %line2%
-cscript //nologo "!office!\ospp.vbs" /dstatus
-)
-
-:casVc10
-if %_wow%==0 reg query HKLM\SOFTWARE\Microsoft\Office\14.0\CVH /f Click2run /k >nul 2>&1 || goto :casVend
-if %_wow%==1 reg query HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\14.0\CVH /f Click2run /k >nul 2>&1 || goto :casVend
-set office=
-if exist "%ProgramFiles%\Microsoft Office\Office14\ospp.vbs" (
-  set "office=%ProgramFiles%\Microsoft Office\Office14"
-) else if exist "%ProgramW6432%\Microsoft Office\Office14\ospp.vbs" (
-  set "office=%ProgramW6432%\Microsoft Office\Office14"
-) else if exist "%ProgramFiles(x86)%\Microsoft Office\Office14\ospp.vbs" (
-  set "office=%ProgramFiles(x86)%\Microsoft Office\Office14"
-)
-if exist "!office!\ospp.vbs" (
-echo.
-echo %line2%
-echo ***                Office 2010 C2R Status                ***
-echo %line2%
-cscript //nologo "!office!\ospp.vbs" /dstatus
-)
-
-:casVend
-echo.
-call :_color %_Yellow% "Press any key to go back..."
-pause >nul
-exit /b
-
-:+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-:_Check_Status_wmi
-
-@setlocal DisableDelayedExpansion
-@echo off
-mode con cols=100 lines=32
-powershell "&{$W=$Host.UI.RawUI.WindowSize;$B=$Host.UI.RawUI.BufferSize;$W.Height=31;$B.Height=300;$Host.UI.RawUI.WindowSize=$W;$Host.UI.RawUI.BufferSize=$B;}"
-color 07
-title Check Activation Status [wmi]
-
-set WMI_VBS=0
-@cls
-set "_cmdf=%~f0"
-set wspp=SoftwareLicensingProduct
-set wsps=SoftwareLicensingService
-set ospp=OfficeSoftwareProtectionProduct
-set osps=OfficeSoftwareProtectionService
-set winApp=55c92734-d682-4d71-983e-d6ec3f16059f
-set o14App=59a52881-a989-479d-af46-f275c6370663
-set o15App=0ff1ce15-a989-479d-af46-f275c6370663
-for %%# in (spp_get,ospp_get,cW1nd0ws,sppw,c0ff1ce15,sppo,osppsvc,ospp14,ospp15) do set "%%#="
-for /f "tokens=6 delims=[]. " %%# in ('ver') do set winbuild=%%#
-set "spp_get=Description, DiscoveredKeyManagementServiceMachineName, DiscoveredKeyManagementServiceMachinePort, EvaluationEndDate, GracePeriodRemaining, ID, KeyManagementServiceMachine, KeyManagementServicePort, KeyManagementServiceProductKeyID, LicenseStatus, LicenseStatusReason, Name, PartialProductKey, ProductKeyID, VLActivationInterval, VLRenewalInterval"
-set "ospp_get=%spp_get%"
-if %winbuild% GEQ 9200 set "spp_get=%spp_get%, KeyManagementServiceLookupDomain, VLActivationTypeEnabled"
-if %winbuild% GEQ 9600 set "spp_get=%spp_get%, DiscoveredKeyManagementServiceMachineIpAddress, ProductKeyChannel"
-set "_work=%~dp0"
-set "_batf=%~f0"
-set "_batp=%_batf:'=''%"
-set "_Local=%LocalAppData%"
-set _Identity=0
-setlocal EnableDelayedExpansion
-dir /b /s /a:-d "!_Local!\Microsoft\Office\Licenses\*1*" 1>nul 2>nul && set _Identity=1
-dir /b /s /a:-d "!ProgramData!\Microsoft\Office\Licenses\*1*" 1>nul 2>nul && set _Identity=1
-pushd "!_work!"
-setlocal DisableDelayedExpansion
-if %winbuild% LSS 9200 if not exist "%SystemRoot%\servicing\Packages\Microsoft-Windows-PowerShell-WTR-Package~*.mum" set _Identity=0
-
-set "SysPath=%SystemRoot%\System32"
-set "Path=%SystemRoot%\System32;%SystemRoot%\System32\Wbem;%SystemRoot%\System32\WindowsPowerShell\v1.0\"
-if exist "%SystemRoot%\Sysnative\reg.exe" (
-set "SysPath=%SystemRoot%\Sysnative"
-set "Path=%SystemRoot%\Sysnative;%SystemRoot%\Sysnative\Wbem;%SystemRoot%\Sysnative\WindowsPowerShell\v1.0\;%Path%"
-)
-
-set ohook=
-for %%# in (15 16) do (
-for %%A in ("%ProgramFiles%" "%ProgramW6432%" "%ProgramFiles(x86)%") do (
-if exist "%%~A\Microsoft Office\Office%%#\sppc*dll" set ohook=1
-)
-)
-
-for %%# in (System SystemX86) do (
-for %%G in ("Office 15" "Office") do (
-for %%A in ("%ProgramFiles%" "%ProgramW6432%" "%ProgramFiles(x86)%") do (
-if exist "%%~A\Microsoft %%~G\root\vfs\%%#\sppc*dll" set ohook=1
-)
-)
-)
-
-set _cwmi=0
-for %%# in (wmic.exe) do @if not "%%~$PATH:#"=="" (
-wmic path Win32_ComputerSystem get CreationClassName /value 2>nul | find /i "ComputerSystem" 1>nul && set _cwmi=1
-)
-
-if %_cwmi% EQU 0 (
-echo:
-echo Error: WMI is not responding in the system.
-echo:
-echo In MAS, Goto Troubleshoot and run Fix WMI option.
-echo:
-echo Press any key to go back...
-pause >nul
-exit /b
-)
-
-set "line2=************************************************************"
-set "line3=____________________________________________________________"
-set "_psc=powershell"
-
-set _prsh=1
-for %%# in (powershell.exe) do @if "%%~$PATH:#"=="" set _prsh=0
-set "_csg=cscript.exe //NoLogo //Job:WmiMulti "%~nx0?.wsf""
-set "_csq=cscript.exe //NoLogo //Job:WmiQuery "%~nx0?.wsf""
-set "_csx=cscript.exe //NoLogo //Job:XPDT "%~nx0?.wsf""
-if %_cwmi% EQU 0 set WMI_VBS=1
-if %WMI_VBS% EQU 0 (
-set "_zz1=wmic path"
-set "_zz2=where"
-set "_zz3=get"
-set "_zz4=/value"
-set "_zz5=("
-set "_zz6=)"
-set "_zz7="wmic path"
-set "_zz8=/value""
-) else (
-set "_zz1=%_csq%"
-set "_zz2="
-set "_zz3="
-set "_zz4="
-set "_zz5=""
-set "_zz6=""
-set "_zz7=%_csq%"
-set "_zz8="
-)
-set _WSH=0
-set OsppHook=1
-sc query osppsvc >nul 2>&1
-if %errorlevel% EQU 1060 set OsppHook=0
-
-net start sppsvc /y >nul 2>&1
-call :casWpkey %wspp% %winApp% cW1nd0ws sppw
-if %winbuild% GEQ 9200 call :casWpkey %wspp% %o15App% c0ff1ce15 sppo
-if %OsppHook% NEQ 0 (
-net start osppsvc /y >nul 2>&1
-call :casWpkey %ospp% %o14App% osppsvc ospp14
-if %winbuild% LSS 9200 call :casWpkey %ospp% %o15App% osppsvc ospp15
-)
-
-echo %line2%
-echo ***                   Windows Status                     ***
-echo %line2%
-if not defined cW1nd0ws (
-echo.
-echo Error: product key not found.
-goto :casWcon
-)
-set winID=1
-set "_qr=%_zz7% %wspp% %_zz2% %_zz5%ApplicationID='%winApp%' and PartialProductKey is not null%_zz6% %_zz3% ID %_zz8%"
-for /f "tokens=2 delims==" %%# in ('%_qr%') do (
-  set "chkID=%%#"
-  call :casWdet "%wspp%" "%wsps%" "%spp_get%"
-  call :casWout
-  echo %line3%
-  echo.
-)
-
-if defined ohook (
-echo.
-echo.
-echo %line2%
-echo ***            Office Ohook Activation Status            ***
-echo %line2%
-echo.
-powershell "write-host -back 'Black' -fore 'Yellow' 'Ohook for permanent Office activation is installed.'; write-host -back 'Black' -fore 'Yellow' 'You can ignore below Office activation status.'"
-echo.
-)
-
-:casWcon
-set winID=0
-set verbose=1
-if not defined c0ff1ce15 (
-if defined osppsvc goto :casWospp
-goto :casWend
-)
-echo %line2%
-echo ***                   Office Status                      ***
-echo %line2%
-set "_qr=%_zz7% %wspp% %_zz2% %_zz5%ApplicationID='%o15App%' and PartialProductKey is not null%_zz6% %_zz3% ID %_zz8%"
-for /f "tokens=2 delims==" %%# in ('%_qr%') do (
-  set "chkID=%%#"
-  call :casWdet "%wspp%" "%wsps%" "%spp_get%"
-  call :casWout
-  echo %line3%
-  echo.
-)
-set verbose=0
-if defined osppsvc goto :casWospp
-goto :casWend
-
-:casWospp
-if %verbose% EQU 1 (
-echo %line2%
-echo ***                   Office Status                      ***
-echo %line2%
-)
-set "_qr=%_zz7% %ospp% %_zz2% %_zz5%ApplicationID='%o15App%' and PartialProductKey is not null%_zz6% %_zz3% ID %_zz8%"
-if defined ospp15 for /f "tokens=2 delims==" %%# in ('%_qr%') do (
-  set "chkID=%%#"
-  call :casWdet "%ospp%" "%osps%" "%ospp_get%"
-  call :casWout
-  echo %line3%
-  echo.
-)
-set "_qr=%_zz7% %ospp% %_zz2% %_zz5%ApplicationID='%o14App%' and PartialProductKey is not null%_zz6% %_zz3% ID %_zz8%"
-if defined ospp14 for /f "tokens=2 delims==" %%# in ('%_qr%') do (
-  set "chkID=%%#"
-  call :casWdet "%ospp%" "%osps%" "%ospp_get%"
-  call :casWout
-  echo %line3%
-  echo.
-)
-goto :casWend
-
-:casWpkey
-set "_qr=%_zz1% %1 %_zz2% %_zz5%ApplicationID='%2' and PartialProductKey is not null%_zz6% %_zz3% ID %_zz4%"
-%_qr% 2>nul | findstr /i ID 1>nul && (set %3=1&set %4=1)
-exit /b
-
-:casWdet
-for %%# in (%~3) do set "%%#="
-if /i %~1==%ospp% for %%# in (DiscoveredKeyManagementServiceMachineIpAddress, KeyManagementServiceLookupDomain, ProductKeyChannel, VLActivationTypeEnabled) do set "%%#="
-set "cKmsClient="
-set "cTblClient="
-set "cAvmClient="
-set "ExpireMsg="
-set "_xpr="
-set "_qr="wmic path %~1 where ID='%chkID%' get %~3 /value" ^| findstr ^="
-if %WMI_VBS% NEQ 0 set "_qr=%_csg% %~1 "ID='%chkID%'" "%~3""
-for /f "tokens=* delims=" %%# in ('%_qr%') do set "%%#"
-
-set /a _gpr=(GracePeriodRemaining+1440-1)/1440
-echo %Description%| findstr /i VOLUME_KMSCLIENT 1>nul && (set cKmsClient=1&set _mTag=Volume)
-echo %Description%| findstr /i TIMEBASED_ 1>nul && (set cTblClient=1&set _mTag=Timebased)
-echo %Description%| findstr /i VIRTUAL_MACHINE_ACTIVATION 1>nul && (set cAvmClient=1&set _mTag=Automatic VM)
-cmd /c exit /b %LicenseStatusReason%
-set "LicenseReason=%=ExitCode%"
-set "LicenseMsg=Time remaining: %GracePeriodRemaining% minute(s) (%_gpr% day(s))"
-if %_gpr% GEQ 1 if %_WSH% EQU 1 (
-for /f "tokens=* delims=" %%# in ('%_csx% %GracePeriodRemaining%') do set "_xpr=%%#"
-)
-if %_gpr% GEQ 1 if %_prsh% EQU 1 if not defined _xpr (
-for /f "tokens=* delims=" %%# in ('%_psc% "$([DateTime]::Now.addMinutes(%GracePeriodRemaining%)).ToString('yyyy-MM-dd HH:mm:ss')" 2^>nul') do set "_xpr=%%#"
-title Check Activation Status [wmi]
-)
-
-if %LicenseStatus% EQU 0 (
-set "License=Unlicensed"
-set "LicenseMsg="
-)
-if %LicenseStatus% EQU 1 (
-set "License=Licensed"
-set "LicenseMsg="
-if %GracePeriodRemaining% EQU 0 (
-  if %winID% EQU 1 (set "ExpireMsg=The machine is permanently activated.") else (set "ExpireMsg=The product is permanently activated.")
-  ) else (
-  set "LicenseMsg=%_mTag% activation expiration: %GracePeriodRemaining% minute(s) (%_gpr% day(s))"
-  if defined _xpr set "ExpireMsg=%_mTag% activation will expire %_xpr%"
-  )
-)
-if %LicenseStatus% EQU 2 (
-set "License=Initial grace period"
-if defined _xpr set "ExpireMsg=Initial grace period ends %_xpr%"
-)
-if %LicenseStatus% EQU 3 (
-set "License=Additional grace period (KMS license expired or hardware out of tolerance)"
-if defined _xpr set "ExpireMsg=Additional grace period ends %_xpr%"
-)
-if %LicenseStatus% EQU 4 (
-set "License=Non-genuine grace period."
-if defined _xpr set "ExpireMsg=Non-genuine grace period ends %_xpr%"
-)
-if %LicenseStatus% EQU 6 (
-set "License=Extended grace period"
-if defined _xpr set "ExpireMsg=Extended grace period ends %_xpr%"
-)
-if %LicenseStatus% EQU 5 (
-set "License=Notification"
-  if "%LicenseReason%"=="C004F200" (set "LicenseMsg=Notification Reason: 0xC004F200 (non-genuine)."
-  ) else if "%LicenseReason%"=="C004F009" (set "LicenseMsg=Notification Reason: 0xC004F009 (grace time expired)."
-  ) else (set "LicenseMsg=Notification Reason: 0x%LicenseReason%"
-  )
-)
-if %LicenseStatus% GTR 6 (
-set "License=Unknown"
-set "LicenseMsg="
-)
-if not defined cKmsClient exit /b
-
-if %KeyManagementServicePort%==0 set KeyManagementServicePort=1688
-set "KmsReg=Registered KMS machine name: %KeyManagementServiceMachine%:%KeyManagementServicePort%"
-if "%KeyManagementServiceMachine%"=="" set "KmsReg=Registered KMS machine name: KMS name not available"
-
-if %DiscoveredKeyManagementServiceMachinePort%==0 set DiscoveredKeyManagementServiceMachinePort=1688
-set "KmsDns=KMS machine name from DNS: %DiscoveredKeyManagementServiceMachineName%:%DiscoveredKeyManagementServiceMachinePort%"
-if "%DiscoveredKeyManagementServiceMachineName%"=="" set "KmsDns=DNS auto-discovery: KMS name not available"
-
-set "_qr="wmic path %~2 get ClientMachineID, KeyManagementServiceHostCaching /value" ^| findstr ^="
-if %WMI_VBS% NEQ 0 set "_qr=%_csg% %~2 "ClientMachineID, KeyManagementServiceHostCaching""
-for /f "tokens=* delims=" %%# in ('%_qr%') do set "%%#"
-if /i %KeyManagementServiceHostCaching%==True (set KeyManagementServiceHostCaching=Enabled) else (set KeyManagementServiceHostCaching=Disabled)
-
-if %winbuild% LSS 9200 exit /b
-if /i %~1==%ospp% exit /b
-
-if "%KeyManagementServiceLookupDomain%"=="" set "KeyManagementServiceLookupDomain="
-
-if %VLActivationTypeEnabled% EQU 3 (
-set VLActivationType=Token
-) else if %VLActivationTypeEnabled% EQU 2 (
-set VLActivationType=KMS
-) else if %VLActivationTypeEnabled% EQU 1 (
-set VLActivationType=AD
-) else (
-set VLActivationType=All
-)
-
-if %winbuild% LSS 9600 exit /b
-if "%DiscoveredKeyManagementServiceMachineIpAddress%"=="" set "DiscoveredKeyManagementServiceMachineIpAddress=not available"
-exit /b
-
-:casWout
-echo.
-echo Name: %Name%
-echo Description: %Description%
-echo Activation ID: %ID%
-echo Extended PID: %ProductKeyID%
-if defined ProductKeyChannel echo Product Key Channel: %ProductKeyChannel%
-echo Partial Product Key: %PartialProductKey%
-echo License Status: %License%
-if defined LicenseMsg echo %LicenseMsg%
-if not %LicenseStatus%==0 if not %EvaluationEndDate:~0,8%==16010101 echo Evaluation End Date: %EvaluationEndDate:~0,4%-%EvaluationEndDate:~4,2%-%EvaluationEndDate:~6,2% %EvaluationEndDate:~8,2%:%EvaluationEndDate:~10,2% UTC
-if not defined cKmsClient (
-if defined ExpireMsg echo.&echo.    %ExpireMsg%
-exit /b
-)
-if defined VLActivationTypeEnabled echo Configured Activation Type: %VLActivationType%
-echo.
-if not %LicenseStatus%==1 (
-echo Please activate the product in order to update KMS client information values.
-exit /b
-)
-echo Most recent activation information:
-echo Key Management Service client information
-echo.    Client Machine ID (CMID): %ClientMachineID%
-echo.    %KmsDns%
-echo.    %KmsReg%
-if defined DiscoveredKeyManagementServiceMachineIpAddress echo.    KMS machine IP address: %DiscoveredKeyManagementServiceMachineIpAddress%
-echo.    KMS machine extended PID: %KeyManagementServiceProductKeyID%
-echo.    Activation interval: %VLActivationInterval% minutes
-echo.    Renewal interval: %VLRenewalInterval% minutes
-echo.    K.M.S. host caching: %KeyManagementServiceHostCaching%
-if defined KeyManagementServiceLookupDomain echo.    KMS SRV record lookup domain: %KeyManagementServiceLookupDomain%
-if defined ExpireMsg echo.&echo.    %ExpireMsg%
-exit /b
-
-:casWend
-if %_Identity% EQU 1 if %_prsh% EQU 1 (
-echo %line2%
-echo ***                  Office vNext Status                 ***
-echo %line2%
-setlocal EnableDelayedExpansion
-%_psc% "$f=[IO.File]::ReadAllText('!_batp!') -split ':vNextDiag\:.*';iex ($f[1])"
-title Check Activation Status [wmi]
-echo %line3%
-echo.
-)
-echo.
-call :_color %_Yellow% "Press any key to go back..."
-pause >nul
-exit /b
-
-:vNextDiag:
-function PrintModePerPridFromRegistry
-{
-	$vNextRegkey = "HKCU:\SOFTWARE\Microsoft\Office\16.0\Common\Licensing\LicensingNext"
-	$vNextPrids = Get-Item -Path $vNextRegkey -ErrorAction Ignore | Select-Object -ExpandProperty 'property' | Where-Object -FilterScript {$_.ToLower() -like "*retail" -or $_.ToLower() -like "*volume"}
-	If ($vNextPrids -Eq $null)
-	{
-		Write-Host "No registry keys found."
-		Return
-	}
-	$vNextPrids | ForEach `
-	{
-		$mode = (Get-ItemProperty -Path $vNextRegkey -Name $_).$_
-		Switch ($mode)
-		{
-			2 { $mode = "vNext"; Break }
-			3 { $mode = "Device"; Break }
-			Default { $mode = "Legacy"; Break }
-		}
-		Write-Host $_ = $mode
-	}
-}
-function PrintSharedComputerLicensing
-{
-	$scaRegKey = "HKLM:\SOFTWARE\Microsoft\Office\ClickToRun\Configuration"
-	$scaValue = Get-ItemProperty -Path $scaRegKey -ErrorAction Ignore | Select-Object -ExpandProperty "SharedComputerLicensing" -ErrorAction Ignore
-	$scaRegKey2 = "HKLM:\SOFTWARE\Microsoft\Office\16.0\Common\Licensing"
-	$scaValue2 = Get-ItemProperty -Path $scaRegKey2 -ErrorAction Ignore | Select-Object -ExpandProperty "SharedComputerLicensing" -ErrorAction Ignore
-	$scaPolicyKey = "HKLM:\SOFTWARE\Policies\Microsoft\Office\16.0\Common\Licensing"
-	$scaPolicyValue = Get-ItemProperty -Path $scaPolicyKey -ErrorAction Ignore | Select-Object -ExpandProperty "SharedComputerLicensing" -ErrorAction Ignore
-	If ($scaValue -Eq $null -And $scaValue2 -Eq $null -And $scaPolicyValue -Eq $null)
-	{
-		Write-Host "No registry keys found."
-		Return
-	}
-	$scaModeValue = $scaValue -Or $scaValue2 -Or $scaPolicyValue
-	If ($scaModeValue -Eq 0)
-	{
-		$scaMode = "Disabled"
-	}
-	If ($scaModeValue -Eq 1)
-	{
-		$scaMode = "Enabled"
-	}
-	Write-Host "SharedComputerLicensing" = $scaMode
-	Write-Host
-	$tokenFiles = $null
-	$tokenPath = "${env:LOCALAPPDATA}\Microsoft\Office\16.0\Licensing"
-	If (Test-Path $tokenPath)
-	{
-		$tokenFiles = Get-ChildItem -Path $tokenPath -Recurse -File -Filter "*authString*"
-	}
-	If ($tokenFiles.length -Eq 0)
-	{
-		Write-Host "No tokens found."
-		Return
-	}
-	$tokenFiles | ForEach `
-	{
-		$tokenParts = (Get-Content -Encoding Unicode -Path $_.FullName).Split('_')
-		$output = [PSCustomObject] `
-			@{
-				ACID = $tokenParts[0];
-				User = $tokenParts[3]
-				NotBefore = $tokenParts[4];
-				NotAfter = $tokenParts[5];
-			} | ConvertTo-Json
-		Write-Host $output
-	}
-}
-function PrintLicensesInformation
-{
-	Param(
-		[ValidateSet("NUL", "Device")]
-		[String]$mode
-	)
-	If ($mode -Eq "NUL")
-	{
-		$licensePath = "${env:LOCALAPPDATA}\Microsoft\Office\Licenses"
-	}
-	ElseIf ($mode -Eq "Device")
-	{
-		$licensePath = "${env:PROGRAMDATA}\Microsoft\Office\Licenses"
-	}
-	$licenseFiles = $null
-	If (Test-Path $licensePath)
-	{
-		$licenseFiles = Get-ChildItem -Path $licensePath -Recurse -File
-	}
-	If ($licenseFiles.length -Eq 0)
-	{
-		Write-Host "No licenses found."
-		Return
-	}
-	$licenseFiles | ForEach `
-	{
-		$license = (Get-Content -Encoding Unicode $_.FullName | ConvertFrom-Json).License
-		$decodedLicense = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($license)) | ConvertFrom-Json
-		$licenseType = $decodedLicense.LicenseType
-		If ($null -Ne $decodedLicense.ExpiresOn)
-		{
-			$expiry = [DateTime]::Parse($decodedLicense.ExpiresOn, $null, 48)
-		}
-		Else
-		{
-			$expiry = New-Object DateTime
-		}
-		$licenseState = $null
-		If ((Get-Date) -Gt (Get-Date $decodedLicense.MetaData.NotAfter))
-		{
-			$licenseState = "RFM"
-		}
-		ElseIf ((Get-Date) -Lt (Get-Date $expiry))
-		{
-			$licenseState = "Licensed"
-		}
-		Else
-		{
-			$licenseState = "Grace"
-		}
-		if ($mode -Eq "NUL")
-		{
-			$output = [PSCustomObject] `
-			@{
-				Version = $_.Directory.Name
-				Type = "User|${licenseType}";
-				Product = $decodedLicense.ProductReleaseId;
-				Acid = $decodedLicense.Acid;
-				LicenseState = $licenseState;
-				EntitlementStatus = $decodedLicense.Status;
-				EntitlementExpiration = $decodedLicense.ExpiresOn;
-				ReasonCode = $decodedLicense.ReasonCode;
-				NotBefore = $decodedLicense.Metadata.NotBefore;
-				NotAfter = $decodedLicense.Metadata.NotAfter;
-				NextRenewal = $decodedLicense.Metadata.RenewAfter;
-				TenantId = $decodedLicense.Metadata.TenantId;
-			} | ConvertTo-Json
-		}
-		ElseIf ($mode -Eq "Device")
-		{
-			$output = [PSCustomObject] `
-			@{
-				Version = $_.Directory.Name
-				Type = "Device|${licenseType}";
-				Product = $decodedLicense.ProductReleaseId;
-				Acid = $decodedLicense.Acid;
-				DeviceId = $decodedLicense.Metadata.DeviceId;
-				LicenseState = $licenseState;
-				EntitlementStatus = $decodedLicense.Status;
-				EntitlementExpiration = $decodedLicense.ExpiresOn;
-				ReasonCode = $decodedLicense.ReasonCode;
-				NotBefore = $decodedLicense.Metadata.NotBefore;
-				NotAfter = $decodedLicense.Metadata.NotAfter;
-				NextRenewal = $decodedLicense.Metadata.RenewAfter;
-				TenantId = $decodedLicense.Metadata.TenantId;
-			} | ConvertTo-Json
-		}
-		Write-Output $output
-	}
-}
-	Write-Host
-	Write-Host "========== Mode per ProductReleaseId =========="
-	Write-Host
-PrintModePerPridFromRegistry
-	Write-Host
-	Write-Host "========== Shared Computer Licensing =========="
-	Write-Host
-PrintSharedComputerLicensing
-	Write-Host
-	Write-Host "========== vNext licenses =========="
-	Write-Host
-PrintLicensesInformation -Mode "NUL"
-	Write-Host
-	Write-Host "========== Device licenses =========="
-	Write-Host
-PrintLicensesInformation -Mode "Device"
-:vNextDiag:
-
-:+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-:troubleshoot
-@setlocal DisableDelayedExpansion
-@echo off
-
-::========================================================================================================================================
-
-cls
-color 07
-title  Troubleshoot %masver%
-
-set _args=
-set _elev=
-
-set _args=%*
-if defined _args set _args=%_args:"=%
-if defined _args (
-for %%A in (%_args%) do (
-if /i "%%A"=="-el"                    set _elev=1
-)
-)
-
-set "nul1=1>nul"
-set "nul2=2>nul"
-set "nul6=2^>nul"
-set "nul=>nul 2>&1"
-
-set psc=powershell.exe
-set winbuild=1
-for /f "tokens=6 delims=[]. " %%G in ('ver') do set winbuild=%%G
-
-set _NCS=1
-if %winbuild% LSS 10586 set _NCS=0
-if %winbuild% GEQ 10586 reg query "HKCU\Console" /v ForceV2 %nul2% | find /i "0x0" %nul1% && (set _NCS=0)
-
-call :_colorprep
-
-set "nceline=echo: &echo ==== ERROR ==== &echo:"
-set "eline=echo: &call :_color %Red% "==== ERROR ====" &echo:"
-set "line=_________________________________________________________________________________________________"
-if %~z0 GEQ 200000 (set "_exitmsg=Go back") else (set "_exitmsg=Exit")
-
-::========================================================================================================================================
-
-::  Fix for the special characters limitation in path name
-
-set "_work=%~dp0"
-if "%_work:~-1%"=="\" set "_work=%_work:~0,-1%"
-
-set "_batf=%~f0"
-set "_batp=%_batf:'=''%"
-
-set _PSarg="""%~f0""" -el %_args%
-
-set "_ttemp=%userprofile%\AppData\Local\Temp"
-
-::  Check desktop location
-
-set desktop=
-for /f "skip=2 tokens=2*" %%a in ('reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v Desktop') do call set "desktop=%%b"
-if not defined desktop for /f "delims=" %%a in ('%psc% "& {write-host $([Environment]::GetFolderPath('Desktop'))}"') do call set "desktop=%%a"
-
-if not defined desktop (
-%eline%
-echo Desktop location was not detected, aborting...
-goto at_done
-)
-
-setlocal EnableDelayedExpansion
-
-::========================================================================================================================================
-
-:at_menu
-
-cls
-color 07
-title  Troubleshoot %masver%
-mode con cols=77 lines=30
-
-echo:
-echo:
-echo:
-echo:
-echo:       _______________________________________________________________
-echo:                                                   
-call :_color2 %_White% "             [1] " %_Green% "Help"
-echo:             ___________________________________________________
-echo:                                                                      
-echo:             [2] Dism RestoreHealth
-echo:             [3] SFC Scannow
-echo:                                                                      
-echo:             [4] Fix WMI
-echo:             [5] Fix Licensing
-echo:             [6] Fix WPA Registry
-echo:             ___________________________________________________
-echo:
-echo:             [0] %_exitmsg%
-echo:       _______________________________________________________________
-echo:          
-call :_color2 %_White% "            " %_Green% "Enter a menu option in the Keyboard :"
-choice /C:1234560 /N
-set _erl=%errorlevel%
-
-if %_erl%==7 exit /b
-if %_erl%==6 start %mas%fix-wpa-registry.html &goto at_menu
-if %_erl%==5 goto:retokens
-if %_erl%==4 goto:fixwmi
-if %_erl%==3 goto:sfcscan
-if %_erl%==2 goto:dism_rest
-if %_erl%==1 start %mas%troubleshoot.html &goto at_menu
-goto :at_menu
-
-::========================================================================================================================================
-
-:dism_rest
-
-cls
-mode 98, 30
-title  Dism /English /Online /Cleanup-Image /RestoreHealth
-
-if %winbuild% LSS 9200 (
-%eline%
-echo Unsupported OS version Detected.
-echo This command is supported only for Windows 8/8.1/10/11 and their Server equivalent.
-goto :at_back
-)
-
-set _int=
-for %%a in (l.root-servers.net resolver1.opendns.com download.windowsupdate.com google.com) do if not defined _int (
-for /f "delims=[] tokens=2" %%# in ('ping -n 1 %%a') do (if not [%%#]==[] set _int=1)
-)
-
-echo:
-if defined _int (
-echo      Checking Internet Connection  [Connected]
-) else (
-call :_color2 %_White% "     " %Red% "Checking Internet Connection  [Not connected]"
-)
-
-echo %line%
-echo:
-echo      Dism uses Windows Update to provide the files required to fix corruption.
-echo      This will take 5-15 minutes or more..
-echo %line%
-echo:
-echo      Notes:
-echo:
-call :_color2 %_White% "     - " %Gray% "Make sure the Internet is connected."
-call :_color2 %_White% "     - " %Gray% "Make sure the Windows update is properly working."
-echo:
-echo %line%
-echo:
-choice /C:09 /N /M ">    [9] Continue [0] Go back : "
-if %errorlevel%==1 goto at_menu
-
-cls
-mode 110, 30
-%psc% Stop-Service TrustedInstaller -force %nul%
-
-set _time=
-for /f %%a in ('%psc% "Get-Date -format HH_mm_ss"') do set _time=%%a
-echo:
-echo Applying the command,
-echo dism /english /online /cleanup-image /restorehealth
-dism /english /online /cleanup-image /restorehealth
-
-%psc% Stop-Service TrustedInstaller -force %nul%
-
-if not exist "!desktop!\AT_Logs\" md "!desktop!\AT_Logs\" %nul%
-
-call :compresslog cbs\CBS.log RHealth_CBS %nul%
-call :compresslog DISM\dism.log RHealth_DISM %nul%
-
-if not exist "!desktop!\AT_Logs\RHealth_CBS_%_time%.cab" (
-copy /y /b "%SystemRoot%\logs\cbs\cbs.log" "!desktop!\AT_Logs\RHealth_CBS_%_time%.log" %nul%
-)
-
-if not exist "!desktop!\AT_Logs\RHealth_DISM_%_time%.cab" (
-copy /y /b "%SystemRoot%\logs\DISM\dism.log" "!desktop!\AT_Logs\RHealth_DISM_%_time%.log" %nul%
-)
-
-echo:
-call :_color %Gray% "CBS and DISM logs are copied to the AT_Logs folder on the dekstop."
-goto :at_back
-
-::========================================================================================================================================
-
-:sfcscan
-
-cls
-mode 98, 30
-title  sfc /scannow
-
-echo:
-echo %line%
-echo:    
-echo      System File Checker will repair missing or corrupted system files.
-echo      This will take 10-15 minutes or more..
-echo:
-echo      If SFC could not fix something, then run the command again to see if it may be able 
-echo      to the next time. Sometimes it may take running the sfc /scannow command 3 times
-echo      restarting the PC after each time to completely fix everything that it's able to.
-echo:   
-echo %line%
-echo:
-choice /C:09 /N /M ">    [9] Continue [0] Go back : "
-if %errorlevel%==1 goto at_menu
-
-cls
-%psc% Stop-Service TrustedInstaller -force %nul%
-
-set _time=
-for /f %%a in ('%psc% "Get-Date -format HH_mm_ss"') do set _time=%%a
-echo:
-echo Applying the command,
-echo sfc /scannow
-sfc /scannow
-
-%psc% Stop-Service TrustedInstaller -force %nul%
-
-if not exist "!desktop!\AT_Logs\" md "!desktop!\AT_Logs\" %nul%
-
-call :compresslog cbs\CBS.log SFC_CBS %nul%
-
-if not exist "!desktop!\AT_Logs\SFC_CBS_%_time%.cab" (
-copy /y /b "%SystemRoot%\logs\cbs\cbs.log" "!desktop!\AT_Logs\SFC_CBS_%_time%.log" %nul%
-)
-
-echo:
-call :_color %Gray% "CBS log is copied to the AT_Logs folder on the dekstop."
-goto :at_back
-
-::========================================================================================================================================
-
-:retokens
-
-cls
-mode con cols=125 lines=32
-%psc% "&{$W=$Host.UI.RawUI.WindowSize;$B=$Host.UI.RawUI.BufferSize;$W.Height=31;$B.Height=200;$Host.UI.RawUI.WindowSize=$W;$Host.UI.RawUI.BufferSize=$B;}"
-title  Fix Licensing ^(ClipSVC ^+ Office vNext ^+ SPP ^+ OSPP^)
-
-echo:
-echo %line%
-echo:   
-echo      Notes:
-echo:
-echo       - It helps in troubleshooting activation issues.
-echo:
-echo       - This option will,
-echo            - Deactivate Windows and Office, you may need to reactivate
-echo              If Windows is activated with motherboard / OEM / Digital license then don't worry
-echo:
-echo            - Clear ClipSVC, Office vNext, SPP and OSPP licenses
-echo            - Fix SPP permissions of tokens folder and registries
-echo            - Trigger the repair option for Office.
-echo:
-call :_color2 %_White% "      - " %Red% "Apply it only when it is necessary."
-echo:
-echo %line%
-echo:
-choice /C:09 /N /M ">    [9] Continue [0] Go back : "
-if %errorlevel%==1 goto at_menu
-
-::========================================================================================================================================
-
-::  Rebuild ClipSVC Licences
-
-cls
-:cleanlicensing
-
-echo:
-echo %line%
-echo:
-call :_color %Blue% "Rebuilding ClipSVC Licences"
-echo:
-
-if %winbuild% LSS 10240 (
-echo ClipSVC Licence rebuilding is supported only on Win 10/11 and Server equivalent.
-echo Skipping...
-goto :cleanvnext
-)
-
-%psc% "(([WMISEARCHER]'SELECT Name FROM SoftwareLicensingProduct WHERE LicenseStatus=1 AND GracePeriodRemaining=0 AND PartialProductKey IS NOT NULL').Get()).Name" %nul2% | findstr /i "Windows" %nul1% && (
-echo Windows is permanently activated.
-echo Skipping rebuilding ClipSVC licences...
-goto :cleanvnext
-)
-
-echo Stopping ClipSVC service...
-%psc% Stop-Service ClipSVC -force %nul%
-timeout /t 2 %nul%
-
-echo:
-echo Applying the command to Clean ClipSVC Licences...
-echo rundll32 clipc.dll,ClipCleanUpState
-
-rundll32 clipc.dll,ClipCleanUpState
-
-if %winbuild% LEQ 10240 (
-echo [Successful]
-) else (
-if exist "%ProgramData%\Microsoft\Windows\ClipSVC\tokens.dat" (
-call :_color %Red% "[Failed]"
-) else (
-echo [Successful]
-)
-)
-
-::  Below registry key (Volatile & Protected) gets created after the ClipSVC License cleanup command, and gets automatically deleted after 
-::  system restart. It needs to be deleted to activate the system without restart.
-
-set "RegKey=HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ClipSVC\Volatile\PersistedSystemState"
-set "_ident=HKU\S-1-5-19\SOFTWARE\Microsoft\IdentityCRL"
-
-reg query "%RegKey%" %nul% && %nul% call :regownstart
-reg delete "%RegKey%" /f %nul% 
-
-echo:
-echo Deleting a Volatile ^& Protected Registry Key...
-echo [%RegKey%]
-reg query "%RegKey%" %nul% && (
-call :_color %Red% "[Failed]"
-echo Restart the system, that will delete this registry key automatically.
-) || (
-echo [Successful]
-)
-
-::   Clear HWID token related registry to fix activation incase if there is any corruption
-
-echo:
-echo Deleting a IdentityCRL Registry Key...
-echo [%_ident%]
-reg delete "%_ident%" /f %nul%
-reg query "%_ident%" %nul% && (
-call :_color %Red% "[Failed]"
-) || (
-echo [Successful]
-)
-
-%psc% Stop-Service ClipSVC -force %nul%
-
-::  Rebuild ClipSVC folder to fix permission issues
-
-echo:
-if %winbuild% GTR 10240 (
-echo Deleting Folder %ProgramData%\Microsoft\Windows\ClipSVC\
-rmdir /s /q "C:\ProgramData\Microsoft\Windows\ClipSvc" %nul%
-
-if exist "%ProgramData%\Microsoft\Windows\ClipSVC\" (
-call :_color %Red% "[Failed]"
-) else (
-echo [Successful]
-)
-
-echo:
-echo Rebuilding Folder %ProgramData%\Microsoft\Windows\ClipSVC\
-%psc% Start-Service ClipSVC %nul%
-timeout /t 3 %nul%
-if not exist "%ProgramData%\Microsoft\Windows\ClipSVC\" timeout /t 5 %nul%
-if not exist "%ProgramData%\Microsoft\Windows\ClipSVC\" (
-call :_color %Red% "[Failed]"
-) else (
-echo [Successful]
-)
-)
-
-echo:
-echo Restarting [wlidsvc LicenseManager] services...
-for %%# in (wlidsvc LicenseManager) do (%psc% Restart-Service %%# %nul%)
-
-::========================================================================================================================================
-
-::  Find remnants of Office vNext license block and remove it because it stops non vNext licenses from appearing
-::  https://learn.microsoft.com/en-us/office/troubleshoot/activation/reset-office-365-proplus-activation-state
-
-:cleanvnext
-
-echo:
-echo %line%
-echo:
-call :_color %Blue% "Clearing Office vNext License"
-echo:
-
-setlocal DisableDelayedExpansion
-set "_Local=%LocalAppData%"
-setlocal EnableDelayedExpansion
-
-attrib -R "!ProgramData!\Microsoft\Office\Licenses" %nul%
-attrib -R "!_Local!\Microsoft\Office\Licenses" %nul%
-
-if exist "!ProgramData!\Microsoft\Office\Licenses\" (
-rd /s /q "!ProgramData!\Microsoft\Office\Licenses\" %nul%
-if exist "!ProgramData!\Microsoft\Office\Licenses\" (
-echo Failed To Delete - !ProgramData!\Microsoft\Office\Licenses\
-) else (
-echo Deleted Folder - !ProgramData!\Microsoft\Office\Licenses\
-)
-) else (
-echo Not Found - !ProgramData!\Microsoft\Office\Licenses\
-)
-
-if exist "!_Local!\Microsoft\Office\Licenses\" (
-rd /s /q "!_Local!\Microsoft\Office\Licenses\" %nul%
-if exist "!_Local!\Microsoft\Office\Licenses\" (
-echo Failed To Delete - !_Local!\Microsoft\Office\Licenses\
-) else (
-echo Deleted Folder - !_Local!\Microsoft\Office\Licenses\
-)
-) else (
-echo Not Found - !_Local!\Microsoft\Office\Licenses\
-)
-
-
-echo:
-for /f "tokens=* delims=" %%a in ('%psc% "Get-ChildItem -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList' | ForEach-Object { Split-Path -Path $_.PSPath -Leaf }" %nul6%') do (if defined _sid (set "_sid=!_sid! HKU\%%a") else (set "_sid=HKU\%%a"))
-
-set regfound=
-for %%# in (HKCU !_sid!) do (
-for %%A in (
-%%#\Software\Microsoft\Office\16.0\Common\Licensing
-%%#\Software\Microsoft\Office\16.0\Common\Identity
-%%#\Software\Microsoft\Office\16.0\Registration
-) do (
-reg query %%A %nul% && (
-set regfound=1
-reg delete %%A /f %nul% && (
-echo Deleted Registry - %%A
-) || (
-echo Failed to Delete - %%A
-)
-)
-)
-)
-if not defined regfound echo Not Found - Office vNext Registry Keys
-
-::========================================================================================================================================
-
-::  Rebuild SPP Tokens
-
-echo:
-echo %line%
-echo:
-call :_color %Blue% "Rebuilding SPP Licensing Tokens"
-echo:
-
-call :scandat check
-
-if not defined token (
-call :_color %Red% "tokens.dat file not found."
-) else (
-echo tokens.dat file: [%token%]
-)
-
-echo:
-set wpainfo=
-for /f "delims=" %%a in ('%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':wpatest\:.*';iex ($f[1]);" %nul6%') do (set wpainfo=%%a)
-echo "%wpainfo%" | find /i "Error Found" %nul% && (
-call :_color %Red% "WPA Registry Error: %wpainfo%"
-) || (
-echo WPA Registry Count: %wpainfo%
-)
-
-set tokenstore=
-for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v TokenStore %nul6%') do call set "tokenstore=%%b"
-
-::  Check sppsvc permissions and apply fixes
-
-if %winbuild% GEQ 10240 (
-
-echo:
-echo Checking SPP permission related issues...
-call :checkperms
-
-if defined permerror (
-
-mkdir "%tokenstore%" %nul%
-set "d=$sddl = 'O:BAG:BAD:PAI(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;OICIIO;GR;;;BU)(A;;FR;;;BU)(A;OICI;FA;;;S-1-5-80-123231216-2592883651-3715271367-3753151631-4175906628)';"
-set "d=!d! $AclObject = New-Object System.Security.AccessControl.DirectorySecurity;"
-set "d=!d! $AclObject.SetSecurityDescriptorSddlForm($sddl);"
-set "d=!d! Set-Acl -Path %tokenstore% -AclObject $AclObject;"
-%psc% "!d!" %nul%
-
-for %%# in (
-"HKLM:\SYSTEM\WPA_QueryValues, EnumerateSubKeys, WriteKey"
-"HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform_SetValue"
-) do for /f "tokens=1,2 delims=_" %%A in (%%#) do (
-set "d=$acl = Get-Acl '%%A';"
-set "d=!d! $rule = New-Object System.Security.AccessControl.RegistryAccessRule ('NT Service\sppsvc', '%%B', 'ContainerInherit, ObjectInherit','None','Allow');"
-set "d=!d! $acl.ResetAccessRule($rule);"
-set "d=!d! $acl.SetAccessRule($rule);"
-set "d=!d! Set-Acl -Path '%%A' -AclObject $acl"
-%psc% "!d!" %nul%
-)
-
-call :checkperms
-if defined permerror (
-call :_color %Red% "[Failed To Fix]"
-) else (
-echo [Successfully Fixed]
-)
-) else (
-echo [No Error Found]
-)
-)
-
-echo:
-echo Stopping sppsvc service...
-%psc% Stop-Service sppsvc -force %nul%
-
-echo:
-call :scandat delete
-call :scandat check
-
-if defined token (
-echo:
-call :_color %Red% "Failed to delete .dat files."
-echo:
-)
-
-echo:
-echo Reinstalling System Licenses [slmgr /rilc]...
-cscript //nologo %windir%\system32\slmgr.vbs /rilc %nul%
-if %errorlevel% NEQ 0 cscript //nologo %windir%\system32\slmgr.vbs /rilc %nul%
-if %errorlevel% EQU 0 (
-echo [Successful]
-) else (
-call :_color %Red% "[Failed]"
-)
-
-call :scandat check
-
-echo:
-if not defined token (
-call :_color %Red% "Failed to rebuilt tokens.dat file."
-) else (
-echo tokens.dat file was rebuilt successfully.
-)
-
-::========================================================================================================================================
-
-::  Rebuild OSPP Tokens
-
-echo:
-echo %line%
-echo:
-call :_color %Blue% "Rebuilding OSPP Licensing Tokens"
-echo:
-
-sc qc osppsvc %nul% || (
-echo OSPP based Office is not installed
-echo Skipping rebuilding OSPP tokens...
-goto :repairoffice
-)
-
-call :scandatospp check
-
-if not defined token (
-call :_color %Red% "tokens.dat file not found."
-) else (
-echo tokens.dat file: [%token%]
-)
-
-echo:
-echo Stopping osppsvc service...
-%psc% Stop-Service osppsvc -force %nul%
-
-echo:
-call :scandatospp delete
-call :scandatospp check
-
-if defined token (
-echo:
-call :_color %Red% "Failed to delete .dat files."
-echo:
-)
-
-echo:
-echo Starting osppsvc service to generate tokens.dat
-%psc% Start-Service osppsvc %nul%
-call :scandatospp check
-if not defined token (
-%psc% Stop-Service osppsvc -force %nul%
-%psc% Start-Service osppsvc %nul%
-timeout /t 3 %nul%
-)
-
-call :scandatospp check
-
-echo:
-if not defined token (
-call :_color %Red% "Failed to rebuilt tokens.dat file."
-) else (
-echo tokens.dat file was rebuilt successfully.
-)
-
-::========================================================================================================================================
-
-:repairoffice
-
-echo:
-echo %line%
-echo:
-call :_color %Blue% "Repairing Office Licenses"
-echo:
-
-for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v PROCESSOR_ARCHITECTURE') do set arch=%%b
-
-if /i "%arch%"=="ARM64" (
-echo:
-echo ARM64 Windows Found.
-echo You need to use repair option in Windows settings for Office.
-echo:
-start ms-settings:appsfeatures
-goto :repairend
-)
-
-if /i "%arch%"=="x86" (
-set arch=X86
-) else (
-set arch=X64
-)
-
-for %%# in (68 86) do (
-for %%A in (msi14 msi15 msi16 c2r14 c2r15 c2r16) do (set %%A_%%#=&set %%Arepair%%#=)
-)
-
-set _68=HKLM\SOFTWARE\Microsoft\Office
-set _86=HKLM\SOFTWARE\Wow6432Node\Microsoft\Office
-
-reg query %_68%\14.0\CVH /f Click2run /k %nul% && (set "c2r14_68=Office 14.0 C2R x86/x64"  & set "c2r14repair68=")
-reg query %_86%\14.0\CVH /f Click2run /k %nul% && (set "c2r14_86=Office 14.0 C2R x86"      & set "c2r14repair86=")
-
-for /f "skip=2 tokens=2*" %%a in ('"reg query %_86%\14.0\Common\InstallRoot /v Path" %nul6%') do if exist "%%b\EntityPicker.dll" (set "msi14_86=Office 14.0 MSI x86"      & set "msi14repair86=%systemdrive%\Program Files (x86)\Common Files\Microsoft Shared\OFFICE14\Office Setup Controller\Setup.exe")
-for /f "skip=2 tokens=2*" %%a in ('"reg query %_68%\14.0\Common\InstallRoot /v Path" %nul6%') do if exist "%%b\EntityPicker.dll" (set "msi14_68=Office 14.0 MSI x86/x64"  & set "msi14repair68=%systemdrive%\Program Files\Common Files\microsoft shared\OFFICE14\Office Setup Controller\Setup.exe")
-for /f "skip=2 tokens=2*" %%a in ('"reg query %_86%\15.0\Common\InstallRoot /v Path" %nul6%') do if exist "%%b\EntityPicker.dll" (set "msi15_86=Office 15.0 MSI x86"      & set "msi15repair86=%systemdrive%\Program Files (x86)\Common Files\Microsoft Shared\OFFICE15\Office Setup Controller\Setup.exe")
-for /f "skip=2 tokens=2*" %%a in ('"reg query %_68%\15.0\Common\InstallRoot /v Path" %nul6%') do if exist "%%b\EntityPicker.dll" (set "msi15_68=Office 15.0 MSI x86/x64"  & set "msi15repair68=%systemdrive%\Program Files\Common Files\microsoft shared\OFFICE15\Office Setup Controller\Setup.exe")
-for /f "skip=2 tokens=2*" %%a in ('"reg query %_86%\16.0\Common\InstallRoot /v Path" %nul6%') do if exist "%%b\EntityPicker.dll" (set "msi16_86=Office 16.0 MSI x86"      & set "msi16repair86=%systemdrive%\Program Files (x86)\Common Files\Microsoft Shared\OFFICE16\Office Setup Controller\Setup.exe")
-for /f "skip=2 tokens=2*" %%a in ('"reg query %_68%\16.0\Common\InstallRoot /v Path" %nul6%') do if exist "%%b\EntityPicker.dll" (set "msi16_68=Office 16.0 MSI x86/x64"  & set "msi16repair68=%systemdrive%\Program Files\Common Files\Microsoft Shared\OFFICE16\Office Setup Controller\Setup.exe")
-
-for /f "skip=2 tokens=2*" %%a in ('"reg query %_86%\15.0\ClickToRun /v InstallPath" %nul6%') do if exist "%%b\root\Licenses\ProPlus*.xrm-ms" (set "c2r15_86=Office 15.0 C2R x86"      & set "c2r15repair86=%systemdrive%\Program Files\Microsoft Office 15\Client%arch%\integratedoffice.exe")
-for /f "skip=2 tokens=2*" %%a in ('"reg query %_68%\15.0\ClickToRun /v InstallPath" %nul6%') do if exist "%%b\root\Licenses\ProPlus*.xrm-ms" (set "c2r15_68=Office 15.0 C2R x86/x64"  & set "c2r15repair68=%systemdrive%\Program Files\Microsoft Office 15\Client%arch%\integratedoffice.exe")
-for /f "skip=2 tokens=2*" %%a in ('"reg query %_86%\ClickToRun /v InstallPath" %nul6%') do if exist "%%b\root\Licenses16\ProPlus*.xrm-ms"    (set "c2r16_86=Office 16.0 C2R x86"      & set "c2r16repair86=%systemdrive%\Program Files\Microsoft Office 15\Client%arch%\OfficeClickToRun.exe")
-for /f "skip=2 tokens=2*" %%a in ('"reg query %_68%\ClickToRun /v InstallPath" %nul6%') do if exist "%%b\root\Licenses16\ProPlus*.xrm-ms"    (set "c2r16_68=Office 16.0 C2R x86/x64"  & set "c2r16repair68=%systemdrive%\Program Files\Microsoft Office 15\Client%arch%\OfficeClickToRun.exe")
-
-set uwp16=
-if %winbuild% GEQ 10240 (
-%psc% "Get-AppxPackage -name "Microsoft.Office.Desktop"" | find /i "Office" %nul1% && set uwp16=Office 16.0 UWP
-)
-
-set /a counter=0
-echo Checking installed Office versions...
-echo:
-
-for %%# in (
-"%msi14_68%"
-"%msi14_86%"
-"%msi15_68%"
-"%msi15_86%"
-"%msi16_68%"
-"%msi16_86%"
-"%c2r14_68%"
-"%c2r14_86%"
-"%c2r15_68%"
-"%c2r15_86%"
-"%c2r16_68%"
-"%c2r16_86%"
-"%uwp16%"
-) do (
-if not "%%#"=="""" (
-set insoff=%%#
-set insoff=!insoff:"=!
-echo [!insoff!]
-set /a counter+=1
-)
-)
-
-if %counter% GTR 1 (
-%eline%
-echo Multiple office versions found.
-echo It's recommended to install only one version of office.
-echo ________________________________________________________________
-echo:
-)
-
-if %counter% EQU 0 (
-echo:
-echo Installed Office is not found.
-goto :repairend
-echo:
-) else (
-echo:
-call :_color %_Yellow% "A Window will popup, in that Window you need to select [Quick] Repair Option..."
-call :_color %_Yellow% "Press any key to continue..."
-echo:
-pause %nul1%
-)
-
-if defined uwp16 (
-echo:
-echo Note: Skipping repair for Office 16.0 UWP. 
-echo       You need to use reset option in Windows settings for it.
-echo ________________________________________________________________
-echo:
-start ms-settings:appsfeatures
-)
-
-set c2r14=
-if defined c2r14_68 set c2r14=1
-if defined c2r14_86 set c2r14=1
-
-if defined c2r14 (
-echo:
-echo Note: Skipping repair for Office 14.0 C2R 
-echo       You need to use Repair option in Windows settings for it.
-echo ________________________________________________________________
-echo:
-start appwiz.cpl
-)
-
-if defined msi14_68 if exist "%msi14repair68%" echo Running - "%msi14repair68%"                    & "%msi14repair68%"
-if defined msi14_86 if exist "%msi14repair86%" echo Running - "%msi14repair86%"                    & "%msi14repair86%"
-if defined msi15_68 if exist "%msi15repair68%" echo Running - "%msi15repair68%"                    & "%msi15repair68%"
-if defined msi15_86 if exist "%msi15repair86%" echo Running - "%msi15repair86%"                    & "%msi15repair86%"
-if defined msi16_68 if exist "%msi16repair68%" echo Running - "%msi16repair68%"                    & "%msi16repair68%"
-if defined msi16_86 if exist "%msi16repair86%" echo Running - "%msi16repair86%"                    & "%msi16repair86%"
-if defined c2r15_68 if exist "%c2r15repair68%" echo Running - "%c2r15repair68%" REPAIRUI RERUNMODE & "%c2r15repair68%" REPAIRUI RERUNMODE
-if defined c2r15_86 if exist "%c2r15repair86%" echo Running - "%c2r15repair86%" REPAIRUI RERUNMODE & "%c2r15repair86%" REPAIRUI RERUNMODE
-if defined c2r16_68 if exist "%c2r16repair68%" echo Running - "%c2r16repair68%" scenario=Repair    & "%c2r16repair68%" scenario=Repair
-if defined c2r16_86 if exist "%c2r16repair86%" echo Running - "%c2r16repair86%" scenario=Repair    & "%c2r16repair86%" scenario=Repair
-
-:repairend
-
-echo:
-echo %line%
-echo:
-echo:
-call :_color %Green% "Finished"
-goto :at_back
-
-::========================================================================================================================================
-
-:fixwmi
-
-cls
-mode 98, 34
-title  Fix WMI
-
-::  https://techcommunity.microsoft.com/t5/ask-the-performance-team/wmi-repository-corruption-or-not/ba-p/375484
-
-if exist "%SystemRoot%\Servicing\Packages\Microsoft-Windows-Server*Edition~*.mum" (
-%eline%
-echo WMI rebuild is not recommended on Windows Server. Aborting...
-goto :at_back
-)
-
-for %%# in (wmic.exe) do @if "%%~$PATH:#"=="" (
-%eline%
-echo wmic.exe file is not found in the system. Aborting...
-goto :at_back
-)
-
-echo:
-echo Checking WMI
-call :checkwmi
-
-::  Apply basic fix first and check
-
-if defined error (
-%psc% Stop-Service Winmgmt -force %nul%
-winmgmt /salvagerepository %nul%
-call :checkwmi
-)
-
-if not defined error (
-echo [Working]
-echo No need to apply this option. Aborting...
-goto :at_back
-)
-
-call :_color %Red% "[Not Responding]"
-
-set _corrupt=
-sc start Winmgmt %nul%
-if %errorlevel% EQU 1060 set _corrupt=1
-sc query Winmgmt %nul% || set _corrupt=1
-for %%G in (DependOnService Description DisplayName ErrorControl ImagePath ObjectName Start Type) do if not defined _corrupt (reg query HKLM\SYSTEM\CurrentControlSet\Services\Winmgmt /v %%G %nul% || set _corrupt=1)
-
-echo:
-if defined _corrupt (
-%eline%
-echo Winmgmt service is corrupted. Aborting...
-goto :at_back
-)
-
-echo Disabling Winmgmt service
-sc config Winmgmt start= disabled %nul%
-if %errorlevel% EQU 0 (
-echo [Successful]
-) else (
-call :_color %Red% "[Failed] Aborting..."
-sc config Winmgmt start= auto %nul%
-goto :at_back
-)
-
-echo:
-echo Stopping Winmgmt service
-%psc% Stop-Service Winmgmt -force %nul%
-%psc% Stop-Service Winmgmt -force %nul%
-%psc% Stop-Service Winmgmt -force %nul%
-sc query Winmgmt | find /i "STOPPED" %nul% && (
-echo [Successful]
-) || (
-call :_color %Red% "[Failed]"
-echo:
-call :_color %Blue% "Its recommended to select [Restart] option and then apply Fix WMI option again."
-echo %line%
-echo:
-choice /C:21 /N /M "> [1] Restart  [2] Revert Back Changes :"
-if !errorlevel!==1 (sc config Winmgmt start= auto %nul%&goto :at_back)
-echo:
-echo Restarting...
-shutdown -t 5 -r
-exit
-)
-
-echo:
-echo Deleting WMI repository
-rmdir /s /q "%windir%\System32\wbem\repository\" %nul%
-if exist "%windir%\System32\wbem\repository\" (
-call :_color %Red% "[Failed]"
-) else (
-echo [Successful]
-)
-
-echo:
-echo Enabling Winmgmt service
-sc config Winmgmt start= auto %nul%
-if %errorlevel% EQU 0 (
-echo [Successful]
-) else (
-call :_color %Red% "[Failed]"
-)
-
-call :checkwmi
-if not defined error (
-echo:
-echo Checking WMI
-call :_color %Green% "[Working]"
-goto :at_back
-)
-
-echo:
-echo Registering .dll's and Compiling .mof's, .mfl's
-call :registerobj %nul%
-
-echo:
-echo Checking WMI
-call :checkwmi
-if defined error (
-call :_color %Red% "[Not Responding]"
-echo:
-echo Run [Dism RestoreHealth] and [SFC Scannow] options and make sure there are no errors.
-) else (
-call :_color %Green% "[Working]"
-)
-
-goto :at_back
-
-:registerobj
-
-::  https://eskonr.com/2012/01/how-to-fix-wmi-issues-automatically/
-
-%psc% Stop-Service Winmgmt -force %nul%
-cd /d %systemroot%\system32\wbem\
-regsvr32 /s %systemroot%\system32\scecli.dll
-regsvr32 /s %systemroot%\system32\userenv.dll
-mofcomp cimwin32.mof
-mofcomp cimwin32.mfl
-mofcomp rsop.mof
-mofcomp rsop.mfl
-for /f %%s in ('dir /b /s *.dll') do regsvr32 /s %%s
-for /f %%s in ('dir /b *.mof') do mofcomp %%s
-for /f %%s in ('dir /b *.mfl') do mofcomp %%s
-
-winmgmt /salvagerepository
-winmgmt /resetrepository
-exit /b
-
-:checkwmi
-
-::  https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmi-error-constants
-
-set error=
-wmic path Win32_ComputerSystem get CreationClassName /value %nul2% | find /i "computersystem" %nul1%
-if %errorlevel% NEQ 0 (set error=1& exit /b)
-winmgmt /verifyrepository %nul%
-if %errorlevel% NEQ 0 (set error=1& exit /b)
-
-cscript //nologo %windir%\system32\slmgr.vbs /dlv %nul%
-cmd /c exit /b %errorlevel%
-echo "0x%=ExitCode%" | findstr /i "0x800410 0x800440" %nul1%
-if %errorlevel% EQU 0 set error=1
-exit /b
-
-::========================================================================================================================================
-
-:at_back
-
-echo:
-echo %line%
-echo:
-call :_color %_Yellow% "Press any key to go back..."
-pause %nul1%
-goto :at_menu
-
-::========================================================================================================================================
-
-:at_done
-
-echo:
-echo Press any key to %_exitmsg%...
-pause %nul1%
-exit /b
-
-::========================================================================================================================================
-
-:compresslog
-
-::  https://stackoverflow.com/a/46268232
-
-set "ddf="%SystemRoot%\Temp\ddf""
-%nul% del /q /f %ddf%
-echo/.New Cabinet>%ddf%
-echo/.set Cabinet=ON>>%ddf%
-echo/.set CabinetFileCountThreshold=0;>>%ddf%
-echo/.set Compress=ON>>%ddf%
-echo/.set CompressionType=LZX>>%ddf%
-echo/.set CompressionLevel=7;>>%ddf%
-echo/.set CompressionMemory=21;>>%ddf%
-echo/.set FolderFileCountThreshold=0;>>%ddf%
-echo/.set FolderSizeThreshold=0;>>%ddf%
-echo/.set GenerateInf=OFF>>%ddf%
-echo/.set InfFileName=nul>>%ddf%
-echo/.set MaxCabinetSize=0;>>%ddf%
-echo/.set MaxDiskFileCount=0;>>%ddf%
-echo/.set MaxDiskSize=0;>>%ddf%
-echo/.set MaxErrors=1;>>%ddf%
-echo/.set RptFileName=nul>>%ddf%
-echo/.set UniqueFiles=ON>>%ddf%
-for /f "tokens=* delims=" %%D in ('dir /a:-D/b/s "%SystemRoot%\logs\%1"') do (
- echo/"%%~fD"  /inf=no;>>%ddf%
-)
-makecab /F %ddf% /D DiskDirectory1="" /D CabinetNameTemplate="!desktop!\AT_Logs\%2_%_time%.cab"
-del /q /f %ddf%
-exit /b
-
-::========================================================================================================================================
-
-:checkperms
-
-set permerror=
-if not exist "%tokenstore%\" set permerror=1
-
-for %%# in (
-"%tokenstore%"
-"HKLM:\SYSTEM\WPA"
-"HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform"
-) do if not defined permerror (
-%psc% "$acl = Get-Acl '%%#'; if ($acl.Access.Where{ $_.IdentityReference -eq 'NT SERVICE\sppsvc' -and $_.AccessControlType -eq 'Deny' -or $acl.Access.IdentityReference -notcontains 'NT SERVICE\sppsvc'}) {Exit 2}" %nul%
-if !errorlevel!==2 set permerror=1
-)
-exit /b
-
-::========================================================================================================================================
-
-:scandat
-
-set token=
-for %%# in (
-%Systemdrive%\Windows\System32\spp\store_test\2.0\
-%Systemdrive%\Windows\System32\spp\store\
-%Systemdrive%\Windows\System32\spp\store\2.0\
-%Systemdrive%\Windows\ServiceProfiles\NetworkService\AppData\Roaming\Microsoft\SoftwareProtectionPlatform\
-) do (
-
-if %1==check (
-if exist %%#tokens.dat set token=%%#tokens.dat
-)
-
-if %1==delete (
-if exist %%# (
-%nul% dir /a-d /s "%%#*.dat" && (
-attrib -r -s -h "%%#*.dat" /S
-del /S /F /Q "%%#*.dat"
-)
-)
-)
-)
-exit /b
-
-:scandatospp
-
-set token=
-for %%# in (
-%ProgramData%\Microsoft\OfficeSoftwareProtectionPlatform\
-) do (
-
-if %1==check (
-if exist %%#tokens.dat set token=%%#tokens.dat
-)
-
-if %1==delete (
-if exist %%# (
-%nul% dir /a-d /s "%%#*.dat" && (
-attrib -r -s -h "%%#*.dat" /S
-del /S /F /Q "%%#*.dat"
-)
-)
-)
-)
-exit /b
-
-::========================================================================================================================================
-
-:regownstart
-
-%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':regown\:.*';iex ($f[1]);"
-exit /b
-
-::  Below code takes ownership of a volatile registry key and deletes it
-::  HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ClipSVC\Volatile\PersistedSystemState
-
-:regown:
-$AssemblyBuilder = [AppDomain]::CurrentDomain.DefineDynamicAssembly(4, 1)
-$ModuleBuilder = $AssemblyBuilder.DefineDynamicModule(2, $False)
-$TypeBuilder = $ModuleBuilder.DefineType(0)
-
-$TypeBuilder.DefinePInvokeMethod('RtlAdjustPrivilege', 'ntdll.dll', 'Public, Static', 1, [int], @([int], [bool], [bool], [bool].MakeByRefType()), 1, 3) | Out-Null
-$TypeBuilder.CreateType()::RtlAdjustPrivilege(9, $true, $false, [ref]$false) | Out-Null
-
-$SID = New-Object System.Security.Principal.SecurityIdentifier('S-1-5-32-544')
-$IDN = ($SID.Translate([System.Security.Principal.NTAccount])).Value
-$Admin = New-Object System.Security.Principal.NTAccount($IDN)
-
-$path = 'SOFTWARE\Microsoft\Windows NT\CurrentVersion\ClipSVC\Volatile\PersistedSystemState'
-$key = [Microsoft.Win32.RegistryKey]::OpenBaseKey('LocalMachine', 'Registry64').OpenSubKey($path, 'ReadWriteSubTree', 'takeownership')
-
-$acl = $key.GetAccessControl()
-$acl.SetOwner($Admin)
-$key.SetAccessControl($acl)
-
-$rule = New-Object System.Security.AccessControl.RegistryAccessRule($Admin,"FullControl","Allow")
-$acl.SetAccessRule($rule)
-$key.SetAccessControl($acl)
-:regown:
-
-:+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-:change_edition
-@setlocal DisableDelayedExpansion
-@echo off
-
-::  To stage current edition while changing edition with CBS Upgrade Method, change 0 to 1 in below line
-set _stg=0
-
-::========================================================================================================================================
-
-cls
-color 07
-title  Change Windows Edition %masver%
-
-set _args=
-set _elev=
-
-set _args=%*
-if defined _args set _args=%_args:"=%
-if defined _args (
-for %%A in (%_args%) do (
-if /i "%%A"=="-el"                    set _elev=1
-)
-)
-
-set "nul1=1>nul"
-set "nul2=2>nul"
-set "nul6=2^>nul"
-set "nul=>nul 2>&1"
-
-set psc=powershell.exe
-set winbuild=1
-for /f "tokens=6 delims=[]. " %%G in ('ver') do set winbuild=%%G
-
-set _NCS=1
-if %winbuild% LSS 10586 set _NCS=0
-if %winbuild% GEQ 10586 reg query "HKCU\Console" /v ForceV2 %nul2% | find /i "0x0" %nul1% && (set _NCS=0)
-
-if %_NCS% EQU 1 (
-for /F %%a in ('echo prompt $E ^| cmd') do set "esc=%%a"
-set     "Red="41;97m""
-set    "Gray="100;97m""
-set   "Green="42;97m""
-set    "Blue="44;97m""
-set  "_White="40;37m""
-set  "_Green="40;92m""
-set "_Yellow="40;93m""
-) else (
-set     "Red="Red" "white""
-set    "Gray="Darkgray" "white""
-set   "Green="DarkGreen" "white""
-set    "Blue="Blue" "white""
-set  "_White="Black" "Gray""
-set  "_Green="Black" "Green""
-set "_Yellow="Black" "Yellow""
-)
-
-set "nceline=echo: &echo ==== ERROR ==== &echo:"
-set "eline=echo: &call :dk_color %Red% "==== ERROR ====" &echo:"
-set "line=echo ___________________________________________________________________________________________"
-if %~z0 GEQ 200000 (set "_exitmsg=Go back") else (set "_exitmsg=Exit")
-
-::========================================================================================================================================
-
-::  Fix for the special characters limitation in path name
-
-set "_work=%~dp0"
-if "%_work:~-1%"=="\" set "_work=%_work:~0,-1%"
-
-set "_batf=%~f0"
-set "_batp=%_batf:'=''%"
-
-set _PSarg="""%~f0""" -el %_args%
-
-set "_ttemp=%userprofile%\AppData\Local\Temp"
-
-setlocal EnableDelayedExpansion
-
-::========================================================================================================================================
-
-cls
-mode 98, 30
-
-echo:
-echo Initializing...
-echo:
-call :dk_product
-call :dk_ckeckwmic
-
-::  Show info for potential script stuck scenario
-
-sc start sppsvc %nul%
-if %errorlevel% NEQ 1056 if %errorlevel% NEQ 0 (
-echo:
-echo Error code: %errorlevel%
-call :dk_color %Red% "Failed to start [sppsvc] service, rest of the process may take a long time..."
-echo:
-)
-
-::========================================================================================================================================
-
-::  Check Activation IDs
-
-call :dk_actids
-if not defined applist (
-net stop sppsvc /y %nul%
-cscript //nologo %windir%\system32\slmgr.vbs /rilc %nul%
-if !errorlevel! NEQ 0 cscript //nologo %windir%\system32\slmgr.vbs /rilc %nul%
-call :dk_refresh
-call :dk_actids
-if not defined applist (
-%eline%
-echo Activation IDs not found. Aborting...
-echo:
-echo Check this page for help. %mas%troubleshoot
-goto ced_done
-)
-)
-
-::========================================================================================================================================
-
-call :dk_checksku
-
-if not defined osSKU (
-%eline%
-echo SKU value was not detected properly. Aborting...
-goto ced_done
-)
-
-::========================================================================================================================================
-
-::  Check Windows Edition
-
-set osedition=
-set dismedition=
-set dismnotworking=
-
-set d1=%ref% [void]$TypeBuilder.DefinePInvokeMethod('SLGetWindowsInformation', 'slc.dll', 22, 1, [int], @([String], [int], [int].MakeByRefType(), [String].MakeByRefType()), 1, 3);
-set d1=%d1% $editionName = 0; [void]$TypeBuilder.CreateType()::SLGetWindowsInformation('Kernel-EditionName', 0, [ref]0, [ref]$editionName); $editionName
-if %winbuild% GEQ 14393 for /f "delims=" %%s in ('"%psc% %d1%"') do if not errorlevel 1 (set osedition=%%s)
-if "%osedition%"=="0" set osedition=
-
-if not defined osedition (
-for /f "skip=2 tokens=3" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v EditionID %nul6%') do set "osedition=%%a"
-)
-
-::  Workaround for an issue in builds between 1607 and 1709 where ProfessionalEducation is shown as Professional
-
-if %osSKU%==164 set osedition=ProfessionalEducation
-if %osSKU%==165 set osedition=ProfessionalEducationN
-
-for /f "tokens=3 delims=: " %%a in ('DISM /English /Online /Get-CurrentEdition %nul6% ^| find /i "Current Edition :"') do set "dismedition=%%a"
-if not defined dismedition set dismnotworking=1
-
-if defined dismedition if not defined osedition set osedition=%dismedition%
-
-if not defined osedition (
-%eline%
-DISM /English /Online /Get-CurrentEdition %nul%
-cmd /c exit /b !errorlevel!
-echo DISM command failed [Error Code - 0x!=ExitCode!]
-echo OS Edition was not detected properly. Aborting...
-echo:
-echo Check this page for help. %mas%troubleshoot
-goto ced_done
-)
-
-::========================================================================================================================================
-
-set branch=
-for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v BuildBranch %nul6%') do set "branch=%%b"
-
-::  Check PowerShell
-
-%psc% $ExecutionContext.SessionState.LanguageMode %nul2% | find /i "Full" %nul1% || (
-%eline%
-%psc% $ExecutionContext.SessionState.LanguageMode
-echo:
-echo PowerShell is not working. Aborting...
-echo If you have applied restrictions on Powershell then undo those changes.
-echo:
-echo Check this page for help. %mas%troubleshoot
-goto ced_done
-)
-
-::========================================================================================================================================
-
-::  Get Target editions list
-
-set _target=
-set _dtarget=
-set _ptarget=
-set _ntarget=
-set _wtarget=
-
-if %winbuild% GEQ 10240 for /f "tokens=4" %%a in ('dism /online /english /Get-TargetEditions ^| findstr /i /c:"Target Edition : "') do (if defined _dtarget (set "_dtarget= !_dtarget! %%a ") else (set "_dtarget= %%a "))
-if %winbuild% LSS 10240 for /f "tokens=4" %%a in ('%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':cbsxml\:.*';& ([ScriptBlock]::Create($f[1])) -GetTargetEditions;" ^| findstr /i /c:"Target Edition : "') do (if defined _ptarget (set "_ptarget= !_ptarget! %%a ") else (set "_ptarget= %%a "))
-
-if %winbuild% GEQ 10240 if not exist "%SystemRoot%\Servicing\Packages\Microsoft-Windows-Server*Edition~*.mum" (
-call :ced_edilist
-if /i "%osedition:~0,4%"=="Core" (set "_wtarget= Professional !_wtarget! ")
-set "_dtarget= %_dtarget% !_wtarget! "
-)
-
-::========================================================================================================================================
-
-::  Block the change to/from CloudEdition editions
-
-for %%# in (202 203) do if %osSKU%==%%# (
-%eline%
-echo [%winos% ^| SKU:%osSKU% ^| %winbuild%]
-echo It's not recommended to change this installed edition to any other.
-echo Aborting...
-goto ced_done
-)
-
-for %%# in ( %_dtarget% %_ptarget% ) do if /i not "%%#"=="%osedition%" (
-echo "!_target!" | find /i " %%# " %nul1% || set "_target= !_target! %%# "
-)
-
-if defined _target (
-for %%# in (%_target%) do (
-echo %%# | findstr /i "CountrySpecific CloudEdition ServerRdsh" %nul% || (set "_ntarget=!_ntarget! %%#")
-)
-)
-
-if not defined _ntarget (
-%line%
-echo:
-if defined dismnotworking call :dk_color %Red% "DISM.exe is not responding."
-call :dk_color %Gray% "Target Edition not found."
-echo Current Edition [%osedition% ^| %winbuild%] can not be changed to any other Edition.
-%line%
-goto ced_done
-)
-
-::========================================================================================================================================
-
-:cedmenu2
-
-cls
-mode 98, 30
-set inpt=
-set counter=0
-set verified=0
-set targetedition=
-
-%line%
-echo:
-call :dk_color %Gray% "You can change the Edition [%osedition%] [%winbuild%] to one of the following."
-if defined dismnotworking (
-call :dk_color %_Yellow% "Note - DISM.exe is not responding."
-if /i "%osedition:~0,4%"=="Core" call :dk_color %_Yellow% "     - You will see more edition options to choose once its changed to Pro."
-)
-%line%
-echo:
-
-for %%A in (%_ntarget%) do (
-set /a counter+=1
-echo [!counter!]  %%A
-set targetedition!counter!=%%A
-)
-
-%line%
-echo:
-echo [0]  %_exitmsg%
-echo:
-call :dk_color %_Green% "Enter option number in keyboard, and press "Enter":"
-set /p inpt=
-if "%inpt%"=="" goto cedmenu2
-if "%inpt%"=="0" exit /b
-for /l %%i in (1,1,%counter%) do (if "%inpt%"=="%%i" set verified=1)
-set targetedition=!targetedition%inpt%!
-if %verified%==0 goto cedmenu2
-
-::========================================================================================================================================
-
-if %winbuild% LSS 10240 goto :cbsmethod
-if exist "%SystemRoot%\Servicing\Packages\Microsoft-Windows-Server*Edition~*.mum" goto :ced_change_server
-
-cls
-mode con cols=105 lines=32
-
-set key=
-set _chan=
-set _dismapi=0
-
-::  Check if DISM Api or slmgr.vbs is required for edition upgrade
-
-if not exist "%SystemRoot%\System32\spp\tokens\skus\%targetedition%\" (
-set _dismapi=1
-)
-
-set "keyflow=Retail OEM:NONSLP OEM:DM Volume:MAK Volume:GVLK"
-
-call :ced_targetSKU %targetedition%
-if defined targetSKU call :ced_windowskey
-if defined key if defined pkeychannel set _chan=%pkeychannel%
-if not defined key call :changeeditiondata
-
-if not defined key (
-%eline%
-echo [%targetedition% ^| %winbuild%]
-echo Unable to get product key from pkeyhelper.dll
-echo:
-echo Check this page for help. %mas%troubleshoot
-goto ced_done
-)
-
-::========================================================================================================================================
-
-::  Changing from Core to Non-Core & Changing editions in Windows build older than 17134 requires "changepk /productkey" or DISM Api method and restart
-::  In other cases, editions can be changed instantly with "slmgr /ipk"
-
-if %_dismapi%==1 (
-mode con cols=105 lines=40
-%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':checkrebootflag\:.*';iex ($f[1]);" | find /i "True" %nul% && (
-%eline%
-echo Pending Reboot flags found.
-echo:
-echo Restart the system and try again.
-goto ced_done
-)
-)
-
-cls
-%line%
-echo:
-if defined dismnotworking call :dk_color %_Yellow% "DISM.exe is not responding."
-echo Changing the Current Edition [%osedition%] %winbuild% to [%targetedition%]
-echo:
-
-if %_dismapi%==1 (
-call :dk_color %Green% "Notes-"
-echo:
-echo  - Save your work before continue, system will auto restart.
-echo:
-echo  - You will need to activate with HWID option once the edition is changed.
-%line%
-echo:
-choice /C:21 /N /M "[1] Continue [2] %_exitmsg% : "
-if !errorlevel!==1 exit /b
-)
-
-::========================================================================================================================================
-
-if %_dismapi%==0 (
-echo Installing %_chan% Key [%key%]
-echo:
-if %_wmic% EQU 1 wmic path SoftwareLicensingService where __CLASS='SoftwareLicensingService' call InstallProductKey ProductKey="%key%" %nul%
-if %_wmic% EQU 0 %psc% "(([WMISEARCHER]'SELECT Version FROM SoftwareLicensingService').Get()).InstallProductKey('%key%')" %nul%
-if not !errorlevel!==0 cscript //nologo %windir%\system32\slmgr.vbs /ipk %key% %nul%
-
-set error_code=!errorlevel!
-cmd /c exit /b !error_code!
-if !error_code! NEQ 0 set "error_code=[0x!=ExitCode!]"
-
-if !error_code! EQU 0 (
-call :dk_refresh
-call :dk_color %Green% "[Successful]"
-echo:
-call :dk_color %Gray% "Reboot is required to properly change the Edition."
-) else (
-call :dk_color %Red% "[Unsuccessful] [Error Code: 0x!=ExitCode!]"
-echo Check this page for help. %mas%troubleshoot
-)
-)
-
-if %_dismapi%==1 (
-echo:
-echo Applying the DISM API method with %_chan% Key %key%. Please wait...
-echo:
-%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':dismapi\:.*';& ([ScriptBlock]::Create($f[1])) %targetedition% %key%;"
-timeout /t 3 %nul1%
-echo:
-call :dk_color %Blue% "Incase of errors, you must restart your system before trying again."
-echo Check this page for help. %mas%troubleshoot
-)
-%line%
-
-goto ced_done
-
-::========================================================================================================================================
-
-:cbsmethod
-
-cls
-mode con cols=105 lines=32
-%psc% "&{$W=$Host.UI.RawUI.WindowSize;$B=$Host.UI.RawUI.BufferSize;$W.Height=31;$B.Height=200;$Host.UI.RawUI.WindowSize=$W;$Host.UI.RawUI.BufferSize=$B;}"
-
-%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':checkrebootflag\:.*';iex ($f[1]);" | find /i "True" %nul% && (
-%eline%
-echo Pending reboot flags found.
-echo:
-echo Restart the system and try again.
-goto ced_done
-)
-
-echo:
-if defined dismnotworking call :dk_color %_Yellow% "Note - DISM.exe is not responding."
-echo Changing the Current Edition [%osedition%] %winbuild% to [%targetedition%]
-echo:
-call :dk_color %Blue% "Important - Save your work before continue, system will auto reboot."
-echo:
-choice /C:01 /N /M "[1] Continue [0] %_exitmsg% : "
-if %errorlevel%==1 exit /b
-
-echo:
-echo Initializing...
-echo:
-
-if %_stg%==0 (set stage=) else (set stage=-StageCurrent)
-%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':cbsxml\:.*';& ([ScriptBlock]::Create($f[1])) -SetEdition %targetedition% %stage%;"
-echo:
-call :dk_color %Blue% "Incase of errors, you must restart your system before trying again."
-echo Check this page for help. %mas%troubleshoot
-%line%
-
-goto ced_done
-
-::========================================================================================================================================
-
-:ced_change_server
-
-cls
-mode con cols=105 lines=32
-%psc% "&{$W=$Host.UI.RawUI.WindowSize;$B=$Host.UI.RawUI.BufferSize;$W.Height=31;$B.Height=200;$Host.UI.RawUI.WindowSize=$W;$Host.UI.RawUI.BufferSize=$B;}"
-
-set key=
-set _chan=
-set "keyflow=Volume:GVLK Retail Volume:MAK OEM:NONSLP OEM:DM"
-
-call :ced_targetSKU %targetedition%
-if defined targetSKU call :ced_windowskey
-if defined key if defined pkeychannel set _chan=%pkeychannel%
-if not defined key call :changeeditiondata
-
-if not defined key (
-%eline%
-echo [%targetedition% ^| %winbuild%]
-echo Unable to get product key from pkeyhelper.dll
-echo:
-echo Check this page for help. %mas%troubleshoot
-goto ced_done
-)
-
-::========================================================================================================================================
-
-%psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':checkrebootflag\:.*';iex ($f[1]);" | find /i "True" %nul% && (
-%eline%
-echo Pending reboot flags found.
-echo:
-echo Restart the system and try again.
-goto ced_done
-)
-
-cls
-echo:
-if defined dismnotworking call :dk_color %_Yellow% "Note - DISM.exe is not responding."
-echo Changing the Current Edition [%osedition%] %winbuild% to [%targetedition%]
-echo:
-echo Applying the command with %_chan% Key
-echo DISM /online /Set-Edition:%targetedition% /ProductKey:%key% /AcceptEula
-DISM /online /Set-Edition:%targetedition% /ProductKey:%key% /AcceptEula
-
-call :dk_color %Blue% "You must restart the system at this stage."
-echo Help: %mas%troubleshoot
-
-::========================================================================================================================================
-
-:ced_done
-
-echo:
-call :dk_color %_Yellow% "Press any key to %_exitmsg%..."
-pause %nul1%
-exit /b
-
-::========================================================================================================================================
-
-::  Get Edition list
-
-:ced_edilist
-
-if %_wmic% EQU 1 set "chkedi=for /f "tokens=2 delims==" %%a in ('"wmic path SoftwareLicensingProduct where (ApplicationID='55c92734-d682-4d71-983e-d6ec3f16059f') get LicenseFamily /VALUE" %nul6%')"
-if %_wmic% EQU 0 set "chkedi=for /f "tokens=2 delims==" %%a in ('%psc% "(([WMISEARCHER]'SELECT LicenseFamily FROM SoftwareLicensingProduct WHERE ApplicationID=''55c92734-d682-4d71-983e-d6ec3f16059f''').Get()).LicenseFamily ^| %% {echo ('LicenseFamily='+$_)}" %nul6%')"
-%chkedi% do (
-call if exist %Systemdrive%\Windows\System32\spp\tokens\skus\%%a (
-call set "_wtarget= !_wtarget! %%a "
-)
-)
-exit /b
-
-::========================================================================================================================================
-
-::  Check pending reboot flags
-
-:checkrebootflag:
-function Test-PendingReboot
-{
- if (Test-Path -Path "$env:windir\WinSxS\pending.xml") { return $true }
- if (Get-ChildItem "HKLM:\Software\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending" -EA Ignore) { return $true }
- if (Get-Item "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired" -EA Ignore) { return $true }
- try { 
-   $util = [wmiclass]"\\.\root\ccm\clientsdk:CCM_ClientUtilities"
-   $status = $util.DetermineIfRebootPending()
-   if(($status -ne $null) -and $status.RebootPending){
-     return $true
-   }
- }catch{}
- 
- return $false
-}
-Test-PendingReboot
-:checkrebootflag:
-
-::========================================================================================================================================
-
-:ced_windowskey
-
-for %%# in (pkeyhelper.dll) do @if "%%~$PATH:#"=="" exit /b
-for %%# in (%keyflow%) do (
-call :dk_pkey %targetSKU% '%%#'
-if defined pkey call :dk_pkeychannel !pkey!
-if /i [!pkeychannel!]==[%%#] (
-set key=!pkey!
-exit /b
-)
-)
-exit /b
-
-::========================================================================================================================================
-
-:ced_targetSKU
-
-set k=%1
-set targetSKU=
-for %%# in (pkeyhelper.dll) do @if "%%~$PATH:#"=="" exit /b
-
-call :dk_reflection
-
-set d1=%ref% [void]$TypeBuilder.DefinePInvokeMethod('GetEditionIdFromName', 'pkeyhelper.dll', 'Public, Static', 1, [int], @([String], [int].MakeByRefType()), 1, 3);
-set d1=%d1% $out = 0; [void]$TypeBuilder.CreateType()::GetEditionIdFromName('%k%', [ref]$out); $out
-
-for /f %%a in ('%psc% "%d1%"') do if not errorlevel 1 (set targetSKU=%%a)
-if "%targetSKU%"=="0" set targetSKU=
-exit /b
-
-::========================================================================================================================================
-
-::  https://github.com/Gamers-Against-Weed/Set-WindowsCbsEdition
-
-:cbsxml:[
-param (
-    [Parameter()]
-    [String]$SetEdition,
-
-    [Parameter()]
-    [Switch]$GetTargetEditions,
-
-    [Parameter()]
-    [Switch]$StageCurrent
-)
-
-function Get-AssemblyIdentity {
-    param (
-        [String]$PackageName
-    )
-
-    $PackageName = [String]$PackageName
-    $packageData = ($PackageName -split '~')
-
-    if($packageData[3] -eq '') {
-        $packageData[3] = 'neutral'
-    }
-
-    return "<assemblyIdentity name=`"$($packageData[0])`" version=`"$($packageData[4])`" processorArchitecture=`"$($packageData[2])`" publicKeyToken=`"$($packageData[1])`" language=`"$($packageData[3])`" />"
-}
-
-function Get-SxsName {
-    param (
-        [String]$PackageName
-    )
-
-    $name = ($PackageName -replace '[^A-z0-9\-\._]', '')
-
-    if($name.Length -gt 40) {
-        $name = ($name[0..18] -join '') + '\.\.' + ($name[-19..-1] -join '')
-    }
-
-    return $name.ToLower()
-}
-
-function Find-EditionXmlInSxs {
-    param (
-        [String]$Edition
-    )
-
-    $candidates = @($Edition, 'Client', 'Server')
-    $winSxs = $Env:SystemRoot + '\WinSxS'
-    $allInSxs = Get-ChildItem -Path $winSxs | select Name
-
-    foreach($candidate in $candidates) {
-        $name = Get-SxsName -PackageName "Microsoft-Windows-Editions-$candidate"
-        $packages = $allInSxs | where name -Match ('^.*_'+$name+'_31bf3856ad364e35')
-
-        if($packages.Length -eq 0) {
-            continue
-        }
-
-        $package = $packages[-1].Name
-        $testPath = $winSxs + "\$package\" + $Edition + 'Edition.xml'
-
-        if(Test-Path -Path $testPath -PathType Leaf) {
-            return $testPath
-        }
-    }
-
-    return $null
-}
-
-function Find-EditionXml {
-    param (
-        [String]$Edition
-    )
-
-    $servicingEditions = $Env:SystemRoot + '\servicing\Editions'
-    $editionXml = $Edition + 'Edition.xml'
-
-    $editionXmlInServicing = $servicingEditions + '\' + $editionXml
-
-    if(Test-Path -Path $editionXmlInServicing -PathType Leaf) {
-        return $editionXmlInServicing
-    }
-
-    return Find-EditionXmlInSxs -Edition $Edition
-}
-
-function Write-UpgradeCandidates {
-    param (
-        [HashTable]$InstallCandidates
-    )
-
-    $editionCount = 0
-    Write-Host 'Editions that can be upgraded to:'
-    foreach($candidate in $InstallCandidates.Keys) {
-        Write-Host "Target Edition : $candidate"
-        $editionCount++
-    }
-
-    if($editionCount -eq 0) {
-        Write-Host '(no editions are available)'
-    }
-}
-
-function Write-UpgradeXml {
-    param (
-        [Array]$RemovalCandidates,
-        [Array]$InstallCandidates,
-        [Boolean]$Stage
-    )
-
-    $removeAction = 'remove'
-    if($Stage) {
-        $removeAction = 'stage'
-    }
-
-    Write-Output '<?xml version="1.0"?>'
-    Write-Output '<unattend xmlns="urn:schemas-microsoft-com:unattend">'
-    Write-Output '<servicing>'
-
-    foreach($package in $InstallCandidates) {
-        Write-Output '<package action="install">'
-        Write-Output (Get-AssemblyIdentity -PackageName $package)
-        Write-Output '</package>'
-    }
-
-    foreach($package in $RemovalCandidates) {
-        Write-Output "<package action=`"$removeAction`">"
-        Write-Output (Get-AssemblyIdentity -PackageName $package)
-        Write-Output '</package>'
-    }
-
-    Write-Output '</servicing>'
-    Write-Output '</unattend>'
-}
-
-function Write-Usage {
-    Get-Help $script:MyInvocation.MyCommand.Path -detailed
-}
-
-$version = '1.0'
-$getTargetsParam = $GetTargetEditions.IsPresent
-$stageCurrentParam = $StageCurrent.IsPresent
-
-if($SetEdition -eq '' -and ($false -eq $getTargetsParam)) {
-    Write-Usage
-    Exit 1
-}
-
-$removalCandidates = @();
-$installCandidates = @{};
-
-$packages = Get-ChildItem -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages' | select Name | where { $_.name -match '^.*\\Microsoft-Windows-.*Edition~' }
-foreach($package in $packages) {
-    $state = (Get-ItemProperty -Path "Registry::$($package.Name)").CurrentState
-    $packageName = ($package.Name -split '\\')[-1]
-    $packageEdition = (($packageName -split 'Edition~')[0] -split 'Microsoft-Windows-')[-1]
-
-    if($state -eq 0x40) {
-        if($null -eq $installCandidates[$packageEdition]) {
-            $installCandidates[$packageEdition] = @()
-        }
-
-        if($false -eq ($installCandidates[$packageEdition] -contains $packageName)) {
-            $installCandidates[$packageEdition] = $installCandidates[$packageEdition] + @($packageName)
-        }
-    }
-
-    if((($state -eq 0x50) -or ($state -eq 0x70)) -and ($false -eq ($removalCandidates -contains $packageName))) {
-        $removalCandidates = $removalCandidates + @($packageName)
-    }
-}
-
-if($getTargetsParam) {
-    Write-UpgradeCandidates -InstallCandidates $installCandidates
-    Exit
-}
-
-if($false -eq ($installCandidates.Keys -contains $SetEdition)) {
-    Write-Error "The system cannot be upgraded to `"$SetEdition`""
-    Exit 1
-}
-
-$xmlPath = $Env:SystemRoot + '\Temp' + '\CbsUpgrade.xml'
-
-Write-UpgradeXml -RemovalCandidates $removalCandidates `
-    -InstallCandidates $installCandidates[$SetEdition] `
-    -Stage $stageCurrentParam >$xmlPath
-
-$editionXml = Find-EditionXml -Edition $SetEdition
-if($null -eq $editionXml) {
-    Write-Warning 'Unable to find edition specific settings XML. Proceeding without it...'
-}
-
-Write-Host 'Starting the upgrade process. This may take a while...'
-
-DISM.EXE /English /NoRestart /Online /Apply-Unattend:$xmlPath
-$dismError = $LASTEXITCODE
-
-Remove-Item -Path $xmlPath -Force
-
-if(($dismError -ne 0) -and ($dismError -ne 3010)) {
-    Write-Error 'Failed to upgrade to the target edition'
-    Exit $dismError
-}
-
-if($null -ne $editionXml) {
-    $destination = $Env:SystemRoot + '\' + $SetEdition + '.xml'
-    Copy-Item -Path $editionXml -Destination $destination
-
-    DISM.EXE /English /NoRestart /Online /Apply-Unattend:$editionXml
-    $dismError = $LASTEXITCODE
-
-    if(($dismError -ne 0) -and ($dismError -ne 3010)) {
-        Write-Error 'Failed to apply edition specific settings'
-        Exit $dismError
-    }
-}
-
-Restart-Computer
-:cbsxml:]
-
-::========================================================================================================================================
-
-::  Change edition using DISM API
-::  Thanks to Alex (aka may, ave9858)
-
-:dismapi:[
-param (
-    [Parameter()]
-    [String]$TargetEdition,
-
-    [Parameter()]
-    [String]$Key
-)
-
-$AssemblyBuilder = [AppDomain]::CurrentDomain.DefineDynamicAssembly(4, 1)
-$ModuleBuilder = $AssemblyBuilder.DefineDynamicModule(2, $False)
-$TB = $ModuleBuilder.DefineType(0)
-
-[void]$TB.DefinePInvokeMethod('DismInitialize', 'DismApi.dll', 22, 1, [int], @([int], [IntPtr], [IntPtr]), 1, 3)
-[void]$TB.DefinePInvokeMethod('DismOpenSession', 'DismApi.dll', 22, 1, [int], @([String], [IntPtr], [IntPtr], [UInt32].MakeByRefType()), 1, 3)
-[void]$TB.DefinePInvokeMethod('_DismSetEdition', 'DismApi.dll', 22, 1, [int], @([UInt32], [String], [String], [IntPtr], [IntPtr], [IntPtr]), 1, 3)
-$Dism = $TB.CreateType()
-
-[void]$Dism::DismInitialize(2, 0, 0)
-$Session = 0
-[void]$Dism::DismOpenSession('DISM_{53BFAE52-B167-4E2F-A258-0A37B57FF845}', 0, 0, [ref]$Session)
-if (!$Dism::_DismSetEdition($Session, "$TargetEdition", "$Key", 0, 0, 0)) {
-    Restart-Computer
-}
-:dismapi:]
-
-::========================================================================================================================================
-
-::  1st column = Generic Retail/OEM/MAK/GVLK Key
-::  2nd column = Key Type
-::  3rd column = WMI Edition ID
-::  4th column = Version name incase same Edition ID is used in different OS versions with different key
-::  Separator  = _
-
-::  For Windows 10/11 editions, HWID key is listed where ever possible, in Server versions, KMS key is listed where ever possible.
-::  Only RS3 and older version Generic keys are stored here, later ones are extracted from the pkeyhelper.dll itself
-
-:changeeditiondata
-
-if %winbuild% GTR 17763 exit /b
-if exist "%SystemRoot%\Servicing\Packages\Microsoft-Windows-Server*CorEdition~*.mum" (set Cor=Cor) else (set Cor=)
-
-set h=
-for %%# in (
-XGV%h%PP-NM%h%H47-7TT%h%HJ-W%h%3FW7-8HV%h%2C__OEM:NONSLP_Enterprise
-D6R%h%D9-D4%h%N8T-RT9%h%QX-Y%h%W6YT-FCW%h%WJ______Retail_Starter
-3V6%h%Q6-NQ%h%XCX-V8Y%h%XR-9%h%QCYV-QPF%h%CT__Volume:MAK_EnterpriseN
-3NF%h%XW-2T%h%27M-2BD%h%W6-4%h%GHRV-68X%h%RX______Retail_StarterN
-VK7%h%JG-NP%h%HTM-C97%h%JM-9%h%MPGT-3V6%h%6T______Retail_Professional
-2B8%h%7N-8K%h%FHP-DKV%h%6R-Y%h%2C8J-PKC%h%KT______Retail_ProfessionalN
-4CP%h%RK-NM%h%3K3-X6X%h%XQ-R%h%XX86-WXC%h%HW______Retail_CoreN
-N24%h%34-X9%h%D7W-8PF%h%6X-8%h%DV9T-8TY%h%MD______Retail_CoreCountrySpecific
-BT7%h%9Q-G7%h%N6G-PGB%h%YW-4%h%YWX6-6F4%h%BT______Retail_CoreSingleLanguage
-YTM%h%G3-N6%h%DKC-DKB%h%77-7%h%M9GH-8HV%h%X7______Retail_Core
-XKC%h%NC-J2%h%6Q9-KFH%h%D2-F%h%KTHY-KD7%h%2Y__OEM:NONSLP_PPIPro
-YNM%h%GQ-8R%h%YV3-4PG%h%Q3-C%h%8XTP-7CF%h%BY______Retail_Education
-84N%h%GF-MH%h%BT6-FXB%h%X8-Q%h%WJK7-DRR%h%8H______Retail_EducationN
-NK9%h%6Y-D9%h%CD8-W44%h%CQ-R%h%8YTK-DYJ%h%WX__OEM:NONSLP_EnterpriseS_RS1
-FWN%h%7H-PF%h%93Q-4GG%h%P8-M%h%8RF3-MDW%h%WW__OEM:NONSLP_EnterpriseS_TH
-2DB%h%W3-N2%h%PJG-MVH%h%W3-G%h%7TDK-9HK%h%R4__Volume:MAK_EnterpriseSN_RS1
-NTX%h%6B-BR%h%YC2-K67%h%86-F%h%6MVQ-M7V%h%2X__Volume:MAK_EnterpriseSN_TH
-G3K%h%NM-CH%h%G6T-R36%h%X3-9%h%QDG6-8M8%h%K9______Retail_ProfessionalSingleLanguage
-HNG%h%CC-Y3%h%8KG-QVK%h%8D-W%h%MWRK-X86%h%VK______Retail_ProfessionalCountrySpecific
-DXG%h%7C-N3%h%6C4-C4H%h%TG-X%h%4T3X-2YV%h%77______Retail_ProfessionalWorkstation
-WYP%h%NQ-8C%h%467-V2W%h%6J-T%h%X4WX-WT2%h%RQ______Retail_ProfessionalWorkstationN
-8PT%h%T6-RN%h%W4C-6V7%h%J2-C%h%2D3X-MHB%h%PB______Retail_ProfessionalEducation
-GJT%h%YN-HD%h%MQY-FRR%h%76-H%h%VGC7-QPF%h%8P______Retail_ProfessionalEducationN
-C4N%h%TJ-CX%h%6Q2-VXD%h%MR-X%h%VKGM-F9D%h%JC__Volume:MAK_EnterpriseG
-46P%h%N6-R9%h%BK9-CVH%h%KB-H%h%WQ9V-MBJ%h%Y8__Volume:MAK_EnterpriseGN
-NJC%h%F7-PW%h%8QT-332%h%4D-6%h%88JX-2YV%h%66______Retail_ServerRdsh
-V3W%h%VW-N2%h%PV2-CGW%h%C3-3%h%4QGF-VMJ%h%2C______Retail_Cloud
-NH9%h%J3-68%h%WK7-6FB%h%93-4%h%K3DF-DJ4%h%F6______Retail_CloudN
-2HN%h%6V-HG%h%TM8-6C9%h%7C-R%h%K67V-JQP%h%FD______Retail_CloudE
-WC2%h%BQ-8N%h%RM3-FDD%h%YY-2%h%BFGV-KHK%h%QY_Volume:GVLK_ServerStandard%Cor%_RS1
-CB7%h%KF-BW%h%N84-R7R%h%2Y-7%h%93K2-8XD%h%DG_Volume:GVLK_ServerDatacenter%Cor%_RS1
-JCK%h%RF-N3%h%7P4-C2D%h%82-9%h%YXRT-4M6%h%3B_Volume:GVLK_ServerSolution_RS1
-QN4%h%C6-GB%h%JD2-FB4%h%22-G%h%HWJK-GJG%h%2R_Volume:GVLK_ServerCloudStorage_RS1
-VP3%h%4G-4N%h%PPG-79J%h%TQ-8%h%64T4-R3M%h%QX_Volume:GVLK_ServerAzureCor_RS1
-9JQ%h%NQ-V8%h%HQ6-PKB%h%8H-G%h%GHRY-R62%h%H6______Retail_ServerAzureNano_RS1
-VN8%h%D3-PR%h%82H-DB6%h%BJ-J%h%9P4M-92F%h%6J______Retail_ServerStorageStandard_RS1
-48T%h%QX-NV%h%K3R-D8Q%h%R3-G%h%THHM-8FH%h%XC______Retail_ServerStorageWorkgroup_RS1
-2HX%h%DN-KR%h%XHB-GPY%h%C7-Y%h%CKFJ-7FV%h%DG_Volume:GVLK_ServerDatacenterACor_RS3
-PTX%h%N8-JF%h%HJM-4WC%h%78-M%h%PCBR-9W4%h%KR_Volume:GVLK_ServerStandardACor_RS3
-) do (
-for /f "tokens=1-4 delims=_" %%A in ("%%#") do if /i %targetedition%==%%C (
-
-if not defined key (
-set 4th=%%D
-if not defined 4th (
-set "key=%%A" & set "_chan=%%B"
-) else (
-echo "%branch%" | find /i "%%D" %nul1% && (set "key=%%A" & set "_chan=%%B")
-)
-)
-)
-)
-exit /b
-
-:+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-:MASend
-echo:
-if defined _MASunattended timeout /t 2 & exit /b
-echo Press any key to exit...
-pause >nul
-exit /b
-
 ::========================================================================================================================================
 :: Leave empty line below
+::ONLINE KMS =================================================================================================
