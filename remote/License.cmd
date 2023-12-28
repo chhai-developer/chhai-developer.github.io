@@ -378,7 +378,7 @@ set _erl=%errorlevel%
 
 if %_erl%==0 exit /b
 if %_erl%==9 setlocal & call :wpi               & cls & endlocal & goto :MainMenu
-if %_erl%==8 setlocal & call :CHWE              & cls & endlocal & goto :MainMenu
+if %_erl%==8 setlocal & call :CHEW              & cls & endlocal & goto :MainMenu
 if %_erl%==7 setlocal & call :Troubleshoot      & cls & endlocal & goto :MainMenu
 if %_erl%==6 setlocal & call :Check_StatusL     & cls & endlocal & goto :MainMenu
 if %_erl%==5 setlocal & call :idm               & cls & endlocal & goto :MainMenu
