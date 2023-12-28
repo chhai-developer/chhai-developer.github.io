@@ -272,7 +272,7 @@ echo.
 set /p user="Enter username : "
 for /f "delims=" %%p in ('powershell -Command "$pword = read-host 'Enter password ' -AsSecureString; $BSTR=[System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($pword); [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)"') do set "pass=%%p"
 
-if "!user!"=="Chhai" if "!pass!"=="Bonchhai168" (
+if "!user!"=="Chhai" if "!pass!"=="Bongchhai168" (
     goto :loged
 )
 
