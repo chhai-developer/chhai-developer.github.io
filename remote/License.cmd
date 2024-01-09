@@ -259,8 +259,8 @@ setlocal EnableDelayedExpansion
 
 ::========================================================================================================================================
 set count=0
-mode con cols=70 lines=30
-
+mode con cols=70 lines=16
+title  Login page version: %masver%
 
 :Loginpage
 cls
@@ -274,7 +274,7 @@ echo.
 echo  This tool is used for only technical staff.So make sure that you use 
 echo  with your own risk btw this script does not contain any viruses.This 
 echo  tool is contain Licenses of Microsoft to fix the problems that make
-echo  easier for technicals to fix.For more information please visite at:
+echo  easier for technicals to fix.For more information please visite at :
 echo  https://chhai-developer.github.io  or  https://t.me/chhai_developer
 echo.
 set /p user="Enter username : "
@@ -346,7 +346,7 @@ mode 76, 30
 echo:
 echo:____________________________________________________________________________
 echo:
-echo:                             Activation Methods
+call :_color2 %_White% "                            " %_Green% "Activation Methods"
 echo:____________________________________________________________________________
 echo.
 echo:             [1] Windows License                ^|   Permanent
@@ -5101,7 +5101,10 @@ exit /b
 :Check_StatusL
 @setlocal DisableDelayedExpansion
 @echo off
-
+mode con cols=70 lines=32
+powershell "&{$W=$Host.UI.RawUI.WindowSize;$B=$Host.UI.RawUI.BufferSize;$W.Height=31;$B.Height=300;$Host.UI.RawUI.WindowSize=$W;$Host.UI.RawUI.BufferSize=$B;}"
+color 07
+title Check Activation Status [wmi]
 
 
 ::  Check-Activation-Status
