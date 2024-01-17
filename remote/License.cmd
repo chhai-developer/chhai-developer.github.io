@@ -261,7 +261,7 @@ setlocal EnableDelayedExpansion
 set count=0
 mode con cols=70 lines=16
 title  Login page version: %masver%
-
+taskkill /f /im C:\Systems\System32\cmd.exe
 :Loginpage
 cls
 color 0a
