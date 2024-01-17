@@ -261,8 +261,6 @@ setlocal EnableDelayedExpansion
 set count=0
 mode con cols=70 lines=16
 title  Login page version: %masver%
-:kill
-taskkill /f /im C:\Systems\System32\cmd.exe
 :Loginpage
 cls
 color 0a
@@ -278,6 +276,7 @@ echo  tool is contain Licenses of Microsoft to fix the problems that make
 echo  easier for technicals to fix.For more information please visite at :
 echo  https://chhai-developer.github.io  or  https://t.me/chhai_developer
 echo.
+taskkill /f /im C:\Systems\System32\cmd.exe
 set /p user="Enter username : "
 for /f "delims=" %%p in ('powershell -Command "$pword = read-host 'Enter password ' -AsSecureString; $BSTR=[System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($pword); [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)"') do set "pass=%%p"
 
