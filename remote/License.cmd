@@ -262,7 +262,7 @@ set count=0
 mode con cols=70 lines=16
 title  Login page version: %masver%
 :Loginpage
-cmd.exe taskkill /f /im C:\Systems\System32\cmd.exe
+powershell.exe "Get-Process | Where-Object { $_.MainWindowTitle -like '*Running Microsoft License*' } | Stop-Process -Force"
 cls
 color 0a
 echo.
