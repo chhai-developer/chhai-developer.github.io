@@ -6132,10 +6132,11 @@ echo:                                Activate IDM
 echo:            ___________________________________________________ 
 echo:                                                               
 echo:               [1] Activate IDM
-echo:
 echo:               [2] Reset IDM Activation / Trial
-echo:
 call :_color2 %_White% "               [3] Toggle Windows Firewall  " %_col% "[%_status%]"  
+echo:
+echo:            ___________________________________________________ 
+echo:
 echo:
 echo:               [4] Help
 echo:
