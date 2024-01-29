@@ -6137,11 +6137,8 @@ call :_color2 %_White% "               [3] Toggle Windows Firewall  " %_col% "[%
 echo:
 echo:            ___________________________________________________ 
 echo:
-echo:
 echo:               [4] Help
-echo:
 echo:               [5] Goto Main Menu
-echo:
 echo:               [6] Exit
 echo:            ___________________________________________________
 echo:         
