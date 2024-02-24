@@ -5701,7 +5701,6 @@ endlocal
 
 
 :idm
-@set iasver=1.0
 @setlocal DisableDelayedExpansion
 @echo off
 
@@ -6092,11 +6091,6 @@ if %_activate%==1 goto :_activate
 
 
 :MainMenui
-if defined Unattended (
-if defined reset goto _reset
-if defined activate goto _activate
-)
-
 :: Check firewall status
 
 set /a _ena=0
@@ -6132,25 +6126,27 @@ echo:                                Activate IDM
 echo:            ___________________________________________________ 
 echo:                                                               
 echo:               [1] Activate IDM
-echo:               [2] Reset IDM Activation / Trial
-call :_color2 %_White% "               [3] Toggle Windows Firewall  " %_col% "[%_status%]"  
+echo:               [2] IDM freeze trial
+echo:               [3] Reset IDM Activation / Trial
+call :_color2 %_White% "               [4] Toggle Windows Firewall  " %_col% "[%_status%]"  
 echo:
 echo:            ___________________________________________________ 
 echo:
-echo:               [4] Help
-echo:               [5] Goto Main Menu
-echo:               [6] Exit
+echo:               [5] Help
+echo:               [6] Goto Main Menu
+echo:               [7] Exit
 echo:            ___________________________________________________
 echo:         
 call :_color2 %_White% "             " %_Green% "Enter a menu option in the Keyboard [1,2,3,4,5,6,0]"
 choice /C:1234560 /N
 set _erl=%errorlevel%
 
-if %_erl%==6 exit /b
-if %_erl%==5 goto :MainMenu
-if %_erl%==4 start https://github.com/WindowsAddict/IDM-Activation-Script & start https://massgrave.dev/idm-activation-script & goto MainMenui
-if %_erl%==3 call :_tog_Firewall&goto MainMenui
-if %_erl%==2 goto _reset
+if %_erl%==7 exit /b
+if %_erl%==6 goto :MainMenu
+if %_erl%==5 start https://github.com/WindowsAddict/IDM-Activation-Script & start https://massgrave.dev/idm-activation-script & goto MainMenui
+if %_erl%==4 call :_tog_Firewall&goto MainMenui
+if %_erl%==3 goto _reset    
+if %_erl%==2 goto _freeze
 if %_erl%==1 goto _activate
 goto :MainMenui
 
@@ -6166,6 +6162,8 @@ exit /b
 
 
 :_reset
+powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/ias))) /res"
+goto MainMenui
 
 cls
 if not %HKCUsync%==1 (
@@ -6254,8 +6252,17 @@ call :_color2 %Red% "Failed - !reg!"
 exit /b
 
 ::========================================================================================================================================
+:_freeze
+powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/ias))) /frz"
+goto MainMenui
+
+
+
 
 :_activate
+powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/ias))) /act"
+goto MainMenui
+
 
 cls
 if not %HKCUsync%==1 (
