@@ -9743,10 +9743,10 @@ if %_el%==8 exit /b
 if %_el%==7 (if %vNextOverride% EQU 0 (set vNextOverride=1) else (set vNextOverride=0))&goto _KMS_Menu
 if %_el%==6 (if %_Debug%==0 (set _Debug=1) else (set _Debug=0)) &goto _KMS_Menu
 if %_el%==5 call:_Complete_Uninstall&cls&goto _KMS_Menu
-if %_el%==4 set ActTask=&call:RenTask&goto _KMS_Menu
-if %_el%==3 cls&setlocal&set "ActWindows=1"&set "ActOffice=1"&call :Activation_Start&endlocal&cls&goto _KMS_Menu
-if %_el%==2 cls&setlocal&set "ActWindows=0"&set "ActOffice=1"&call :Activation_Start&endlocal&cls&goto _KMS_Menu
-if %_el%==1 cls&setlocal&set "ActWindows=1"&set "ActOffice=0"&call :Activation_Start&endlocal&cls&goto _KMS_Menu
+if %_el%==4 goto _kmar
+if %_el%==3 goto _kmall
+if %_el%==2 goto _kmoff
+if %_el%==1 goto _kmwin
 goto _KMS_Menu
 
 ::========================================================================================================================================
@@ -9761,6 +9761,20 @@ pause >nul
 exit /b
 
 :=========================================================================================================================================
+:_kmwin
+powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /KMS-Windows"
+goto _KMS_Menu
+:_kmoff
+powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /KMS-Office"
+goto _KMS_Menu
+:_kmall
+powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /KMS-WindowsOffice"
+goto _KMS_Menu
+:_kmar
+powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /KMS-ActAndRenewalTask"
+goto _KMS_Menu
+
+
 
 :Activation_Start
 
@@ -13634,3 +13648,5 @@ UninstallLicenses("sppc.dll")
 ::========================================================================================================================================
 :: Leave empty line below
 ::ONLINE KMS =================================================================================================
+
+
