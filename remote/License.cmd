@@ -204,32 +204,7 @@ exit /b
 
 ::========================================================================================================================================
 
-::  Check for updates
 
-set -=
-set old=
-
-for /f "delims=[] tokens=2" %%# in ('ping -4 -n 1 updatecheck.mass%-%grave.dev') do (
-if not [%%#]==[] (echo "%%#" | find "127.69" %nul1% && (echo "%%#" | find "127.69.%masver%" %nul1% || set old=1))
-)
-
-if defined old (
-echo ________________________________________________
-%eline%
-echo You are running outdated version MAS %masver%
-echo ________________________________________________
-echo:
-if not defined _MASunattended (
-echo [1] Get Latest MAS
-echo [0] Continue Anyway
-echo:
-call :_color %_Green% "Enter a menu option in the Keyboard [1,0] :"
-choice /C:10 /N
-if !errorlevel!==2 rem
-if !errorlevel!==1 (start ht%-%tps://github.com/mass%-%gravel/Microsoft-Acti%-%vation-Scripts & start %mas% & exit /b)
-)
-)
-cls
 
 ::========================================================================================================================================
 
@@ -392,7 +367,7 @@ goto :MainMenu
 
 ::========================================================================================================================================
 :HWIDActivationON
-Powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /HWID"
+Powershell.exe -Command "& ([ScriptBlock]::Create((irm https://get.activated.win))) /HWID"
 exit /b
 
 
@@ -2000,32 +1975,6 @@ exit /b
 
 ::========================================================================================================================================
 
-::  Check for updates
-
-set -=
-set old=
-
-for /f "delims=[] tokens=2" %%# in ('ping -4 -n 1 updatecheck.mass%-%grave.dev') do (
-if not [%%#]==[] (echo "%%#" | find "127.69" %nul1% && (echo "%%#" | find "127.69.%masver%" %nul1% || set old=1))
-)
-
-if defined old (
-echo ________________________________________________
-%eline%
-echo You are running outdated version MAS %masver%
-echo ________________________________________________
-echo:
-if not %_unattended%==1 (
-echo [1] Get Latest MAS
-echo [0] Continue Anyway
-echo:
-call :dk_color %_Green% "Enter a menu option in the Keyboard [1,0] :"
-choice /C:10 /N
-if !errorlevel!==2 rem
-if !errorlevel!==1 (start ht%-%tps://github.com/mass%-%gravel/Microsoft-Acti%-%vation-Scripts & start %mas% & exit /b)
-)
-)
-cls
 
 ::========================================================================================================================================
 
@@ -2066,7 +2015,7 @@ goto :oh_menu
 
 ::========================================================================================================================================
 :ohhookON
-Powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /Ohook"
+Powershell.exe -Command "& ([ScriptBlock]::Create((irm https://get.activated.win))) /Ohook"
 goto :oh_menu
 
 
@@ -8079,32 +8028,6 @@ exit /b
 
 ::========================================================================================================================================
 
-::  Check for updates
-
-set -=
-set old=
-
-for /f "delims=[] tokens=2" %%# in ('ping -4 -n 1 updatecheck.mass%-%grave.dev') do (
-if not [%%#]==[] (echo "%%#" | find "127.69" %nul1% && (echo "%%#" | find "127.69.%masver%" %nul1% || set old=1))
-)
-
-if defined old (
-echo ________________________________________________
-%eline%
-echo You are running outdated version MAS %masver%
-echo ________________________________________________
-echo:
-if not %_unattended%==1 (
-echo [1] Get Latest MAS
-echo [0] Continue Anyway
-echo:
-call :dk_color %_Green% "Enter a menu option in the Keyboard [1,0] :"
-choice /C:10 /N
-if !errorlevel!==2 rem
-if !errorlevel!==1 (start ht%-%tps://github.com/mass%-%gravel/Microsoft-Acti%-%vation-Scripts & start %mas% & exit /b)
-)
-)
-cls
 
 ::========================================================================================================================================
 
@@ -9585,32 +9508,6 @@ exit /b
 
 ::========================================================================================================================================
 
-::  Check for updates
-
-set -=
-set old=
-
-for /f "delims=[] tokens=2" %%# in ('ping -4 -n 1 updatecheck.mass%-%grave.dev') do (
-if not [%%#]==[] (echo "%%#" | find "127.69" %nul1% && (echo "%%#" | find "127.69.%masver%" %nul1% || set old=1))
-)
-
-if defined old (
-echo ________________________________________________
-%eline%
-echo You are running outdated version MAS %masver%
-echo ________________________________________________
-echo:
-if not defined _unattended (
-echo [1] Get Latest MAS
-echo [0] Continue Anyway
-echo:
-call :_color %_Green% "Enter a menu option in the Keyboard [1,0] :"
-choice /C:10 /N
-if !errorlevel!==2 rem
-if !errorlevel!==1 (start ht%-%tps://github.com/mass%-%gravel/Microsoft-Acti%-%vation-Scripts & start %mas% & exit /b)
-)
-)
-cls
 
 ::========================================================================================================================================
 
@@ -9762,16 +9659,16 @@ exit /b
 
 :=========================================================================================================================================
 :_kmwin
-powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /KMS-Windows"
+powershell.exe -Command "& ([ScriptBlock]::Create((irm https://get.activated.win))) /KMS-Windows"
 goto _KMS_Menu
 :_kmoff
-powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /KMS-Office"
+powershell.exe -Command "& ([ScriptBlock]::Create((irm https://get.activated.win))) /KMS-Office"
 goto _KMS_Menu
 :_kmall
-powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /KMS-WindowsOffice"
+powershell.exe -Command "& ([ScriptBlock]::Create((irm https://get.activated.win))) /KMS-WindowsOffice"
 goto _KMS_Menu
 :_kmar
-powershell.exe -Command "& ([ScriptBlock]::Create((irm https://massgrave.dev/get))) /KMS-ActAndRenewalTask"
+powershell.exe -Command "& ([ScriptBlock]::Create((irm https://get.activated.win))) /KMS-ActAndRenewalTask"
 goto _KMS_Menu
 
 
